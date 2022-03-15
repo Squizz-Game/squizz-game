@@ -1,0 +1,23 @@
+{
+  "name": "squizz-game",
+  "version": "1.0.0",
+  "description": "maquette : https://www.figma.com/file/v5pu16sCnzzKy6TygF1ybz/Maquette?node-id=0%3A1\r modèle BDD : https://www.figma.com/file/w02tSWhjC4AiTtiSh4IDHF/base-de-donn%C3%A9e?node-id=0%3A1\r Use case : https://www.figma.com/file/4ha4yTbSwp8cZjIoAum2ry/Use-Case?node-id=0%3A1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch ./css/main.scss:./views/assets/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Squizz-Game/squizz-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Squizz-Game/squizz-game/issues"
+  },
+  "homepage": "https://github.com/Squizz-Game/squizz-game#readme",
+  "dependencies": {
+    "sass": "^1.49.9"
+  }
+}
