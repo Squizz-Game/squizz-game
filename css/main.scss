@@ -1,9 +1,9 @@
-@font-face {
-    font-family: "Game Of Squids";
-    src: url("./fonts/GameOfSquids/GameOfSquids.ttf") format("ttf");
-    font-family: "GT Walsheim Pro";
-    src: url("./fonts/GTWalsheimPro/GTWalsheimPro-Regular.ttf") format("ttf");    
-}
+@import "libs/reset.scss";
+@import "libs/mixins.scss";
+@import "libs/functions.scss";
+@import "libs/responsive.scss";
+@import "libs/fonts.scss";
+@import "libs/colors.scss";
 
 body {
     background: #180822;
