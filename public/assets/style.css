@@ -45,9 +45,11 @@ td, th {
 
 @font-face {
   font-family: "Game Of Squids";
-  src: url("../fontss/GameOfSquids/GameOfSquids.ttf") format("ttf");
+  src: url("./fonts/GameOfSquids/GameOfSquids.ttf") format("ttf");
+}
+@font-face {
   font-family: "GT Walsheim Pro";
-  src: url("../fontss/GTWalsheimPro/GTWalsheimPro-Regular.ttf") format("ttf");
+  src: url("./fonts/GTWalsheimPro/GTWalsheimPro-Regular.ttf") format("ttf");
 }
 body {
   background: #180822;
