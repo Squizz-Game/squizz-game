@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <title>Inscription</title>
+  </head>
+  <body>
+    <header>
+      <a href="/"
+        ><img src="./assets/img/logo-header.svg" alt="logo squizz game"
+      /></a>
+      <a href="#" class="btn">Jouer</a>
+    </header>
+
+    <section>
+      <h1>Inscription</h1>
+
+      <form action="">
+        <div id="avatar">
+          <label for="btn_avatar"
+            ><img src="./assets/img/avatar.png" alt=""
+          /></label>
+          <input type="hidden" name="avatar_id" />
+          <button id="btn_avatar">Modifier l'avatar</button>
+        </div>
+
+        <div>
+          <label for="mail">Adresse e-mail :</label>
+          <input type="email" id="mail" name="user_mail" />
+        </div>
+
+        <div>
+          <label for="username">Nom d'utilisateur :</label>
+          <input type="text" id="username" name="user_name" />
+        </div>
+
+        <div>
+          <label for="password">Mot de passe :</label>
+          <input type="text" id="password" name="user_password" />
+        </div>
+
+        <div class="inscription">
+          <button type="submit" class="btn_inscription">Inscription</button>
+        </div>
+      </form>
+    </section>
+  </body>
+</html>
