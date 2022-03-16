@@ -1,0 +1,39 @@
+<%- include('_header') %> 
+<%- include('_menu') %> 
+
+<main>
+    <section>
+        <h1>Inscription</h1>
+    
+        <form method="POST">
+          <div id="avatar">
+            <label for="btn_avatar"
+              ><img src="./assets/img/avatar.png" alt=""
+            /></label>
+            <input type="hidden" name="avatar_id" value="<%= avatar_id !== '' ? avatar_id : 1 %>"/>
+            <button id="btn_avatar">Modifier l'avatar</button>
+          </div>
+    
+          <div>
+            <label for="mail">Adresse e-mail :</label>
+            <input type="email" id="mail" name="user_mail" value="<%= user_mail %>"/>
+          </div>
+    
+          <div>
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="user_name" value="<%= user_name %>"/>
+          </div>
+    
+          <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="user_password" />
+          </div>
+    
+          <div class="inscription">
+            <button type="submit" class="btn_inscription">Inscription</button>
+          </div>
+        </form>
+    </section>
+</main>
+
+<%- include('_footer') %> 
