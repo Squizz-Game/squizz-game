@@ -1,0 +1,46 @@
+%btn {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: $white;
+  border-radius: 5px;
+  padding: 0px 20px;
+}
+
+.btn {
+  @extend %btn;
+  text-decoration: none;
+  background: $blueGradient;
+  &:before {
+    content: "O ";
+    font-family: "Game Of Squids";
+    font-size: 20px;
+    color: $green;
+  }
+}
+
+.btn_inscription {
+  @extend %btn;
+  background: $purpleGradient;
+  border: 0;
+  box-shadow: $buttonShadow;
+  cursor: pointer;
+  &:before {
+    content: "{ ";
+    font-family: "Game Of Squids";
+    font-size: 20px;
+    color: $mallow;
+  }
+}
+
+#btn_avatar {
+    font-size: 12px;
+    font-weight: 300;
+    color: $white;
+    background: $purpleGradient;
+    border-radius: 5px;
+    border: 0;
+    box-shadow: $buttonShadow;
+    padding: 5px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
