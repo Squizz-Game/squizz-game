@@ -27,4 +27,8 @@ Application de Quiz comprenant la possibilité de :
 - [modèle BDD](https://www.figma.com/file/w02tSWhjC4AiTtiSh4IDHF/base-de-donn%C3%A9e?node-id=0%3A1)
 - [use case](https://www.figma.com/file/4ha4yTbSwp8cZjIoAum2ry/Use-Case?node-id=0%3A1)
 
+## Installation
 
+- importer la base de donnée
+- lancer `npm i`
+- lancer `npm start`

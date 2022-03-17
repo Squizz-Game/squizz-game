@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const home = require('./back/controllers/home')
+const user = require('./back/controllers/user')
 
 const app = express()
 
@@ -21,6 +21,11 @@ app.use(session({
 app.use(require('./back/middlewares/flash'))
 
 // Controllers
-app.use('/', home)
+app.use('/', user)
+
+// Home page
+app.get('/', (req, res) => {
+    res.render('index')
+})
 
 app.listen(9090, () => console.log('listening on http://localhost:9090/'))
