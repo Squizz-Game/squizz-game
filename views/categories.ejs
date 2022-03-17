@@ -1,0 +1,18 @@
+<%- include('_header') %>
+<%- include('_menu') %>
+
+<main>
+    <h1>Categories</h1>
+    <section class="cards categories-card">
+        <% for (category of categories) { %>
+            <article class="card category-card">
+                <a href="/quizz/<%= category.id_categorie %>">
+                    <img src="./assets/img/<%= category.image %>" alt="<%= category.nom_categorie %>">
+                    <h2><%= category.nom_categorie %></h2>
+                </a>
+            </article>
+        <% } %>
+    </section>
+</main>
+
+<%- include('_footer') %>
