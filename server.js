@@ -23,9 +23,8 @@ app.use(require('./back/middlewares/flash'))
 // Controllers
 app.use('/', user)
 
+// Home page
 app.get('/', (req, res) => {
-    // req.session.user_id = 2
-    // console.log(req.session)
     res.render('index')
 })
 
