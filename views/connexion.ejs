@@ -1,0 +1,20 @@
+<%- include('_header') %>
+<%- include('_menu') %>
+
+<main>
+    <section>
+        <form method="POST">
+            <div>
+                <label for="user_name">Nom d'utilisateur :</label>
+                <input type="text" name="user_name" id="user_name" value="<%= locals.user_name %>">
+            </div>
+            <div>
+                <label for="password">Mot de passe :</label>
+                <input type="password" name="user_password" id="password">
+            </div>
+            <button class="btn">Se connecter</button>
+        </form>
+    </section>
+</main>
+
+<%- include('_footer') %>
