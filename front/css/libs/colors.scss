@@ -1,18 +1,23 @@
-$green: #75D64C;
-$lightPurple: #A596CB;
+// COLORS
+$green: #75d64c;
+$lightPurple: #a596cb;
 $darkPurple: #180822;
-$lightBlue: #65C6DC;
-$mallow: #D6B1D2;
-$purple: #4D3C8F;
-$darkBlue: #10152F;
-$darkGrey: #2E2F32;
-$grey: #9093B6;
-$lightGrey: #E7EAF9;
-$pink: #C055C1;
-$white: #FFFFFF;
-$gold: #F0D22E;
-$bronze: #C67700;
-$red: #E73555;
-$blueGradient: linear-gradient(90deg, #10152F 0%, #65C6DC 116.65%);
-$purpleGradient: linear-gradient(90deg, #180822 0%, #C055C1 116.65%);
+$lightBlue: #65c6dc;
+$mallow: #d6b1d2;
+$purple: #4d3c8f;
+$darkBlue: #10152f;
+$darkGrey: #2e2f32;
+$grey: #9093b6;
+$lightGrey: #e7eaf9;
+$pink: #c055c1;
+$white: #ffffff;
+$gold: #f0d22e;
+$bronze: #c67700;
+$red: #e73555;
+
+// GRADIENTS
+$blueGradient: linear-gradient(90deg, #10152f 0%, #65c6dc 116.65%);
+$purpleGradient: linear-gradient(90deg, #180822 0%, #c055c1 116.65%);
+
+// SHADOW
 $buttonShadow: 0px 2px 4px rgba(0, 0, 0, 0.25);

@@ -51,54 +51,94 @@ td, th {
   font-family: "GT Walsheim Pro";
   src: url("./fonts/GTWalsheimPro/GTWalsheimPro-Regular.ttf") format("ttf");
 }
-.btn_inscription, .btn {
+.btn {
   text-transform: uppercase;
   font-weight: 500;
-  color: #FFFFFF;
+  color: #ffffff;
   border-radius: 5px;
   padding: 0px 20px;
 }
 
-.btn {
+.btn_play {
   text-decoration: none;
-  background: linear-gradient(90deg, #10152F 0%, #65C6DC 116.65%);
+  background: linear-gradient(90deg, #10152f 0%, #65c6dc 116.65%);
 }
-.btn:before {
+.btn_play:before {
   content: "O ";
   font-family: "Game Of Squids";
   font-size: 20px;
-  color: #75D64C;
+  color: #75d64c;
 }
-
-.btn_inscription {
-  background: linear-gradient(90deg, #180822 0%, #C055C1 116.65%);
-  border: 0;
+.btn_edit, .btn_registration {
+  background: linear-gradient(90deg, #180822 0%, #c055c1 116.65%);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
-.btn_inscription:before {
+.btn_edit:before, .btn_registration:before {
   content: "{ ";
   font-family: "Game Of Squids";
   font-size: 20px;
-  color: #D6B1D2;
+  color: #d6b1d2;
+}
+.btn_connection {
+  background: linear-gradient(90deg, #180822 0%, #c055c1 116.65%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.btn_connection:before {
+  content: "} ";
+  font-family: "Game Of Squids";
+  font-size: 20px;
+  color: #65c6dc;
 }
 
 #btn_avatar {
   font-size: 12px;
   font-weight: 300;
-  color: #FFFFFF;
-  background: linear-gradient(90deg, #180822 0%, #C055C1 116.65%);
+  color: #ffffff;
+  background: linear-gradient(90deg, #180822 0%, #c055c1 116.65%);
   border-radius: 5px;
-  border: 0;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   padding: 5px;
   margin-left: 20px;
   cursor: pointer;
 }
 
-* {
-  font: inherit;
-  color: inherit;
+form {
+  margin: 20px 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+label {
+  display: block;
+}
+
+#password,
+#username,
+#mail,
+#old_password,
+#new_password {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  padding: 5px;
+  margin: 5px 10px 10px 0;
+}
+
+.registration,
+.connection,
+.edit {
+  display: flex;
+  align-items: center;
+  margin: 10px 10px 0 0;
+}
+
+#avatar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 body {
@@ -116,7 +156,7 @@ header {
 section {
   width: 80%;
   margin: 50px auto;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 25px;
   padding: 20px;
 }
@@ -127,37 +167,10 @@ h1 {
   font-size: 56px;
 }
 
-form {
-  margin: 20px 100px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-label {
-  display: block;
-}
-
-#password,
-#username,
-#mail {
+* {
+  font: inherit;
+  color: inherit;
   border: 0;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  padding: 5px;
-  margin: 5px 0px 10px 0;
-}
-
-.inscription {
-  display: flex;
-  align-items: center;
-}
-
-#avatar {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 30px;
 }
 
 /*# sourceMappingURL=style.css.map */
