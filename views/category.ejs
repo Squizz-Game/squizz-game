@@ -1,5 +1,5 @@
+<%- include('_head') %>
 <%- include('_header') %>
-<%- include('_menu') %>
 
 <main>
     <h1><%= category %></h1>
@@ -7,7 +7,7 @@
         <% for (q of quizz) { if (q.id_quizz) { %>
             <article class="card quizz-card">
                 <a href="/quizz/<%= q.id_categorie %>/<%= q.id_quizz %>">
-                    <img src="./assets/img/<%= q.image %>" alt="<%= q.nom_quizz %>">
+                    <img src="/assets/img/<%= q.image %>" alt="<%= q.nom_quizz %>">
                     <h2><%= q.nom_quizz %></h2>
                 </a>
             </article>
