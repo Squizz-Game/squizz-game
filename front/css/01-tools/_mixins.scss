@@ -25,3 +25,7 @@
         src: $src;
     }
 }
+
+@function col($span) {
+    @return unquote(100 / 12 * $span + '%');
+}

@@ -1,10 +1,20 @@
 <%- include('_header') %>
 <%- include('_menu') %>
 
-<main>
-    <h1><%= quizz.nom_quizz %></h1>
-    <section id="quizz">
-        Récupérer les questions réponses avec fetch et les afficher.
+<main id="quizz">
+    <section>
+        <div class="quizz-title">
+            <span class="counter">01/10</span>
+            <h1><%= quizz.nom_quizz %></h1>
+            <span class="timer">30s</span>
+        </div>
+    
+        <blockquote class="question">Lörem ipsum deciskap kvasisose. Krogisk pagen ?</blockquote>
+        <div class="reponses">
+            <button class="reponse true"><i></i>Lörem ipsum jonathan Hellström kartad: än tvodd. Gunnar Olsson Gustaf Blom.</button>
+            <button class="reponse false"><i></i>Lörem ipsum jonathan Hellström kartad: än tvodd. Gunnar Olsson Gustaf Blom.</button>
+            <button class="reponse"><i></i>Lörem ipsum jonathan Hellström kartad: än tvodd. Gunnar Olsson Gustaf Blom.</button>
+        </div>
     </section>
 </main>
 

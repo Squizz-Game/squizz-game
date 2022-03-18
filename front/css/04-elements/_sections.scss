@@ -1,6 +1,6 @@
 body {
   background: $darkPurple;
-  font-family: "GT Walsheim Pro";
+  font-family: $font-primary;
 }
 
 header {
@@ -11,9 +11,9 @@ header {
 }
 
 main {
-  width: 80%;
+  width: col(10);
   margin: 50px auto;
   background: $white;
   border-radius: 25px;
-  padding: 20px;
+  padding: ratio-space(8px) col(1);
 }
