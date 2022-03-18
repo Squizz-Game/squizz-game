@@ -1,0 +1,14 @@
+@font-face {
+    font-family: Game Of Squids;
+    src: url("./fonts/GameOfSquids/GameOfSquids.ttf") format("ttf");
+}
+
+@font-face {
+    font-family: GT Walsheim Pro;
+    src: url("./fonts/GTWalsheimPro/GTWalsheimPro-Regular.ttf") format("ttf");
+}
+
+$font-size: 15px;
+$font-primary: GT Walsheim Pro, sans-serif;
+$font-secondary: Game Of Squids, serif;
+$font-color: $darkPurple;
