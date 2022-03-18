@@ -16,8 +16,8 @@ $bronze: #c67700;
 $red: #e73555;
 
 // GRADIENTS
-$blueGradient: linear-gradient(90deg, #10152f 0%, #65c6dc 116.65%);
-$purpleGradient: linear-gradient(90deg, #180822 0%, #c055c1 116.65%);
+$blueGradient: linear-gradient(90deg, $darkBlue 0%, $lightBlue 116.65%);
+$purpleGradient: linear-gradient(90deg, $darkPurple 0%, $pink 116.65%);
 
 // SHADOW
 $buttonShadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
