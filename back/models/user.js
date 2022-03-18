@@ -1,8 +1,6 @@
 const mysql = require('./mysql')
 const bcrypt = require('bcrypt')
 
-// isvalid = bcrypt.compareSync(password, hash);
-
 const User = {
     create: ({avatar_id, user_mail, user_name, user_password}, action) => {
         // Vérifier si tous les champs sont renseignés
