@@ -51,7 +51,7 @@ td, th {
   font-family: "GT Walsheim Pro";
   src: url("./fonts/GTWalsheimPro/GTWalsheimPro-Regular.ttf") format("ttf");
 }
-.btn_inscription, .btn {
+.btn {
   text-transform: uppercase;
   font-weight: 500;
   color: #FFFFFF;
@@ -59,28 +59,37 @@ td, th {
   padding: 0px 20px;
 }
 
-.btn {
+.btn_play {
   text-decoration: none;
   background: linear-gradient(90deg, #10152F 0%, #65C6DC 116.65%);
 }
-.btn:before {
+.btn_play:before {
   content: "O ";
   font-family: "Game Of Squids";
   font-size: 20px;
   color: #75D64C;
 }
-
-.btn_inscription {
+.btn_edit, .btn_registration {
   background: linear-gradient(90deg, #180822 0%, #C055C1 116.65%);
-  border: 0;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
-.btn_inscription:before {
+.btn_edit:before, .btn_registration:before {
   content: "{ ";
   font-family: "Game Of Squids";
   font-size: 20px;
   color: #D6B1D2;
+}
+.btn_connection {
+  background: linear-gradient(90deg, #180822 0%, #C055C1 116.65%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.btn_connection:before {
+  content: "} ";
+  font-family: "Game Of Squids";
+  font-size: 20px;
+  color: #65C6DC;
 }
 
 #btn_avatar {
@@ -89,13 +98,57 @@ td, th {
   color: #FFFFFF;
   background: linear-gradient(90deg, #180822 0%, #C055C1 116.65%);
   border-radius: 5px;
-  border: 0;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   padding: 5px;
   margin-left: 20px;
   cursor: pointer;
 }
 
+/* =========== page scss============== */
+img {
+  display: flex;
+  width: 60%;
+  margin: auto;
+  padding-right: 20px;
+}
+
+#btn_rc {
+  text-align: center;
+}
+
+#btn {
+  justify-content: center;
+}
+
+#btn button {
+  margin: 10px;
+}
+
+button {
+  min-width: 163px;
+}
+
+@media screen and (max-width: 800px) {
+  img {
+    width: 60%;
+  }
+
+  #btn {
+    display: grid;
+    grid-template-columns: 1 1f;
+    grid-template-rows: repat 3 1fr;
+  }
+
+  .btn.btn_play {
+    margin: 0 auto;
+    margin: 10px;
+  }
+}
+@media screen and (min-width: 400px) {
+  .btn.btn_registration .btn.btn_play {
+    width: 5px;
+  }
+}
 * {
   font: inherit;
   color: inherit;
