@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const user = require('./back/controllers/user')
 const quizz = require('./back/controllers/quizz')
+const api = require('./back/controllers/api')
+const cors = require("cors")
 
 const app = express()
 
@@ -10,6 +12,7 @@ const app = express()
 app.set('view engine', 'ejs')
 
 // Middlewares
+app.use(cors())
 app.use('/assets', express.static('./public/assets'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -24,6 +27,7 @@ app.use(require('./back/middlewares/flash'))
 // Controllers
 app.use('/', user)
 app.use('/quizz', quizz)
+app.use('/api', api)
 
 // Home page
 app.get('/', (req, res) => {
