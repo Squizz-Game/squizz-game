@@ -1,0 +1,74 @@
+@import "libs/reset.scss";
+@import "libs/mixins.scss";
+@import "libs/functions.scss";
+@import "libs/responsive.scss";
+@import "libs/fonts.scss";
+@import "libs/colors.scss";
+@import "libs/buttons.scss";
+
+/* =========== page scss============== */
+@import "libs/accueil.scss";
+
+* {
+  font: inherit;
+  color: inherit;
+}
+
+body {
+  background: $darkPurple;
+  font-family: "GT Walsheim Pro";
+}
+
+header {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+section {
+  width: 80%;
+  margin: 50px auto;
+  background: $white;
+  border-radius: 25px;
+  padding: 20px;
+}
+
+h1 {
+  font-family: "Game Of Squids";
+  text-align: center;
+  font-size: 56px;
+}
+
+form {
+  margin: 20px 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+label {
+  display: block;
+}
+
+#password,
+#username,
+#mail {
+  border: 0;
+  box-shadow: $buttonShadow;
+  padding: 5px;
+  margin: 5px 0px 10px 0;
+}
+
+.inscription {
+  display: flex;
+  align-items: center;
+}
+
+#avatar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
