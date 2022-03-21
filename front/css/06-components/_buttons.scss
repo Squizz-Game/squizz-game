@@ -1,0 +1,56 @@
+%btn {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: $white;
+  border-radius: 5px;
+  padding: 0px 20px;
+}
+
+.btn {
+  @extend %btn;
+  &_play {
+    text-decoration: none;
+    background: $blueGradient;
+    &:before {
+      content: "O ";
+      font-family: $font-secondary;
+      font-size: 20px;
+      color: $green;
+    }
+  }
+  &_edit,
+  &_registration {
+    background: $purpleGradient;
+    box-shadow: $buttonShadow;
+    cursor: pointer;
+    &:before {
+      content: "{ ";
+      font-family: $font-secondary;
+      font-size: 20px;
+      color: $mallow;
+    }
+  }
+  &_connection {
+    background: $purpleGradient;
+    box-shadow: $buttonShadow;
+    cursor: pointer;
+    &:before {
+      content: "} ";
+      font-family: $font-secondary;
+      font-size: 20px;
+      color: $lightBlue;
+    }
+  }
+}
+
+#btn_avatar {
+  font-size: 12px;
+  font-weight: 300;
+  color: $white;
+  background: $purpleGradient;
+  border-radius: 5px;
+  box-shadow: $buttonShadow;
+  padding: 5px;
+  margin-left: 20px;
+  cursor: pointer;
+}

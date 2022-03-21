@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const user = require('./back/controllers/user')
+const quizz = require('./back/controllers/quizz')
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use(require('./back/middlewares/flash'))
 
 // Controllers
 app.use('/', user)
+app.use('/quizz', quizz)
 
 // Home page
 app.get('/', (req, res) => {

@@ -1,0 +1,20 @@
+body {
+  background: $darkPurple;
+  font-family: $font-primary;
+  min-height: 100vh;
+}
+
+header {
+  padding: ratio-space(4px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main {
+  width: col(10);
+  margin: 0 auto;
+  background: $white;
+  border-radius: 25px;
+  padding: ratio-space(8px) col(1);
+}

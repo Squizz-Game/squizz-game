@@ -23,7 +23,7 @@ router.post('/inscription', (req, res) => {
             if (!err) {
                 // message succes flash
                 req.session.user_id = data // on connecte l'utilisateur
-                res.redirect('quizz')
+                res.redirect('/quizz')
             } else {
                 console.log(data)
                 // message erreur flash
@@ -48,7 +48,7 @@ router.post('/connexion', (req, res) => {
             if (!err) {
                 // message succes flash
                 req.session.user_id = data // on connecte l'utilisateur
-                res.redirect('quizz')
+                res.redirect('/quizz')
             } else {
                 console.log(data)
                 // message erreur flash

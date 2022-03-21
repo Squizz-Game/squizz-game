@@ -1,20 +1,25 @@
+<%- include('_head') %>
 <%- include('_header') %>
-<%- include('_menu') %>
 
 <main>
+    <h1>Connexion</h1>
     <section>
         <form method="POST">
-            <div>
-                <label for="user_name">Nom d'utilisateur :</label>
-                <input type="text" name="user_name" id="user_name" value="<%= locals.user_name %>">
-            </div>
-            <div>
-                <label for="password">Mot de passe :</label>
-                <input type="password" name="user_password" id="password">
-            </div>
-            <button class="btn">Se connecter</button>
+          <div>
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="user_name" value="<%= locals.user_name %>"/>
+          </div>
+  
+          <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="user_password" />
+          </div>
+  
+          <div class="connection">
+            <button type="submit" class="btn btn_connection">Connexion</button>
+          </div>
         </form>
-    </section>
+      </section>
 </main>
 
 <%- include('_footer') %>
