@@ -6,9 +6,9 @@
     <section class="cards categories-card">
         <% for (category of categories) { %>
             <article class="card category-card">
-                <a href="/quizz/<%= category.id_categorie %>">
+                <a class="card-image" href="/quizz/<%= category.id_categorie %>">
                     <img src="/assets/img/<%= category.image %>" alt="<%= category.nom_categorie %>">
-                    <h2><%= category.nom_categorie %></h2>
+                    <h2 class="card-title"><%= category.nom_categorie %></h2>
                 </a>
             </article>
         <% } %>

@@ -10,11 +10,15 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id_cat', (req, res) => {
-    Quizz.getQuizzByCategory(req.params.id_cat, (err, data) => {
+    Quizz.getByCategory(req.params.id_cat, (err, data) => {
         if (!err) {
-            res.render('category', { quizz: data, category: data[0].nom_categorie })
+            console.log(data)
+            res.render('category', { cat: data, category: data[0].nom_categorie })
         }
-        else res.send('error')
+        else {
+            console.log(data)
+            res.send('error')
+        }
     })
 })
 
@@ -29,7 +33,10 @@ router.get('/:id_cat/:id_quizz', (req, res) => {
                 return res.redirect('/quizz/' + quizz.id_categorie + '/' + quizz.id_quizz)
             res.render('quizz', { quizz })
         }
-        else res.send('error')
+        else {
+            console.log(data)
+            res.send('error')
+        }
     })
 })
 
