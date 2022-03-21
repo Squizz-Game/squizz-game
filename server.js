@@ -20,7 +20,10 @@ app.use(session({
     secret: 'my-secret-key',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } //if https : true
+    cookie: {
+        secure: false, //if https : true
+        maxAge: 604800 // 1 semaine
+    }
 }))
 app.use(require('./back/middlewares/flash'))
 
