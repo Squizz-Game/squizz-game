@@ -1,0 +1,216 @@
+/*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
+html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+ul {
+  list-style: none;
+}
+
+button, input, select {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+img, video {
+  height: auto;
+  max-width: 100%;
+}
+
+iframe {
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td, th {
+  padding: 0;
+}
+
+@font-face {
+  font-family: "Game Of Squids";
+  src: url("./fonts/GameOfSquids/GameOfSquids.ttf") format("ttf");
+}
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("./fonts/GTWalsheimPro/GTWalsheimPro-Regular.ttf") format("ttf");
+}
+.btn {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #FFFFFF;
+  border-radius: 5px;
+  padding: 0px 20px;
+}
+
+.btn_play {
+  text-decoration: none;
+  background: linear-gradient(90deg, #10152F 0%, #65C6DC 116.65%);
+}
+.btn_play:before {
+  content: "O ";
+  font-family: "Game Of Squids";
+  font-size: 20px;
+  color: #75D64C;
+}
+.btn_edit, .btn_registration {
+  background: linear-gradient(90deg, #180822 0%, #C055C1 116.65%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.btn_edit:before, .btn_registration:before {
+  content: "{ ";
+  font-family: "Game Of Squids";
+  font-size: 20px;
+  color: #D6B1D2;
+}
+.btn_connection {
+  background: linear-gradient(90deg, #180822 0%, #C055C1 116.65%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.btn_connection:before {
+  content: "} ";
+  font-family: "Game Of Squids";
+  font-size: 20px;
+  color: #65C6DC;
+}
+
+#btn_avatar {
+  font-size: 12px;
+  font-weight: 300;
+  color: #FFFFFF;
+  background: linear-gradient(90deg, #180822 0%, #C055C1 116.65%);
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  padding: 5px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+/* =========== page scss============== */
+img {
+  display: flex;
+  width: 60%;
+  margin: auto;
+  padding-right: 20px;
+}
+
+#btn_rc {
+  text-align: center;
+}
+
+#btn {
+  justify-content: center;
+}
+
+#btn button {
+  margin: 10px;
+}
+
+button {
+  min-width: 163px;
+}
+
+@media screen and (max-width: 800px) {
+  img {
+    width: 60%;
+  }
+
+  #btn {
+    display: grid;
+    grid-template-columns: 1 1f;
+    grid-template-rows: repat 3 1fr;
+  }
+
+  .btn.btn_play {
+    margin: 0 auto;
+    margin: 10px;
+  }
+}
+@media screen and (min-width: 400px) {
+  .btn.btn_registration .btn.btn_play {
+    width: 5px;
+  }
+}
+* {
+  font: inherit;
+  color: inherit;
+}
+
+body {
+  background: #180822;
+  font-family: "GT Walsheim Pro";
+}
+
+header {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+section {
+  width: 80%;
+  margin: 50px auto;
+  background: #FFFFFF;
+  border-radius: 25px;
+  padding: 20px;
+}
+
+h1 {
+  font-family: "Game Of Squids";
+  text-align: center;
+  font-size: 56px;
+}
+
+form {
+  margin: 20px 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+label {
+  display: block;
+}
+
+#password,
+#username,
+#mail {
+  border: 0;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  padding: 5px;
+  margin: 5px 0px 10px 0;
+}
+
+.inscription {
+  display: flex;
+  align-items: center;
+}
+
+#avatar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/*# sourceMappingURL=style.css.map */
