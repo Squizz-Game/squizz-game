@@ -27,10 +27,14 @@ router.get("/reponses/:id_question", (req, res) => {
 
 router.post("/score", (req, res) => {
   mysql.execute(
-    "INSERT INTO `scores`(`score`, `date`, `id_user`, `id_quizz`) VALUES ([req.body], [now()], [id_user], [id_quizz]) "
-  )
-  console.log("salut", req.body);
-  res.send("coucou")
-})
+    "INSERT INTO `scores`(`score`, `date`, `id_user`, `id_quizz`) VALUES (?, now(), ?, ?)",
+    [req.body.score, req.body.id_user, req.body.id_quizz],
+    (err, data) => {
+      console.log(data);
+      console.log(err);
+      res.json(data);
+    }
+  );
+});
 
 module.exports = router;
