@@ -1,0 +1,43 @@
+<%- include('_head') %> 
+<%- include('_header') %> 
+
+<main>
+  <h1>Mon compte</h1>
+  <section>
+    <form method="POST">
+      <div id="avatar">
+        <label for="btn_avatar"
+          ><img src="./assets/img/avatar.png" alt=""
+        /></label>
+        <input type="hidden" name="avatar_id" value="<%= locals.id_avatar %>" required/>
+        <button id="btn_avatar">Modifier l'avatar</button>
+      </div>
+
+      <div>
+        <label for="mail">Adresse e-mail :</label>
+        <input type="email" id="mail" name="user_mail" value="<%= locals.mail ?? locals.user_mail %>" required/>
+      </div>
+
+      <div>
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" name="user_name" value="<%= locals.user_name %>" required/>
+      </div>
+
+      <div>
+        <label for="old_password">Ancien mot de passe :</label>
+        <input type="password" id="old_password" name="old_password" />
+      </div>
+
+      <div>
+        <label for="new_password">Nouveau mot de passe :</label>
+        <input type="password" id="new_password" name="new_password" />
+      </div>
+
+      <div class="edit">
+        <button type="submit" class="btn btn_edit">Modifier</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<%- include('_footer') %> 
