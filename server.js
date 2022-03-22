@@ -1,8 +1,12 @@
+// Modules imports
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+
+// Controllers imports
 const user = require('./back/controllers/user')
 const quizz = require('./back/controllers/quizz')
+const crudQuizz = require('./back/controllers/crud-quizz')
 
 const app = express()
 
@@ -27,6 +31,7 @@ app.use(require('./back/middlewares/flash'))
 // Controllers
 app.use('/', user)
 app.use('/quizz', quizz)
+app.use('/mes-quizz', crudQuizz)
 
 // Home page
 app.get('/', (req, res) => {

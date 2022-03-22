@@ -1,0 +1,42 @@
+form#crud-quizz {
+    margin: 0;
+    .field {
+        display: flex;
+        align-items: center;
+        gap: ratio-space(2px);
+        width: calc(col(4) - 20px);
+        position: relative;
+
+        input, select {
+            border-radius: 5px;
+            min-width: col(2);
+        }
+
+        input[type=file] {
+            display: none;
+        }
+
+        input[type=submit] {
+            height: 50px;
+            // width: 50%;
+            position: absolute;
+            right: 0;
+            margin: 0;
+            bottom: 0;
+        }
+        
+        .preview {
+            margin: ratio-space(2px) 0 0 0;
+            width: 60%;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            padding: 0;
+
+            &[src$="empty.jpg"] {
+                height: 60px;
+                object-fit: contain;
+            }
+        }
+    }
+}

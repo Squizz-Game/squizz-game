@@ -1,0 +1,33 @@
+<%- include('_head') %>
+<%- include('_header') %>
+
+<main>
+    <h1>Nouveau quizz</h1>
+    <section>
+        <form method="POST" id="crud-quizz" enctype="multipart/form-data">
+            <div class="field">
+                <label for="nom_quizz">Nom du quizz :</label>
+                <input type="text" id="nom_quizz" name="nom_quizz" value="<%= locals.nom_quizz %>">
+            </div>
+            <div class="field">
+                <label for="id_categorie">Catégorie :</label>
+                <select id="id_categorie" name="id_categorie">
+                    <% for (cat of locals.categories) { %> 
+                        <option value="<%= cat.id_categorie %>" <% if (locals.id_categorie == cat.id_categorie) { %>selected<% } %>><%= cat.nom_categorie %></option>
+                    <% } %> 
+                </select>
+            </div>
+            <div class="field">
+                <img src="/assets/img/empty.jpg" class="preview">
+                <label for="image" class="small-button">Modifier l'image</label>
+                <input type="file" id="image" name="image" value="">
+            </div>
+            <div class="field">
+                <input type="submit" value="Créer" class="btn btn_registration">
+            </div>
+        </form>
+    </section>
+
+</main>
+
+<%- include('_footer') %>

@@ -9,8 +9,6 @@ router.get('/deconnexion', (req, res) => {
 
 // Si connecté :
 router.get('/mon-compte', (req, res) => {
-    req.session.user_id = 2 // à retirer
-
     if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
         console.log('utilisateur:', req.session.user_id)
         User.get({...req.session}, (err, data) => {
