@@ -16,15 +16,17 @@
     // width: 100%;
     
   }
-  
+  a {
+    display: inline-block;
+  }
   #btn {
     
     justify-content: center;
   }
-  #btn button {
+  #btn a {
   margin: 10px;
   }
-  button{
+  a {
       min-width: 163px;
   }
   @media screen and (max-width: 800px) {

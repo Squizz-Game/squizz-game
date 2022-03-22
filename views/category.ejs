@@ -6,8 +6,8 @@
     <section class="cards quizz-cards">
         <% for (quizz of cat) { if (quizz.id_quizz) { %>
             <article class="card quizz-card">
-                <a class="card-image" href="/quizz/<%= quizz.id_categorie %>/<%= quizz.id_quizz %>">
-                    <img src="/assets/img/quizz/<%= quizz.q_img %>" alt="<%= quizz.nom_quizz %>">
+                <a class="card-image" href="/jeu/<%= quizz.id_categorie %>/<%= quizz.id_quizz %>">
+                    <img src="/assets/img/jeu/<%= quizz.q_img %>" alt="<%= quizz.nom_quizz %>">
                     <h2 class="card-title"><%= quizz.nom_quizz %></h2>
                 </a>
                 <div class="card-text">

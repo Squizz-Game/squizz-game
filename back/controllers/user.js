@@ -34,7 +34,7 @@ router.post('/mon-compte', (req, res) => {
             } else {
                 // flash: succès
                 console.log(data)
-                return res.redirect('/quizz')
+                return res.redirect('/jeu')
             }
         })
     } else {
@@ -49,7 +49,7 @@ router.get('/inscription', (req, res) => {
         res.render('inscription')
     } else {
         // flash : vous êtes déjà connecté
-        res.redirect('/quizz')
+        res.redirect('/jeu')
     }
 })
 
@@ -59,7 +59,7 @@ router.post('/inscription', (req, res) => {
             if (!err) {
                 // message succes flash
                 req.session.user_id = data // on connecte l'utilisateur
-                res.redirect('/quizz')
+                res.redirect('/jeu')
             } else {
                 console.log(data)
                 // message erreur flash
@@ -74,7 +74,7 @@ router.get('/connexion', (req, res) => {
         res.render('connexion')
     } else {
         // flash : vous êtes déjà connecté
-        res.redirect('/quizz')
+        res.redirect('/jeu')
     }
 })
 
@@ -84,7 +84,7 @@ router.post('/connexion', (req, res) => {
             if (!err) {
                 // message succes flash
                 req.session.user_id = data // on connecte l'utilisateur
-                res.redirect('/quizz')
+                res.redirect('/jeu')
             } else {
                 console.log(data)
                 // message erreur flash
