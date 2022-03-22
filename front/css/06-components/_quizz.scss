@@ -26,8 +26,36 @@
       gap: 20px;
       justify-content: space-evenly;
 
+      // .reponse {
+      //   width: calc(col(4) - 20px);
+      //   background-color: $darkPurple;
+      //   color: $white;
+      //   padding: ratio-space(2px);
+      //   border-radius: 5px;
+
+      //   display: flex;
+      //   align-items: center;
+      //   text-align: left;
+
+      //   i {
+      //     margin-right: ratio-space(5px);
+      //     width: 42px;
+      //     height: 42px;
+      //     font-family: $font-secondary;
+      //     position: relative;
+      //     &:before {
+      //       position: absolute;
+      //       margin-right: ratio-space(5px);
+      //       width: 42px;
+      //       line-height: 42px;
+      //       text-align: center;
+      //       font-size: 56px;
+      //       left: 0;
+      //     }
+      //   }
+
       .reponse {
-        width: calc(col(4) - 20px);
+        width: 450px;
         background-color: $darkPurple;
         color: $white;
         padding: ratio-space(2px);
@@ -35,7 +63,6 @@
 
         display: flex;
         align-items: center;
-        text-align: left;
 
         i {
           margin-right: ratio-space(5px);
@@ -54,48 +81,12 @@
           }
         }
 
-<<<<<<< Updated upstream
-            .reponse {
-                width: 450px;
-                background-color: $darkPurple;
-                color: $white;
-                padding: ratio-space(2px);
-                border-radius: 5px;
-                
-                display: flex;
-                align-items: center;
-                
-                i {
-                    margin-right: ratio-space(5px);
-                    width: 42px;
-                    height: 42px;
-                    font-family: $font-secondary;
-                    position: relative;
-                    &:before {
-                        position: absolute;
-                        margin-right: ratio-space(5px);
-                        width: 42px;
-                        line-height: 42px;
-                        text-align: center;
-                        font-size: 56px;
-                        left: 0;
-                    }
-                }
-
-                &:nth-child(1) {
-                    i:before {
-                        content: '{';
-                        color: $green;
-                    }
-                }
-=======
         &:nth-child(1) {
           i:before {
             content: "{";
             color: $green;
           }
         }
->>>>>>> Stashed changes
 
         &:nth-child(2) {
           i:before {
@@ -139,7 +130,7 @@
     top: 0;
     left: 0;
   }
-  
+
   .next {
     display: flex;
     margin-top: 20px;
