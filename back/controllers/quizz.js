@@ -27,10 +27,10 @@ router.get('/:id_cat/:id_quizz', (req, res) => {
         if (!err) {
             const quizz = data[0]
             // Si aucun quizz, rediriger sur la page catégorie
-            if (!quizz) return res.redirect('/quizz/' + req.params.id_cat)
+            if (!quizz) return res.redirect('/jeu/' + req.params.id_cat)
             // Si l'id de la catégorie n'est pas le bon, rediriger sur la bonne url
             if (quizz && parseInt(quizz.id_categorie) !== parseInt(req.params.id_cat))
-                return res.redirect('/quizz/' + quizz.id_categorie + '/' + quizz.id_quizz)
+                return res.redirect('/jeu/' + quizz.id_categorie + '/' + quizz.id_quizz)
             res.render('quizz', { quizz })
         }
         else {

@@ -173,6 +173,7 @@ fetch("/api/questions/" + sectionQuestion.dataset.quizz)
       insertAswers();
       startTimer();
       next.addEventListener("click", () => {
+        stopTimer();
         nextQuestion();
       });
     }
