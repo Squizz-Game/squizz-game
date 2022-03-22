@@ -1,9 +1,13 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const session = require("express-session");
-const user = require("./back/controllers/user");
-const quizz = require("./back/controllers/quizz");
-const api = require("./back/controllers/api");
+// Modules imports
+const express = require('express')
+const bodyParser = require('body-parser')
+const session = require('express-session')
+
+// Controllers imports
+const user = require('./back/controllers/user')
+const quizz = require('./back/controllers/quizz')
+const crudQuizz = require('./back/controllers/crud-quizz')
+const api = require('./back/controllers/api')
 
 const app = express();
 
@@ -19,15 +23,18 @@ app.use(
     secret: "my-secret-key",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, //if https : true
-  })
-);
-app.use(require("./back/middlewares/flash"));
+    cookie: {
+        secure: false, //if https : true
+        maxAge: 604800 // 1 semaine
+    }
+}))
+app.use(require('./back/middlewares/flash'))
 
 // Controllers
-app.use("/", user);
-app.use("/quizz", quizz);
-app.use("/api", api);
+app.use('/', user)
+app.use('/quizz', quizz)
+app.use('/mes-quizz', crudQuizz)
+app.use("/api", api)
 
 // Home page
 app.get("/", (req, res) => {

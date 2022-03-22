@@ -4,12 +4,16 @@
 <main>
     <h1><%= category %></h1>
     <section class="cards quizz-cards">
-        <% for (q of quizz) { if (q.id_quizz) { %>
+        <% for (quizz of cat) { if (quizz.id_quizz) { %>
             <article class="card quizz-card">
-                <a href="/quizz/<%= q.id_categorie %>/<%= q.id_quizz %>">
-                    <img src="/assets/img/<%= q.image %>" alt="<%= q.nom_quizz %>">
-                    <h2><%= q.nom_quizz %></h2>
+                <a class="card-image" href="/quizz/<%= quizz.id_categorie %>/<%= quizz.id_quizz %>">
+                    <img src="/assets/img/quizz/<%= quizz.q_img %>" alt="<%= quizz.nom_quizz %>">
+                    <h2 class="card-title"><%= quizz.nom_quizz %></h2>
                 </a>
+                <div class="card-text">
+                    <a href="/classement/<%= quizz.id_quizz %>">Voir le classement</a>
+                    <span>par <%= quizz.user_name %></span>
+                </div>
             </article>
         <% }} %>
     </section>

@@ -7,11 +7,13 @@ const Quizz = {
             return action(false, rows)
         })
     },
-    getQuizzByCategory: (id, action) => {
+    getByCategory: (id, action) => {
         mysql.execute(
-            'SELECT * FROM quizz q ' +
+            'SELECT *, q.image as q_img FROM quizz q ' +
             'RIGHT JOIN categories c ' +
             'ON c.id_categorie = q.id_categorie ' +
+            'LEFT JOIN utilisateurs u ' +
+            'ON u.id_user = q.id_user ' +
             'WHERE c.id_categorie = ?',
             [id],
             (err, rows) => {
@@ -24,6 +26,22 @@ const Quizz = {
             if (err) return action(true, err)
             return action(false, rows)
         })
+    },
+    create: ({nom_quizz, image, id_categorie, id_user}, action) => {        if (
+            nom_quizz === (undefined || '') ||
+            image === (undefined || '') ||
+            id_categorie === (undefined || '') ||
+            id_user === (undefined || '')
+        ) return action(true, 'Veuillez renseigner tous les champs.')
+
+        mysql.execute(
+            'INSERT INTO quizz SET nom_quizz = ?, image = ?, id_categorie = ?, id_user = ?',
+            [nom_quizz, image, id_categorie, id_user],
+            (err, rows) => {
+                if (err) return action(true, err)
+                return action(false, rows.insertId)
+            }
+        )
     }
 }
 
