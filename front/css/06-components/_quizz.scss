@@ -1,31 +1,26 @@
 #quizz {
-  position: relative;
-  section {
-    .quizz-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    position: relative;
+    section {
+        .quizz-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-      .counter,
-      .timer {
+            .counter,
+            .timer {
+                @extend h4;
+                text-transform: lowercase;
+            }
+        }
+
+        blockquote.question {
         @extend h4;
-        text-transform: lowercase;
-      }
-    }
-
-    blockquote.question {
-      @extend h4;
-      padding: ratio-space(5px);
-      box-shadow: $buttonShadow;
-      text-align: center;
-      margin-bottom: ratio-space(8px);
-    }
-    .reponses {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: space-evenly;
-      
+        padding: ratio-space(5px);
+        box-shadow: $buttonShadow;
+        text-align: center;
+        margin-bottom: ratio-space(8px);
+        }
+        
         .reponses {
             display: flex;
             flex-wrap: wrap;
@@ -61,59 +56,60 @@
                     }
                 }
 
-        &:nth-child(1) {
-          i:before {
-            content: "{";
-            color: $green;
-          }
-        }
+                &:nth-child(1) {
+                    i:before {
+                    content: "{";
+                    color: $green;
+                    }
+                }
 
-        &:nth-child(2) {
-          i:before {
-            content: "}";
-            color: $lightBlue;
-          }
-        }
+                &:nth-child(2) {
+                    i:before {
+                    content: "}";
+                    color: $lightBlue;
+                    }
+                }
 
-        &:nth-child(3) {
-          i:before {
-            content: "o";
-            color: $pink;
-          }
-        }
+                &:nth-child(3) {
+                    i:before {
+                    content: "o";
+                    color: $pink;
+                    }
+                }
 
-        &.true {
-          background-color: $green;
-          color: $white;
-          i:before {
-            color: $white;
-          }
+                &.true {
+                    background-color: $green;
+                    color: $white;
+                    i:before {
+                    color: $white;
+                    }
+                }
+
+                &.false {
+                    background-color: $red;
+                    color: $white;
+                    i:before {
+                    color: $white;
+                    }
+                }
+            }
         }
-        &.false {
-          background-color: $red;
-          color: $white;
-          i:before {
-            color: $white;
-          }
-        }
-      }
+    }   
+
+    &::before {
+        position: fixed;
+        content: "";
+        background: rgba(#000, 0.25);
+        width: 100%;
+        height: 100vh;
+        z-index: -1;
+        top: 0;
+        left: 0;
     }
-  }
 
-  &::before {
-    position: fixed;
-    content: "";
-    background: rgba(#000, 0.25);
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
-    top: 0;
-    left: 0;
-  }
-
-  .next {
-    display: flex;
-    margin-top: 20px;
-    justify-content: flex-end;
-  }
+    .next {
+        display: flex;
+        margin-top: 20px;
+        justify-content: flex-end;
+    }
 }
