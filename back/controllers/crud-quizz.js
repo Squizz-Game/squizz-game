@@ -17,7 +17,7 @@ router.get('/nouveau', (req, res) => {
     }
 })
 
-router.post('/nouveau', async (req, res) => {
+router.post('/nouveau', (req, res) => {
     req.session.user_id = 2 // à supprimer
     if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
         // Gérer l'upload d'image
@@ -65,6 +65,28 @@ router.post('/nouveau', async (req, res) => {
         })
     } else {
         // flash : vous n'êtes pas connecté
+        res.redirect('/connexion')
+    }
+})
+
+router.get('/:id_quizz', (req, res) => {
+    req.session.user_id = 2 // à supprimer
+    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
+        Quizz.get(req.params.id_quizz, (err, data) => {
+            if (err) {
+                // flash: ce quizz n'existe pas
+                res.redirect('/mes-quizz')
+            } else if (data[0].id_user === req.session.user_id) {
+                res.render('questions', { quizz: data[0]})
+                // res.json(data)
+            } else {
+                // flash: vous n'avez pas les droits pour modifier ce quizz
+                res.redirect('/mes-quizz')
+                console.log(data)
+            }           
+        })
+
+    } else {
         res.redirect('/connexion')
     }
 })
