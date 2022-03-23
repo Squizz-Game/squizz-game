@@ -8,7 +8,7 @@
 
 .btn {
   @extend %btn;
-  &_play {
+  &_play ,&_mon_compte {
     text-decoration: none;
     background: $blueGradient;
     &:before {

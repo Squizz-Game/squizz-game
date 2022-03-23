@@ -1,0 +1,187 @@
+//  === header ===== 
+header{
+    width: 1200px;
+    display: flex;
+    margin: 0 auto;
+   
+}
+header > nav > ul{
+    display: flex;
+    justify-content: space-around;
+    width: 1000px;
+    font-family: $font-primary;
+    color:$white;
+    font-size: 2rem;   
+}
+//  classement des joueur  top 3 
+
+
+#quizz_rank_top3{
+   
+    display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-bottom: 100px;
+        
+}
+//  rank 2
+
+#rank2 {
+    width: 125px;
+    height: 128px;
+    margin: 10px;
+    text-align: center;
+}
+#rank2 >  img{
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    border :solid 5px $grey;
+}
+
+ .rank2{
+    position: relative;
+    display: flex;
+  align-items: center;
+  justify-content: center;    
+    bottom:18px;
+    left:52px;
+    background: $grey;
+  border-radius: 50%;  
+width: 24px;
+height: 24px;
+font-size: 1rem,
+}
+
+
+//  rank 1
+#rank1{
+    text-align: center;
+    width: 188px;
+    height: 188px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+
+#rank1 > img {
+    display:flex;    
+    width: 188px;
+    height: 188px;
+    border-radius: 50%;
+    border: solid 6px $gold;
+}
+.rank1{
+    position: relative;
+    display: flex;
+    left:80px;
+    bottom:15px;
+    align-items: center;
+    justify-content: center;
+    background: $gold;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 1rem;
+}
+// rank 3
+#rank3{
+    height: 128px;
+    width: 128px;
+    margin: 10px;
+    text-align: center;
+    
+}
+#rank3 > img {
+    display: flex;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    border: solid 5px $bronze;    
+}
+.rank3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: $bronze;
+    position:relative;
+    left:52px;
+    bottom:14px;
+}
+
+// ==== table- rank 
+#rank4_and_more{
+    margin: 0 auto;
+    width: 100%;
+}
+.ranking_table{ 
+    display: flex;  
+    width: 80%;
+    height: 50px;
+    margin:10px auto;
+    background: $darkPurple;
+    justify-content:space-between;
+    border-radius: 5px;
+    
+    align-items: center;
+}
+.ranking_table > span{
+    margin-left:10px;
+    margin-right:10px;
+    text-align: center;
+    align-items: center;
+    color:$white ;
+}
+// ===== responsive  ====
+
+//  ===== middle size section top 3 =====
+
+
+   @media #{$media-down-md}{
+       main {
+        //   text-align: center;
+        align-items: center;
+        justify-content: center; 
+       }
+         }
+
+// main{
+//     @media #{$media-down-md}{
+//         justify-content: center;
+//     }
+// }
+
+// #rank1 > img {
+//     @media #{$media-down-md}{
+//         width: 100px;
+//         height: 100px;
+
+//     }
+// }
+
+// #rank2 >img{
+//      @media #{$media-down-md}{      
+//          width: 80px;
+//          height: 80px;
+//         // border-radius:50%;
+//      }
+//  }
+
+// #rank3 > img{
+//     @media #{$media-down-md}{      
+//         width: 60px;
+//         height: 60px;
+//         // border-radius:50%;
+//     }
+// }
+
+
+
+
+
+
+
+
