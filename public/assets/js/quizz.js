@@ -1,8 +1,8 @@
 // VARIABLES POUR LES QUESTIONS/REPONSES
-
 let questions = [];
 let reponses = [];
 let question;
+let button = [];
 let sectionQuestion = document.querySelector(".question");
 let sectionReponse = document.querySelector(".reponses");
 let next = document.querySelector(".btn_next");
@@ -17,8 +17,25 @@ let intervalTimer = null;
 let temps = 30;
 let timers = [];
 
+// EXECUTION POUR L'INSERTION DES QUESTIONS/REPONSES DU QUIZZ
 
-// FONCTIONS POUR L'INSEERTION DES QUESTIONS ET REPONSES DU QUIZZ
+fetch("/api/questions/" + sectionQuestion.dataset.quizz)
+  .then((res) => res.json())
+  .then((res) => {
+    questions = res;
+    shuffleQR(questions);
+    if (questions.length > 0) {
+      question = questions[index];
+      sectionQuestion.innerHTML = question.question;
+      insertAswers();
+      startTimer();
+      next.addEventListener("click", () => {
+        nextQuestion();
+      });
+    }
+  });
+  
+// FONCTIONS POUR L'INSERTION DES QUESTIONS ET REPONSES DU QUIZZ
 
 // insérer les réponses à la question
 function insertAswers() {
@@ -28,67 +45,68 @@ function insertAswers() {
       reponses = res;
       shuffleQR(reponses);
       sectionReponse.innerHTML = "";
+      button = [];
       reponses.forEach((reponse) => {
         r = document.createElement("button");
+        // pousse mes réponses dans un tableau pour pouvoir les vérifier par la suite
+        button.push(r);
         r.className = "reponse";
         // insérer le logo(carré,rond ou triangle) sur les boutons réponses
         r.innerHTML = "<i></i>" + reponse.reponse;
         sectionReponse.appendChild(r);
         checkAnswer(r, reponse.correct);
-        showAnswerDelay(r, reponse.correct);       
+        showAnswerDelay();
+        noClickNext();
         // compteur des questions
-        counterQuestion.innerHTML = index + 1 + "/" + questions.length
-      })      
+        counterQuestion.innerHTML = index + 1 + "/" + questions.length;
+      });
     });
 }
 
-function showTrue(r, correct) {
-  if (correct) {
-    r.classList.add("true")
-  } else {
-    r.classList.add("false");
-  }
-}
-// verifier si la réponse est correct, si oui incrémenter le score
+// verifier si la réponse cliqué est correct, si oui incrémenter le score
 function checkAnswer(r, correct) {
   r.addEventListener("click", () => {
+    showAnswer();
+    stopTimer();
+    removeDelay();
+    noClick();
+    removeNoClickNext();
     if (correct) {
-      r.classList.add("true");
       // si réponse correct, incrémente la variable score avec le temps restant multiplié par 10
       score += temps * 10;
       console.log(score);
-      stopTimer();
-      removeDelay();
-      noClick();
-    } else {
-      r.classList.add("false");
-      stopTimer();
-      removeDelay();
-      noClick();
+    } 
+  });
+}
 
+// afficher les réponses correct et les réponses fausses
+function showAnswer() {
+  button.forEach((btn, i) => {
+    if (reponses[i].correct) {
+      btn.classList.add("true");
+    } else {
+      btn.classList.add("false");
     }
   });
 }
 
-// afficher les réponses
-function showAnswer(r, correct) {
-  if (correct) {
-    r.classList.add("true");
-    stopTimer();
-  } else {
-    r.classList.add("false");
-    stopTimer();
-  }
-}
-
 // afficher les réponses si l'utilisateur ne répond pas dans le temps imparti
-function showAnswerDelay(r, correct) {
+function showAnswerDelay() {
   timers.push(
     setTimeout(() => {
-      showAnswer(r, correct);
+      showAnswer()
+      stopTimer();
       noClick();
+      removeNoClickNext();
     }, 5000)
   );
+}
+
+// stopper le délai pour l'affichage des réponses si l'utilisateur ne répond pas dans le temps imparti
+function removeDelay() {
+  timers.forEach((timer) => {
+    clearTimeout(timer);
+  });
 }
 
 // passer à la question suivante
@@ -132,6 +150,16 @@ function removeNoClick() {
   sectionReponse.style = "pointer-events: auto";
 }
 
+// empécher le clic sur le bouton question suivante
+function noClickNext() {
+  next.style = "pointer-events: none";
+}
+
+// réactiver le clic sur le bouton question suivante
+function removeNoClickNext() {
+  next.style = "pointer-events: auto";
+}
+
 // récuperer aléatoirement les questions/réponses
 function shuffleQR(arr) {
   for (var i = arr.length - 1; i > 0; i--) {
@@ -144,10 +172,10 @@ function shuffleQR(arr) {
 
 // création du timer
 function timer() {
+  temps = temps <= 0 ? 0 : temps - 1;
   let secondes = parseInt(temps % 60, 10);
   secondes = secondes < 10 ? "0" + secondes : secondes;
   timerElement.innerText = `${secondes}s`;
-  temps = temps <= 0 ? 0 : temps - 1;
 }
 
 // lancer le timer
@@ -160,30 +188,3 @@ function startTimer() {
 function stopTimer() {
   clearInterval(intervalTimer);
 }
-
-// stopper le délai pour l'affichage des réponses si l'utilisateur ne répond pas dans le temps imparti
-function removeDelay() {
-  timers.forEach((timer) => {
-    clearTimeout(timer);
-  });
-}
-
-
-// EXECUTION POUR L'INSERTION DES QUESTIONS/REPONSES DU QUIZZ
-
-fetch("/api/questions/" + sectionQuestion.dataset.quizz)
-  .then((res) => res.json())
-  .then((res) => {
-    questions = res;
-    shuffleQR(questions);
-    if (questions.length > 0) {
-      question = questions[index];
-      sectionQuestion.innerHTML = question.question;
-      insertAswers();
-      startTimer();
-      next.addEventListener("click", () => {
-        stopTimer();
-        nextQuestion();
-      });
-    }
-  });
