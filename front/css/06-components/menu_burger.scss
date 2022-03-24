@@ -1,4 +1,23 @@
+// header
+header{
+    position: relative;
+    width: 100vw;
+   // display: flex;
+   // margin: 0 auto;
+  
+}
+header > nav > ul{
+   display: flex;
+   justify-content: space-around;
+   width:70vw;
+   font-family: $font-primary;
+   color:$white;
+   font-size: 1rem;
+   
+ 
+}
 //  menu burger
+
 .menu_burger{
     display:none;
 }
