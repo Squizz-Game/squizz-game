@@ -1,0 +1,46 @@
+//  menu burger
+.menu_burger{
+    display:none;
+}
+label[for=toggle]{
+    display:flex;
+    color:$white ;
+    position: absolute;
+    right:10%;
+    top: 3%;   
+    font-size: 2.5rem;
+    cursor:pointer;
+   
+}
+#toggle {
+    display: none;
+}
+.menu_burger > ul {
+    display:flex;
+    flex-direction: column;
+    display: none;
+    // position: absolute;   
+    width: 10vw;
+  
+}
+.ul_burger >li {
+    padding: 5px;
+    
+}
+
+
+#toggle:checked + .ul_burger {
+  display: flex;
+  width: 100vw;
+  height: 20vh;  
+ position:relative;
+  right: 38px; 
+  background: $darkPurple;
+  margin-top: 70px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  
+  
+  
+}

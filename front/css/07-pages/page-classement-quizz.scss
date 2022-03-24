@@ -1,31 +1,93 @@
 //  === header ===== 
 header{
-    width: 1200px;
-    display: flex;
-    margin: 0 auto;
+     position: relative;
+     width: 100vw;
+    // display: flex;
+    // margin: 0 auto;
    
 }
 header > nav > ul{
     display: flex;
     justify-content: space-around;
-    width: 1000px;
+    width:70vw;
     font-family: $font-primary;
     color:$white;
-    font-size: 2rem;   
+    font-size: 1rem;
+    
+  
 }
-//  classement des joueur  top 3 
-
-
-#quizz_rank_top3{
+//  menu burger
+.menu_burger{
+    display:none;
+}
+label[for=toggle]{
+    display:flex;
+    color:$white ;
+    position: absolute;
+    right:10%;
+    top: 3%;   
+    font-size: 2.5rem;
+    cursor:pointer;
    
+}
+#toggle {
+    display: none;
+}
+.menu_burger > ul {
+    display:flex;
+    flex-direction: column;
+    display: none;
+    // position: absolute;   
+    width: 10vw;
+  
+}
+.ul_burger >li {
+    padding: 5px;
+    
+}
+
+
+#toggle:checked + .ul_burger {
+  display: flex;
+  width: 100vw;
+  height: 20vh;  
+ position:relative;
+//   right: 38px; 
+  background: $darkPurple;
+  margin-top: 70px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  
+  
+  
+}
+
+// ===========
+
+// ================ logo ==========
+figure {
+    min-height: 15px;
+    margin-bottom: 10px;
+}
+.logo{    
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+// ===========================================
+
+
+
+
+//  classement des joueur  top 3 
+#quizz_rank_top3{   
     display: flex;
      justify-content: center;
      align-items: center;
-     margin-bottom: 100px;
-        
+     margin-bottom: 100px;        
 }
 //  rank 2
-
 #rank2 {
     width: 125px;
     height: 128px;
@@ -45,7 +107,7 @@ header > nav > ul{
   align-items: center;
   justify-content: center;    
     bottom:18px;
-    left:52px;
+    left:51px;
     background: $grey;
   border-radius: 50%;  
 width: 24px;
@@ -108,7 +170,7 @@ font-size: 1rem,
     border-radius: 50%;
     background: $bronze;
     position:relative;
-    left:52px;
+    left:54px;
     bottom:14px;
 }
 
@@ -137,7 +199,7 @@ font-size: 1rem,
 }
 // ===== responsive  ====
 
-//  ===== middle size section top 3 =====
+//  ===== middle size  =====
 
 
    @media #{$media-down-md}{
@@ -147,37 +209,67 @@ font-size: 1rem,
         justify-content: center; 
        }
          }
+// =============== section top 3 =========
+@media screen  and (max-width: 650px){
+    .full_size{
+        display: none;
+    }
+    .menu_burger{
+        display: contents;
+    }
+    #rank2{
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        }
+        .rank2{
+            width: 24px;
+            height: 24px;
+            position: relative;
+            left:29px;
+        }
+    
+   #rank2 > img  {
+       width: 80px;
+       height: 80px;   
+}
+#rank1{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+.rank1{
+    width: 24px;
+    height: 24px;
+    position: relative;
+    left: 40px;
+}
+#rank1 > img {
+    width: 100px;
+    height: 100px;   
+    margin: 0 auto;
+}
+#rank3{
+    width: 60px;
+    height: 60px;
+    text-align: center;
+}
+#rank3 > img {
+    height: 60px;
+    width: 60px;
+}
+.rank3{
+    width: 24px;
+    height: 24px;
+    position: relative;
+    left: 19px;
+    bottom: 14px;
+  
+}
 
-// main{
-//     @media #{$media-down-md}{
-//         justify-content: center;
-//     }
-// }
 
-// #rank1 > img {
-//     @media #{$media-down-md}{
-//         width: 100px;
-//         height: 100px;
 
-//     }
-// }
-
-// #rank2 >img{
-//      @media #{$media-down-md}{      
-//          width: 80px;
-//          height: 80px;
-//         // border-radius:50%;
-//      }
-//  }
-
-// #rank3 > img{
-//     @media #{$media-down-md}{      
-//         width: 60px;
-//         height: 60px;
-//         // border-radius:50%;
-//     }
-// }
-
+}
 
 
 
