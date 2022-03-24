@@ -26,6 +26,7 @@ function insertAswers() {
     .then((res) => res.json())
     .then((res) => {
       reponses = res;
+      shuffleQR(reponses);
       sectionReponse.innerHTML = "";
       reponses.forEach((reponse) => {
         r = document.createElement("button");
@@ -34,13 +35,20 @@ function insertAswers() {
         r.innerHTML = "<i></i>" + reponse.reponse;
         sectionReponse.appendChild(r);
         checkAnswer(r, reponse.correct);
-        showAnswerDelay(r, reponse.correct);
+        showAnswerDelay(r, reponse.correct);       
         // compteur des questions
-        counterQuestion.innerHTML = index+1+"/"+questions.length
-      });
+        counterQuestion.innerHTML = index + 1 + "/" + questions.length
+      })      
     });
 }
 
+function showTrue(r, correct) {
+  if (correct) {
+    r.classList.add("true")
+  } else {
+    r.classList.add("false");
+  }
+}
 // verifier si la réponse est correct, si oui incrémenter le score
 function checkAnswer(r, correct) {
   r.addEventListener("click", () => {
@@ -57,6 +65,7 @@ function checkAnswer(r, correct) {
       stopTimer();
       removeDelay();
       noClick();
+
     }
   });
 }
@@ -123,8 +132,8 @@ function removeNoClick() {
   sectionReponse.style = "pointer-events: auto";
 }
 
-// récuperer aléatoirement les questions
-function shuffleQuestions(arr) {
+// récuperer aléatoirement les questions/réponses
+function shuffleQR(arr) {
   for (var i = arr.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1)); //random index
     [arr[i], arr[j]] = [arr[j], arr[i]]; // swap
@@ -166,7 +175,7 @@ fetch("/api/questions/" + sectionQuestion.dataset.quizz)
   .then((res) => res.json())
   .then((res) => {
     questions = res;
-    shuffleQuestions(questions);
+    shuffleQR(questions);
     if (questions.length > 0) {
       question = questions[index];
       sectionQuestion.innerHTML = question.question;

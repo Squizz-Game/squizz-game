@@ -37,4 +37,15 @@ router.post("/score", (req, res) => {
   );
 });
 
+router.get("/avatars/", (req, res) => {
+  mysql.query(
+    "SELECT * FROM `avatars`",
+    (err, data) => {
+      console.log(data);
+      console.log(err);
+      res.json(data);
+    }
+  );
+});
+
 module.exports = router;

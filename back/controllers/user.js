@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../models/user')
+const mysql = require('../models/mysql')
 
 router.get('/deconnexion', (req, res) => {
     req.session.user_id = undefined
@@ -9,11 +10,20 @@ router.get('/deconnexion', (req, res) => {
 
 // Si connecté :
 router.get('/mon-compte', (req, res) => {
+    req.session.user_id = 2
     if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
         console.log('utilisateur:', req.session.user_id)
         User.get({...req.session}, (err, data) => {
             if (!err) {
-                return res.render('mon-compte', { ...data })
+                mysql.query(
+                    "SELECT * FROM `avatars`",
+                    (err, avatars) => {
+                      console.log(data);
+                      console.log(err);
+                      return res.render('mon-compte', { ...data, avatars })
+                    }
+                  );
+                
             } else {
                 res.redirect('/connexion')
             }
@@ -46,7 +56,15 @@ router.post('/mon-compte', (req, res) => {
 // Si non connecté :
 router.get('/inscription', (req, res) => {
     if (req.session.user_id === undefined) { // Si aucun utilisateur est connecté
-        res.render('inscription')
+        mysql.query(
+            "SELECT * FROM `avatars`",
+            (err, data) => {
+              console.log(data);
+              console.log(err);
+              res.render('inscription', {avatars:data})
+            }
+          );
+        
     } else {
         // flash : vous êtes déjà connecté
         res.redirect('/jeu')
