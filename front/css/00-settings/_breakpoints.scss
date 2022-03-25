@@ -1,14 +1,14 @@
-$bp-sm: 576px; //Smartphones
+$bp-sm: 440px; //Smartphones
 $bp-md: 800px; //Tablettes (ou smartphones en mode portrait)
 $bp-lg: 992px; //PC
 $bp-xl: 1200px; //PC grand-écran
 //  au dessus de mD
-$media-up-sm: only screen and (min-width: $bp-sm);
+$media-up-sm: "only screen and (min-width: #{$bp-sm})";
 $media-up-md: "only screen and (min-width: #{$bp-md})";
 $media-up-lg: only screen and (min-width: $bp-lg);
 $media-up-xl: only screen and (min-width: $bp-xl);
 //  en dessous de md 
-$media-down-sm: only screen and (max-width: $bp-sm);
+$media-down-sm: "only screen and (max-width: #{$bp-sm})";
 $media-down-md: "only screen and (max-width: #{$bp-md})";
 $media-down-lg: only screen and (max-width: $bp-lg);
 $media-down-xl: only screen and (max-width: #{$bp-xl});
