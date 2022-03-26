@@ -21,13 +21,24 @@ const Quizz = {
             return action(false, rows)
         })
     },
-    get: (id, action) => {
-        mysql.execute('SELECT * FROM quizz WHERE id_quizz = ?', [id], (err, rows) => {
+    getByUser: (id, action) => {
+        mysql.execute(
+            'SELECT * FROM quizz ' +
+            'WHERE id_user = ?',
+            [id],
+            (err, rows) => {
             if (err) return action(true, err)
             return action(false, rows)
         })
     },
-    create: ({nom_quizz, image, id_categorie, id_user}, action) => {        if (
+    get: (id, action) => {
+        mysql.execute('SELECT * FROM quizz WHERE id_quizz = ?', [id], (err, rows) => {
+            if (err) return action(true, err)
+            return action(false, rows[0])
+        })
+    },
+    create: ({nom_quizz, image, id_categorie, id_user}, action) => {
+        if (
             nom_quizz === (undefined || '') ||
             image === (undefined || '') ||
             id_categorie === (undefined || '') ||
@@ -42,6 +53,33 @@ const Quizz = {
                 return action(false, rows.insertId)
             }
         )
+    },
+    update: ({nom_quizz, image, id_categorie, id_quizz}, next) => {
+        if (
+            nom_quizz === (undefined || '') ||
+            id_categorie === (undefined || '') ||
+            id_quizz === (undefined || '')
+        ) return action(true, 'Veuillez renseigner tous les champs.')
+        
+        if (image === undefined) {
+            mysql.execute(
+                'UPDATE quizz SET nom_quizz = ?, id_categorie = ? WHERE id_quizz = ?',
+                [nom_quizz, id_categorie, id_quizz],
+                (err, rows) => {
+                    if (err) return next(true, err)
+                    else return next(false, err)
+                }
+            )
+        } else {
+            mysql.execute(
+                'UPDATE quizz SET nom_quizz = ?, id_categorie = ?, image = ? WHERE id_quizz = ?',
+                [nom_quizz, id_categorie, image, id_quizz],
+                (err, rows) => {
+                    if (err) return next(true, err)
+                    else return next(false, err)
+                }
+            )
+        }
     }
 }
 
