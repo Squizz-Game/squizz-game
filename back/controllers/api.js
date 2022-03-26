@@ -3,6 +3,7 @@ const mysql = require("../models/mysql.js");
 const Question = require("../models/question.js");
 const Reponse = require("../models/reponse.js");
 
+// Récupérer les questions par quizz
 router.get("/questions/:id_quizz", (req, res) => {
   mysql.execute(
     "SELECT * FROM `questions` WHERE `id_quizz` = ?",
@@ -15,6 +16,7 @@ router.get("/questions/:id_quizz", (req, res) => {
   );
 });
 
+// Récupérer les réponses par question
 router.get("/reponses/:id_question", (req, res) => {
   mysql.execute(
     "SELECT * FROM `reponses` WHERE `id_question` = ?",
@@ -27,6 +29,7 @@ router.get("/reponses/:id_question", (req, res) => {
   );
 });
 
+// Enregistrer le score d'un joueur
 router.post("/score", (req, res) => {
   mysql.execute(
     "INSERT INTO `scores`(`score`, `date`, `id_user`, `id_quizz`) VALUES (?, now(), ?, ?)",
@@ -39,6 +42,7 @@ router.post("/score", (req, res) => {
   );
 });
 
+// Récupérer les avatars
 router.get("/avatars/", (req, res) => {
   mysql.query(
     "SELECT * FROM `avatars`",
@@ -50,39 +54,19 @@ router.get("/avatars/", (req, res) => {
   );
 });
 
+// Récupérer les questions et réponses par quizz (doublon avec les deux premières urls : à optimiser)
 router.get('/quizz/:id_quizz', (req, res) => {
-  Question.getByQuizz(req.params.id_quizz, (err, data) => {
+  // to-do : vérifier les droits (id_user)
+    Question.getByQuizz(req.params.id_quizz, (err, data) => {
     return res.json({err, data})
   })
 })
 
-// Modifier une question
-router.post('/update/question', (req, res) => {
-    Question.update({...req.body}, (err, data) => {
-        if (err) throw err
-        else return res.json(data)
-    })
-})
-
-// Supprimer une question
-router.delete('/remove/question', (req, res) => {
-    Question.remove(req.body.id_question, (err, data) => {
-        res.json({err, data})
-    })
-})
-
-// Supprimer une question
-router.post('/create/question', (req, res) => {
-    Question.create({...req.body}, (err, data) => {
-        res.json({err, data})
-    })
-})
-
-// Modifier une réponse
-router.post('/update/reponse', (req, res) => {
-    console.log('req', req.body)
-    Reponse.update({...req.body}, (err, data) => {
-        res.json({err, data})
+// Modifier les questions réponses d'un quizz
+router.post('/quizz/:id_quizz', (req, res) => {
+    // to-do : vérifier les droits (id_user)
+    Question.updateAll({questions: req.body, id_quizz: req.params.id_quizz}, (err, data) => {
+        return res.json({err, data})
     })
 })
 

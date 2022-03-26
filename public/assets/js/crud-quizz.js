@@ -3,11 +3,11 @@ const checkboxes = document.querySelectorAll('.checkbox')
 
 checkboxes.forEach((checked, i) => {
     checked.addEventListener('click', e => {
-        if (questions[index].reponses[i] === undefined) {
-            questions[index].reponses[i] = { ...empty_rep }
-        }
-
-        checkboxes.forEach(c => {
+        // on retire préalablement le check des autres réponses
+        checkboxes.forEach((c, i) => {
+            if (questions[index].reponses[i] === undefined) {
+                questions[index].reponses[i] = {reponse: ''}
+            }
             questions[index].reponses[i].correct = 0
             c.classList.remove('checked')
         })
@@ -29,16 +29,6 @@ const counter = document.querySelector('.counter')
 const id_quizz = main.dataset.quizz
 let index = 0
 let questions = []
-const empty_rep = {
-    correct: 0,
-    reponse: '',
-}
-const empty_quest = {
-    id_question: null,
-    question: '',
-    id_quizz,
-    reponses: [{ ...empty_rep, correct: 1 }],
-}
 
 const displayReponses = () => {
     // Réinitialise les checkboxes
@@ -67,7 +57,6 @@ const updateCounter = () => {
 }
 
 const displayQuestion = () => {
-    console.log(questions)
     question.innerHTML = questions[index]?.question
     displayReponses()
     updateCounter()
@@ -86,7 +75,15 @@ init()
 // Actions
 next.addEventListener('click', () => {
     if (index === questions.length - 1) {
-        questions.push({ ...empty_quest })
+        questions.push({
+            id_question: null,
+            question: '',
+            id_quizz,
+            reponses: [{
+                correct: 1,
+                reponse: ''
+            }]
+        })
         localStorage.questions = JSON.stringify(questions)
     }
     index++
@@ -115,7 +112,10 @@ question.addEventListener('input', e => {
 reponses_p.forEach((p, i) => {
     p.addEventListener('input', e => {
         if (questions[index].reponses[i] === undefined) {
-            questions[index].reponses[i] = { ...empty_rep }
+            questions[index].reponses[i] = {
+                correct: 0,
+                reponse: ''
+            }
         }
         questions[index].reponses[i].reponse = p.innerHTML
         localStorage.questions = JSON.stringify(questions)
@@ -128,121 +128,72 @@ validate.addEventListener('click', e => {
     // au moins deux réponses remplies par question
     // une réponse correcte
 
-    const verify = () => {
-        let len = questions.length
-        if (len < 10) {
-            return alert('Vous devez avoir au moins 10 questions.')
-        }
-    }
     index = questions.length - 1
     displayQuestion()
 
     let i = index
     const interval = setInterval(() => {
-        if (questions[i].question === '') {
+        if (questions[i].question === '') { // Si la question est vide
             if (confirm('La question ' + (i + 1) + ' est vide, voulez-vous la supprimer ?')) {
                 questions.splice(i, 1)
                 localStorage.questions = JSON.stringify(questions)
                 if (index > 0) index--
-            } else {
+            } else { // S'il arrête la vérification et sort de la boucle
                 clearInterval(interval)
             }
         } else {
-            if (index > 0) index--
+            // Si plus d'une réponse est vide ou non cochée
+            let are_true = 0
+            let total_reps = 0
+            questions[i].reponses.forEach(rep => {
+                if (rep.reponse !== '') {
+                    total_reps++
+                    if (rep.correct) are_true++
+                }
+            })
+
+            if (are_true !== 1 && total_reps !== (2|3)) {
+                alert('Vous devez avoir au moins deux réponses par question dont une correcte.')
+                clearInterval(interval)
+            } else {
+                // si tout est ok, on passe à la question suivante
+                if (index > 0) index--
+            }
         }
         displayQuestion()
         i--
 
-        if (i === -1) {
+        if (i === -1) { // S'il sort de la boucle après vérification, on revérifie la longueur
             clearInterval(interval)
             verify()
         }
     }, 100)
+
+    const verify = () => {
+        let len = questions.length
+        if (len < 10) {
+            return alert('Vous devez avoir au moins 10 questions.')
+        } else {
+            saveQuestions()
+        }
+    }
 })
 
-// ----------------------------------------------
-
-// let questions = []
-// let reponses = []
-// let type = 1
-
-// // erreur : certaines réponses sont créées 2 fois
-// validate.addEventListener('click', () => {
-//     let body_reponses = []
-//     let are_true = 0
-//     let total = 0
-
-//     const getResponses = (question_id) => {
-//         body_reponses = []
-//         are_true = 0
-//         total = 0
-//         // récupérer les réponses
-//         reponses_p.forEach((r, i) => {
-//             body_reponses.push({
-//                 reponse: r.innerHTML,
-//                 correct: checkboxes[i].classList.contains('checked') ? 1 : 0,
-//                 id_reponse: reponses[i]?.id_reponse,
-//                 id_question: question_id
-//             })
-//             if (r.innerHTML !== '') {
-//                 are_true += body_reponses[i].correct
-//                 total++
-//             }
-//         })
-//     }
-
-//     const updateResponses = () => {
-//         body_reponses.forEach(body => {
-//             fetch('/api/update/reponse', {
-//                 method: 'POST',
-//                 headers: { 'Content-Type': 'application/json' },
-//                 body: JSON.stringify(body)
-//             })
-//                 .then(res => res.json())
-//                 .then(res => console.log(res.data))
-//         })
-//     }
-
-//     getResponses(questions[index].id_question)
-
-//     // si la question n'est pas vide et il y a au moins deux réponses dont une correcte
-//     if (question.innerHTML !== '' && total > 1 && are_true === 1) {
-//         // Si la question existe déjà
-//         if (questions[index].id_question) {
-//             console.log('todo')
-//             // update question
-//             fetch('/api/update/question', {
-//                 method: 'POST',
-//                 headers: { 'Content-Type': 'application/json' },
-//                 body: JSON.stringify({
-//                     question: question.innerHTML,
-//                     id_question: questions[index].id_question
-//                 })
-//             })
-//             .then(res => res.json())
-//             .then(res => {
-//                 questions[index] = res
-//                 updateResponses()
-//             })
-
-//         // Si la question n'existe pas encore
-//         } else {
-//             // create question
-//             fetch('/api/create/question', {
-//                 method: 'POST',
-//                 headers: { 'Content-Type': 'application/json' },
-//                 body: JSON.stringify({
-//                     question: question.innerHTML,
-//                     id_quizz: quizz_id
-//                 })
-//             })
-//                 .then(res => res.json())
-//                 .then(res => {
-//                     getResponses(res.data)
-//                     updateResponses()
-//                 })
-//         }
-//     } else {
-//         alert('La question ne peut être vide et vous devez avoir au moins deux réponses dont une correcte.')
-//     }
-// })
+const saveQuestions = () => {
+    fetch('/api/quizz/' + id_quizz, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: localStorage.questions
+    })
+        .then(res => res.json())
+        .then(res => {
+            if (!res.err) {
+                questions = res.data
+                localStorage.questions = JSON.stringify(questions)
+                index = questions.length - 1
+                displayQuestion()
+            } else {
+                console.log(res.data)
+            }
+        })
+}
