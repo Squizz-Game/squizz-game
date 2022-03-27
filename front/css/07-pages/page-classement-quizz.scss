@@ -1,0 +1,294 @@
+//  === header ===== 
+header{
+     position: relative;
+     width: 100vw;
+    // display: flex;
+    // margin: 0 auto;
+   
+}
+
+header > nav > ul{
+    display: flex;
+    justify-content: center;
+    width:95vw;
+    font-family: $font-primary;
+    color:$white;
+    font-size: 1rem; 
+  
+}
+ header > nav > ul > li {
+     margin-left: 15px;
+ }
+//  menu burger
+.menu_burger{
+    display:none;
+}
+label[for=toggle]{
+    display:flex;
+    color:$white ;
+    position: absolute;
+    right:10%;
+    top: 3%;   
+    font-size: 2.5rem;
+    cursor:pointer;
+   
+}
+#toggle {
+    display: none;
+}
+.menu_burger > ul {
+    display:flex;
+    flex-direction: column;
+    display: none;
+    // position: absolute;   
+    width: 10vw;
+  
+}
+.ul_burger >li {
+    padding: 5px;
+    
+}
+
+
+#toggle:checked + .ul_burger {
+  display: flex;
+  width: 100vw;
+  height: 20vh;  
+ position:relative;
+//   right: 38px; 
+  background: $darkPurple;
+  margin-top: 70px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  
+  
+  
+}
+
+// ===========
+
+// ================ logo ==========
+figure {
+    min-height: 15px;
+    margin-bottom: 10px;
+}
+.logo{    
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+// ===========================================
+
+
+
+
+//  classement des joueur  top 3 
+#quizz_rank_top3{   
+    display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-bottom: 100px;        
+}
+//  rank 2
+#rank2 {
+    width: 125px;
+    height: 128px;
+    margin: 10px;
+    text-align: center;
+}
+#rank2 >  img{
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    border :solid 5px $grey;
+}
+
+ .rank2{
+    position: relative;
+    display: flex;
+  align-items: center;
+  justify-content: center;    
+    bottom:18px;
+    left:51px;
+    background: $grey;
+  border-radius: 50%;  
+width: 24px;
+height: 24px;
+font-size: 1rem,
+}
+
+
+//  rank 1
+#rank1{
+    text-align: center;
+    width: 188px;
+    height: 188px; 
+    margin: 10px;
+}
+
+
+#rank1 > img {
+        
+    width: 188px;
+    height: 188px;
+    border-radius: 50%;
+    border: solid 6px $gold;
+}
+.rank1{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left:82px;
+    bottom:20px;
+    background: $gold;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 1rem;
+}
+// rank 3
+#rank3{
+    height: 128px;
+    width: 128px;
+    margin: 10px;
+    text-align: center;
+    
+}
+#rank3 > img {
+    display: flex;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    border: solid 5px $bronze;    
+}
+.rank3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: $bronze;
+    position:relative;
+    left:54px;
+    bottom:14px;
+}
+
+// ==== table- rank 
+#rank4_and_more{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ranking_table{ 
+    display: flex;  
+    width: 80%;
+    height: 50px;
+    margin:10px auto;
+    background: $purpleGradient;
+    justify-content:space-between;
+    border-radius: 5px;
+    
+    align-items: center;
+}
+.ranking_table > span{
+    margin-left:10px;
+    margin-right:10px;
+    text-align: center;
+    align-items: center;
+    color:$white ;
+}
+// ===== responsive  ====
+
+//  ===== middle size  =====
+
+
+   @media #{$media-down-md}{
+       main {
+        //   text-align: center;
+        align-items: center;
+        justify-content: center; 
+       }
+         }
+// =============== section top 3 =========
+@media screen  and (max-width: 700px){
+    .full_size{
+        display: none;
+    }
+    .menu_burger{
+        display: contents;
+    }
+    #rank2{
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        }
+        .rank2{
+            width: 24px;
+            height: 24px;
+            position: relative;
+            left:29px;
+        }
+    
+   #rank2 > img  {
+       width: 80px;
+       height: 80px;   
+}
+#rank1{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+.rank1{
+    width: 24px;
+    height: 24px;
+    position: relative;
+  
+    left: 40px;
+}
+#rank1 > img {
+    width: 100px;
+    height: 100px;   
+    margin: 0 auto;
+}
+#rank3{
+    width: 60px;
+    height: 60px;
+    text-align: center;
+}
+#rank3 > img {
+    height: 60px;
+    width: 60px;
+}
+.rank3{
+    width: 24px;
+    height: 24px;
+    position: relative;
+    left: 19px;
+    bottom: 14px; 
+}
+}
+// ====== small size =====
+
+ @media #{$media-down-sm}{
+   .rank1{
+      position: relative;
+      left: 28px;
+   }
+   .rank2{
+       position:relative;
+       left:26px;
+       bottom:20px;
+   }
+       
+    
+    
+ }
+
+
+
+
+
+
