@@ -7,12 +7,15 @@
         <% for (quizz of myQuizz) { if (quizz.id_quizz) { %>
             <article class="card quizz-card">
                 <a class="card-image" href="/jeu/<%= quizz.id_categorie %>/<%= quizz.id_quizz %>">
-                    <img src="/assets/img/jeu/<%= quizz.q_img %>" alt="<%= quizz.nom_quizz %>">
+                    <img src="/assets/img/quizz/<%= quizz.image %>" alt="<%= quizz.nom_quizz %>">
                     <h2 class="card-title"><%= quizz.nom_quizz %></h2>
                 </a>
                 <div class="card-text">
                     <a href="/mes-quizz/<%= quizz.id_quizz %>">Modifier</a>
-                    <a href="/mes-quizz/remove/<%= quizz.id_quizz %>">Supprimer</a>
+                    <form action="/mes-quizz/<%= quizz.id_quizz %>" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button>Supprimer</button>
+                    </form>
                 </div>
             </article>
         <% }} %>

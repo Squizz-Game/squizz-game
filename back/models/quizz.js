@@ -80,6 +80,12 @@ const Quizz = {
                 }
             )
         }
+    },
+    remove: (id_quizz, next) => {
+        mysql.execute('DELETE FROM quizz WHERE id_quizz = ?', [id_quizz], (err, rows) => {
+            if (err) return next(true, err)
+            return next(false, rows)
+        })
     }
 }
 
