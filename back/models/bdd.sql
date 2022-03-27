@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 17 mars 2022 à 20:10
--- Version du serveur :  10.4.10-MariaDB
--- Version de PHP :  7.4.0
+-- Généré le : sam. 19 mars 2022 à 15:25
+-- Version du serveur :  8.0.21
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `squizz_game`
+-- Base de données : `squizz_game`
 --
 
 -- --------------------------------------------------------
@@ -30,7 +29,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `avatars`;
 CREATE TABLE IF NOT EXISTS `avatars` (
-  `id_avatar` int(11) NOT NULL AUTO_INCREMENT,
+  `id_avatar` int NOT NULL AUTO_INCREMENT,
   `filename` varchar(255) NOT NULL,
   PRIMARY KEY (`id_avatar`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -50,7 +49,7 @@ INSERT INTO `avatars` (`id_avatar`, `filename`) VALUES
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
-  `id_categorie` int(11) NOT NULL AUTO_INCREMENT,
+  `id_categorie` int NOT NULL AUTO_INCREMENT,
   `nom_categorie` varchar(150) NOT NULL,
   `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id_categorie`)
@@ -87,12 +86,21 @@ INSERT INTO `categories` (`id_categorie`, `nom_categorie`, `image`) VALUES
 
 DROP TABLE IF EXISTS `questions`;
 CREATE TABLE IF NOT EXISTS `questions` (
-  `id_question` int(11) NOT NULL AUTO_INCREMENT,
+  `id_question` int NOT NULL AUTO_INCREMENT,
   `question` text NOT NULL,
-  `id_quizz` int(11) NOT NULL,
+  `id_quizz` int NOT NULL,
   PRIMARY KEY (`id_question`),
   KEY `questions_ibfk_1` (`id_quizz`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `questions`
+--
+
+INSERT INTO `questions` (`id_question`, `question`, `id_quizz`) VALUES
+(1, 'Qui est le/la meilleur(e) ?', 1),
+(2, 'Qui était millitaire ?', 1),
+(4, '1 + 1 = 2', 1);
 
 -- --------------------------------------------------------
 
@@ -102,13 +110,13 @@ CREATE TABLE IF NOT EXISTS `questions` (
 
 DROP TABLE IF EXISTS `quizz`;
 CREATE TABLE IF NOT EXISTS `quizz` (
-  `id_quizz` int(11) NOT NULL AUTO_INCREMENT,
+  `id_quizz` int NOT NULL AUTO_INCREMENT,
   `nom_quizz` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `id_categorie` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `id_categorie` int NOT NULL,
+  `id_user` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_quizz`),
   KEY `id_categorie` (`id_categorie`),
   KEY `id_user` (`id_user`)
@@ -149,13 +157,27 @@ INSERT INTO `quizz` (`id_quizz`, `nom_quizz`, `image`, `id_categorie`, `id_user`
 
 DROP TABLE IF EXISTS `reponses`;
 CREATE TABLE IF NOT EXISTS `reponses` (
-  `id_reponse` int(11) NOT NULL AUTO_INCREMENT,
+  `id_reponse` int NOT NULL AUTO_INCREMENT,
   `reponse` text NOT NULL,
   `correct` tinyint(1) NOT NULL,
-  `id_question` int(11) NOT NULL,
+  `id_question` int NOT NULL,
   PRIMARY KEY (`id_reponse`),
   KEY `id_question` (`id_question`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `reponses`
+--
+
+INSERT INTO `reponses` (`id_reponse`, `reponse`, `correct`, `id_question`) VALUES
+(1, 'Amina', 1, 1),
+(2, 'Lucas', 2, 1),
+(3, 'Anthony', 2, 1),
+(6, 'Eric', 2, 2),
+(7, 'Dylan', 1, 2),
+(8, 'Romain', 2, 2),
+(9, 'Vrai', 1, 4),
+(10, 'Faux', 2, 4);
 
 -- --------------------------------------------------------
 
@@ -165,11 +187,11 @@ CREATE TABLE IF NOT EXISTS `reponses` (
 
 DROP TABLE IF EXISTS `scores`;
 CREATE TABLE IF NOT EXISTS `scores` (
-  `id_score` int(11) NOT NULL AUTO_INCREMENT,
-  `score` int(11) NOT NULL,
+  `id_score` int NOT NULL AUTO_INCREMENT,
+  `score` int NOT NULL,
   `date` datetime NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_quizz` int(11) NOT NULL,
+  `id_user` int NOT NULL,
+  `id_quizz` int NOT NULL,
   PRIMARY KEY (`id_score`),
   KEY `id_user` (`id_user`),
   KEY `id_quizz` (`id_quizz`)
@@ -183,11 +205,11 @@ CREATE TABLE IF NOT EXISTS `scores` (
 
 DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE IF NOT EXISTS `utilisateurs` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int NOT NULL AUTO_INCREMENT,
   `user_name` varchar(70) NOT NULL,
   `mail` varchar(255) NOT NULL,
   `password` varchar(70) NOT NULL,
-  `id_avatar` int(11) NOT NULL,
+  `id_avatar` int NOT NULL,
   PRIMARY KEY (`id_user`),
   KEY `id_avatar` (`id_avatar`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;

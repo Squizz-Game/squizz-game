@@ -13,10 +13,11 @@ label {
 #username,
 #mail,
 #old_password,
-#new_password {
+#new_password, input, select {
     box-shadow: $buttonShadow;
     padding: 5px;
     margin: 5px 10px 10px 0;
+    border: none;
 }
 
 .registration,

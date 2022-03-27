@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../models/user')
+const mysql = require('../models/mysql')
 
 router.get('/deconnexion', (req, res) => {
     req.session.user_id = undefined
@@ -7,13 +8,66 @@ router.get('/deconnexion', (req, res) => {
     res.redirect('/connexion')
 })
 
+// Si connecté :
+router.get('/mon-compte', (req, res) => {
+    req.session.user_id = 2
+    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
+        console.log('utilisateur:', req.session.user_id)
+        User.get({...req.session}, (err, data) => {
+            if (!err) {
+                mysql.query(
+                    "SELECT * FROM `avatars`",
+                    (err, avatars) => {
+                      console.log(data);
+                      console.log(err);
+                      return res.render('mon-compte', { ...data, avatars })
+                    }
+                  );
+                
+            } else {
+                res.redirect('/connexion')
+            }
+        })
+    } else {
+        // flash : vous n'êtes pas connecté
+        res.redirect('/connexion')
+    }
+})
+
+router.post('/mon-compte', (req, res) => {
+    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
+        User.update({...req.body, id_user: req.session.user_id}, (err, data) => {
+            if (err) {
+                console.log('error :', data)
+                // flash: error
+                return res.render('mon-compte', { ... req.body })
+            } else {
+                // flash: succès
+                console.log(data)
+                return res.redirect('/jeu')
+            }
+        })
+    } else {
+        // flash : vous n'êtes pas connecté
+        res.redirect('/connexion')
+    }
+})
+
 // Si non connecté :
 router.get('/inscription', (req, res) => {
     if (req.session.user_id === undefined) { // Si aucun utilisateur est connecté
-        res.render('inscription')
+        mysql.query(
+            "SELECT * FROM `avatars`",
+            (err, data) => {
+              console.log(data);
+              console.log(err);
+              res.render('inscription', {avatars:data})
+            }
+          );
+        
     } else {
         // flash : vous êtes déjà connecté
-        res.redirect('/quizz')
+        res.redirect('/jeu')
     }
 })
 
@@ -23,7 +77,7 @@ router.post('/inscription', (req, res) => {
             if (!err) {
                 // message succes flash
                 req.session.user_id = data // on connecte l'utilisateur
-                res.redirect('/quizz')
+                res.redirect('/jeu')
             } else {
                 console.log(data)
                 // message erreur flash
@@ -38,7 +92,7 @@ router.get('/connexion', (req, res) => {
         res.render('connexion')
     } else {
         // flash : vous êtes déjà connecté
-        res.redirect('/quizz')
+        res.redirect('/jeu')
     }
 })
 
@@ -48,7 +102,7 @@ router.post('/connexion', (req, res) => {
             if (!err) {
                 // message succes flash
                 req.session.user_id = data // on connecte l'utilisateur
-                res.redirect('/quizz')
+                res.redirect('/jeu')
             } else {
                 console.log(data)
                 // message erreur flash

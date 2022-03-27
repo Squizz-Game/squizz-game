@@ -1,3 +1,16 @@
 <%- include('_head') %> 
-    Accueil
+    
+<section id="home">
+    <img src="./assets/img/logo-header.svg" alt="Logo Squizz Game">
+      <div id="btn_rc">
+            <% if (!locals.session.user_id) { %> 
+                <div id="btn">
+                    <a href="/inscription" class="btn btn_registration">Inscription</a>
+                    <a href="/connexion" class="btn btn_connection">Connexion</a>
+                </div>
+            <% } %>
+            <a href="/jeu" class="btn btn_play">Jouer</a>
+        </div>
+</main>
+
 <%- include('_footer') %> 

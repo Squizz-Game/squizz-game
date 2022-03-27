@@ -1,0 +1,52 @@
+#home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: ratio-space(8px);
+  
+  img {
+    display: flex;
+    width: 60%;
+  //   padding: 3%;
+    margin: 0 auto;
+    // padding-right: 20px;
+  }
+  #btn_rc {
+    text-align: center;
+    // width: 100%;
+    
+  }
+  a {
+    display: inline-block;
+  }
+  #btn {
+    
+    justify-content: center;
+  }
+  #btn a {
+  margin: 10px;
+  }
+  a {
+      min-width: 163px;
+  }
+  @media screen and (max-width: 800px) {
+    img {
+      width: 60%;
+    }
+    #btn {
+      display: grid;
+      grid-template-columns: 1 1f;
+      grid-template-rows: (repat 3 1fr);
+    }
+    .btn.btn_play {
+      margin: 0 auto;
+      margin: 10px;
+    }
+  }
+  
+  @media screen and (min-width: 400px){
+      .btn.btn_registration .btn.btn_play{
+          width: 5px;
+      }
+  }
+}

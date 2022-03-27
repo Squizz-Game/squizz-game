@@ -6,19 +6,21 @@
             justify-content: space-between;
             align-items: center;
 
-            .counter, .timer {
+            .counter,
+            .timer {
                 @extend h4;
-                text-transform: lowercase
+                text-transform: lowercase;
             }
         }
 
         blockquote.question {
-            @extend h4;
-            padding: ratio-space(5px);
-            box-shadow: $buttonShadow;
-            text-align: center;
-            margin-bottom: ratio-space(8px);
+        @extend h4;
+        padding: ratio-space(5px);
+        box-shadow: $buttonShadow;
+        text-align: center;
+        margin-bottom: ratio-space(8px);
         }
+        
         .reponses {
             display: flex;
             flex-wrap: wrap;
@@ -27,6 +29,7 @@
 
             .reponse {
                 width: calc(col(4) - 20px);
+                min-width: 450px;
                 background-color: $darkPurple;
                 color: $white;
                 padding: ratio-space(2px);
@@ -55,22 +58,22 @@
 
                 &:nth-child(1) {
                     i:before {
-                        content: '{';
-                        color: $green;
+                    content: "{";
+                    color: $green;
                     }
                 }
 
                 &:nth-child(2) {
                     i:before {
-                        content: '}';
-                        color: $lightBlue;
+                    content: "}";
+                    color: $lightBlue;
                     }
                 }
 
                 &:nth-child(3) {
                     i:before {
-                        content: 'o';
-                        color: $pink;
+                    content: "o";
+                    color: $pink;
                     }
                 }
 
@@ -78,28 +81,35 @@
                     background-color: $green;
                     color: $white;
                     i:before {
-                        color: $white;
+                    color: $white;
                     }
                 }
+
                 &.false {
                     background-color: $red;
                     color: $white;
                     i:before {
-                        color: $white;
+                    color: $white;
                     }
                 }
             }
         }
-    }
+    }   
 
     &::before {
         position: fixed;
-        content: '';
-        background: rgba(#000, .25);
+        content: "";
+        background: rgba(#000, 0.25);
         width: 100%;
         height: 100vh;
         z-index: -1;
         top: 0;
         left: 0;
+    }
+
+    .next {
+        display: flex;
+        margin-top: 20px;
+        justify-content: flex-end;
     }
 }
