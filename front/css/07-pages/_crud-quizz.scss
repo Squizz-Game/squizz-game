@@ -40,3 +40,153 @@ form#crud-quizz {
         }
     }
 }
+
+#create-quizz {
+    @extend #quizz;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    h1 {
+        width: 100%;
+    }
+
+    section {
+        width: calc(col(6) - 20px);
+
+        .question {
+            &:empty:before {
+                content: attr(data-placeholder);
+                opacity: .8;
+            }
+        }
+
+        .reponses {
+            .row {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: ratio-space(2px);
+
+                .reponse {
+                    width: 100%;
+                    p {
+                        width: 100%;
+
+                        &:empty:before {
+                            content: attr(data-placeholder);
+                            opacity: .8;
+                        }
+                    }
+                }
+
+                .checkbox {
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    box-shadow: $buttonShadow;
+                    position: relative;
+                    right: 10px;
+                    
+                    &.checked::before {
+                        content: '';
+                        width: 34px;
+                        height: 34px;
+                        position: absolute;
+                        top: -5px;
+                        right: -10px;
+
+                        background: center / contain no-repeat url('/assets/img/check.svg');
+                    }
+                }
+
+                &:nth-child(1) {
+                    .reponse i:before {
+                    content: "{";
+                    color: $green;
+                    }
+                }
+
+                &:nth-child(2) {
+                    .reponse i:before {
+                    content: "}";
+                    color: $lightBlue;
+                    }
+                }
+
+                &:nth-child(3) {
+                    .reponse i:before {
+                    content: "o";
+                    color: $pink;
+                    }
+                }
+            }
+        }
+    }
+
+    aside {
+        width: col(2);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .head {
+            display: flex;
+            gap: ratio-space(2px);
+            flex-direction: column;
+            .counter {
+                width: 64px;
+                height: 64px;
+                align-self: flex-end;
+
+                border: solid 4px $lightGrey;
+                display: inline-block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                font-size: 20px;
+            }
+            select {
+                width: 100%;
+                border-radius: 5px;
+            }
+        }
+        
+        .bottom {
+            button {
+                @extend .btn;
+                width: 100%;
+                text-align: left;
+                padding: ratio-space(1px) ratio-space(2px);
+                margin-top: ratio-space(2px);
+                text-transform: none;
+    
+                background: $blueGradient;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+    
+                img {
+                    width: 16px;
+                    height: 16px;
+                    display: block;
+                }
+
+                &:nth-child(1) {
+                    background: $red;
+                }
+
+                &:nth-child(2) {
+                    background: $green;
+                }
+
+                &:last-child {
+                    background: $purpleGradient;
+                }
+            }
+        }
+    }
+}

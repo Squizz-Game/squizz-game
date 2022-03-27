@@ -2,7 +2,7 @@
 <%- include('_header') %>
 
 <main>
-    <h1>Nouveau quizz</h1>
+    <h1><%= locals.id_quizz ? 'Modifier le' : 'Nouveau' %> quizz</h1>
     <section>
         <form method="POST" id="crud-quizz" enctype="multipart/form-data">
             <div class="field">
@@ -18,16 +18,19 @@
                 </select>
             </div>
             <div class="field">
-                <img src="/assets/img/empty.jpg" class="preview">
+                <img src="/assets/img/<%= locals.image ? 'quizz/' + image : 'empty.jpg' %>" class="preview">
                 <label for="image" class="small-button">Modifier l'image</label>
                 <input type="file" id="image" name="image" value="">
             </div>
+            
             <div class="field">
-                <input type="submit" value="Créer" class="btn btn_registration">
+                <input type="submit" value="<%= locals.id_quizz ? 'Modifier' : 'Créer' %>" class="btn btn_registration">
             </div>
         </form>
+        <% if (locals.id_quizz) { %> 
+            <a href="/mes-quizz/<%= id_quizz %>/questions">Voir les questions</a>
+        <% } %> 
     </section>
-
 </main>
 
 <%- include('_footer') %>

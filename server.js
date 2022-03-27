@@ -2,6 +2,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const method = require('method-override')
 
 // Controllers imports
 const user = require('./back/controllers/user')
@@ -25,6 +26,13 @@ app.use(session({
     cookie: {
         secure: false, //if https : true
         maxAge: 604800 // 1 semaine
+    }
+}))
+app.use(method((req, res) => { // transforme les méthodes POST qui ont des champs _method=DELETE ou _method=PUT
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        const method = req.body._method
+        delete req.body._method
+        return method
     }
 }))
 app.use(require('./back/middlewares/flash'))
