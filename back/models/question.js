@@ -34,13 +34,13 @@ const Question = {
                     // update les réponses
                     const ids_reponses = [] // pour vérifier si des réponses ont été supprimées
                     for (const r of q.reponses) {
-                        if (r.id_reponse) { // Si la réponse existe déjà en bdd, on la modifie
+                        if (r.id_reponse && r.reponse !== '') { // Si la réponse existe déjà en bdd, on la modifie
                             ids_reponses.push(r.id_reponse)
                             await mysql.promise().execute(
                                 'UPDATE reponses SET reponse = ?, correct = ? WHERE id_reponse = ? AND id_question = ?',
                                 [r.reponse, r.correct, r.id_reponse, q.id_question]
                             )
-                        } else { // Si la réponse n'existe pas en bdd, on la crée
+                        } else if (r.reponse !== '') { // Si la réponse n'existe pas en bdd, on la crée
                             const [rows] = await mysql.promise().execute(
                                 'INSERT INTO reponses SET reponse = ?, correct = ?, id_question = ?',
                                 [r.reponse, r.correct, q.id_question]
