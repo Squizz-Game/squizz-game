@@ -3,6 +3,10 @@ h1 {
     text-align: center;
     font-size: 56px;
     margin-bottom: ratio-space(8px);
+    
+    @media #{$media-down-md} {
+        font-size: 28px;
+    }
 }
 
 h4 {

@@ -3,16 +3,16 @@ const User = require('../models/user')
 const mysql = require('../models/mysql')
 
 router.get('/deconnexion', (req, res) => {
-    req.session.user_id = undefined
+    req.session.id_user = undefined
     // flash : à bientôt
     res.redirect('/connexion')
 })
 
 // Si connecté :
 router.get('/mon-compte', (req, res) => {
-    req.session.user_id = 2
-    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
-        console.log('utilisateur:', req.session.user_id)
+    req.session.id_user = 2
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
+        console.log('utilisateur:', req.session.id_user)
         User.get({...req.session}, (err, data) => {
             if (!err) {
                 mysql.query(
@@ -35,8 +35,8 @@ router.get('/mon-compte', (req, res) => {
 })
 
 router.post('/mon-compte', (req, res) => {
-    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
-        User.update({...req.body, id_user: req.session.user_id}, (err, data) => {
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
+        User.update({...req.body, id_user: req.session.id_user}, (err, data) => {
             if (err) {
                 console.log('error :', data)
                 // flash: error
@@ -55,7 +55,7 @@ router.post('/mon-compte', (req, res) => {
 
 // Si non connecté :
 router.get('/inscription', (req, res) => {
-    if (req.session.user_id === undefined) { // Si aucun utilisateur est connecté
+    if (req.session.id_user === undefined) { // Si aucun utilisateur est connecté
         mysql.query(
             "SELECT * FROM `avatars`",
             (err, data) => {
@@ -72,11 +72,11 @@ router.get('/inscription', (req, res) => {
 })
 
 router.post('/inscription', (req, res) => {
-    if (req.session.user_id === undefined) { // Si aucun utilisateur est connecté
+    if (req.session.id_user === undefined) { // Si aucun utilisateur est connecté
         User.create({...req.body}, (err, data) => {
             if (!err) {
                 // message succes flash
-                req.session.user_id = data // on connecte l'utilisateur
+                req.session.id_user = data // on connecte l'utilisateur
                 res.redirect('/jeu')
             } else {
                 console.log(data)
@@ -88,7 +88,7 @@ router.post('/inscription', (req, res) => {
 })
 
 router.get('/connexion', (req, res) => {
-    if (req.session.user_id === undefined) { // Si aucun utilisateur est connecté
+    if (req.session.id_user === undefined) { // Si aucun utilisateur est connecté
         res.render('connexion')
     } else {
         // flash : vous êtes déjà connecté
@@ -97,11 +97,11 @@ router.get('/connexion', (req, res) => {
 })
 
 router.post('/connexion', (req, res) => {
-    if (req.session.user_id === undefined) { // Si aucun utilisateur est connecté
+    if (req.session.id_user === undefined) { // Si aucun utilisateur est connecté
         User.check({...req.body}, (err, data) => {
             if (!err) {
                 // message succes flash
-                req.session.user_id = data // on connecte l'utilisateur
+                req.session.id_user = data // on connecte l'utilisateur
                 res.redirect('/jeu')
             } else {
                 console.log(data)

@@ -5,9 +5,9 @@ const Quizz = require('../models/quizz')
 
 // Lister ses quizz
 router.get('/', (req, res) => {
-    req.session.user_id = 2 // à supprimer
-    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
-        Quizz.getByUser(req.session.user_id, (err, data) => {
+    req.session.id_user = 2 // à supprimer
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
+        Quizz.getByUser(req.session.id_user, (err, data) => {
             if (err) throw err
             else return res.render('mes-quizz', {myQuizz: data})
         })
@@ -18,8 +18,8 @@ router.get('/', (req, res) => {
 
 // Créer un nouveau quizz
 router.get('/nouveau', (req, res) => {
-    req.session.user_id = 2 // à supprimer
-    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
+    req.session.id_user = 2 // à supprimer
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.getCategories((err, data) => {
             if (err) throw err
 
@@ -32,8 +32,8 @@ router.get('/nouveau', (req, res) => {
 })
 
 router.post('/nouveau', (req, res) => {
-    req.session.user_id = 2 // à supprimer
-    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
+    req.session.id_user = 2 // à supprimer
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         // Gérer l'upload d'image
         const form = formidable({ multiples: false })
 
@@ -58,7 +58,7 @@ router.post('/nouveau', (req, res) => {
                     Quizz.create({
                         ...fields,
                         image: newFilename,
-                        id_user: req.session.user_id
+                        id_user: req.session.id_user
                     }, (err, data) => {
                         if (err) {
                             // flash: error
@@ -81,8 +81,8 @@ router.post('/nouveau', (req, res) => {
 
 // Modifier un quizz
 router.get('/:id_quizz', (req, res) => {
-    req.session.user_id = 2 // à supprimer
-    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
+    req.session.id_user = 2 // à supprimer
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.get(req.params.id_quizz, (err, data) => {
             if (err) throw err
             else {
@@ -98,16 +98,15 @@ router.get('/:id_quizz', (req, res) => {
 })
 
 router.post('/:id_quizz', (req, res) => {
-    console.log('hello')
-    req.session.user_id = 2 // à supprimer
-    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
+    console.log(req.originalUrl)
+    req.session.id_user = 2 // à supprimer
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
        
         const form = formidable({ multiples: false })
         form.parse(req, (err, fields, file) => {
             // Si aucune image est uploadé
             if (file.image?.originalFilename === '') {
                 Quizz.update({...fields, ...req.params}, (err, data) => {
-                    // res.redirect('./' + req.params.id_quizz + '/questions')
                     res.redirect('./' + req.params.id_quizz + '/questions')
                 })
             } else if (err || (file.image?.mimetype !== 'image/png' && file.image?.mimetype !== 'image/jpeg')) {
@@ -140,8 +139,8 @@ router.post('/:id_quizz', (req, res) => {
                             if (err) throw err
 
                             Quizz.update({...fields, ...req.params, image: newFilename}, (err, data) => {
-                                console.log(err, data)
-                                res.redirect('./questions')
+                                console.log(err, data, req.url)
+                                res.redirect(req.originalUrl + '/questions')
                             })
                         })
                     })
@@ -156,13 +155,13 @@ router.post('/:id_quizz', (req, res) => {
 
 // Gérer les questions
 router.get('/:id_quizz/questions', (req, res) => {
-    req.session.user_id = 2 // à supprimer
-    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
+    req.session.id_user = 2 // à supprimer
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.get(req.params.id_quizz, (err, data) => {
             if (err) {
                 // flash: ce quizz n'existe pas
                 res.redirect('/mes-quizz')
-            } else if (data.id_user === req.session.user_id) {
+            } else if (data.id_user === req.session.id_user) {
                 res.render('questions', { quizz: data})
             } else {
                 // flash: vous n'avez pas les droits pour modifier ce quizz
@@ -176,13 +175,13 @@ router.get('/:id_quizz/questions', (req, res) => {
 
 //Supprimer un quizz
 router.delete('/:id_quizz', (req, res) => {
-    req.session.user_id = 2 // à supprimer
+    req.session.id_user = 2 // à supprimer
     // to-do : add JWT verification
-    if (req.session.user_id !== undefined) { // Si un utilisateur est connecté
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.remove(req.params.id_quizz, (err, data) => {
             if (err) {
                 // flash: ce quizz n'existe pas
-            } else if (data.id_user !== req.session.user_id) {
+            } else if (data.id_user !== req.session.id_user) {
                 // flash: vous n'avez pas les droits pour supprimer ce quizz
             }
             res.redirect('/mes-quizz')
