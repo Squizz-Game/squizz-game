@@ -1,0 +1,31 @@
+.mon_score {
+  background: $blueGradient;
+}
+// ===== responsive  ====
+
+//  ===== middle size  =====
+
+@media #{$media-down-md} {
+  main {
+    //   text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+}
+// =============== section top 3 =========
+@media screen and (max-width: 700px) {
+  .full_size {
+    display: none;
+  }
+  .menu_burger {
+    display: contents;
+  }
+  .cards {
+    .card.quizz-card {
+      flex-wrap: wrap;
+    }
+    .card.quizz-card .card-image {
+      width: 215px;
+    }
+  }
+}
