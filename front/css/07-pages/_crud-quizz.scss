@@ -1,41 +1,107 @@
-form#crud-quizz {
-    margin: 0;
-    .field {
-        display: flex;
-        align-items: center;
-        gap: ratio-space(2px);
-        width: calc(col(4) - 20px);
-        position: relative;
-
-        input, select {
-            border-radius: 5px;
-            min-width: col(2);
-        }
-
-        input[type=file] {
-            display: none;
-        }
-
-        input[type=submit] {
-            height: 50px;
-            // width: 50%;
-            position: absolute;
-            right: 0;
+#crud-quizz {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    section {
+        form {
             margin: 0;
-            bottom: 0;
-        }
-        
-        .preview {
-            margin: ratio-space(2px) 0 0 0;
-            width: 60%;
-            height: 200px;
-            border-radius: 15px;
-            overflow: hidden;
-            padding: 0;
+            .field {
+                display: flex;
+                align-items: center;
+                gap: ratio-space(2px);
+                width: calc(col(4) - 20px);
+                position: relative;
+                // flex-wrap: wrap;
+    
+                input,
+                select {
+                    border-radius: 5px;
+                    // min-width: col(2);
+                    width: 100%;
+                }
+                label {
+                    width: 100%;
+                }
+    
+                input[type='file'] {
+                    display: none;
+                }
+    
+                input[type='submit'] {
+                    height: 50px;
+                    width: auto;
+                    margin: 0;
+                }
 
-            &[src$="empty.jpg"] {
-                height: 60px;
-                object-fit: contain;
+                &:nth-child(3) {
+                    width: calc(col(5) - 20px);
+                    label {
+                        width: auto;
+                    }
+                    .preview {
+                        margin: ratio-space(2px) 0 0 0;
+                        width: 360px;
+                        height: 200px;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        padding: 0;
+        
+                        &[src$='empty.jpg'] {
+                            height: 60px;
+                            object-fit: contain;
+                        }
+                    }
+                }
+
+                &:nth-child(4) {
+                    width: calc(col(2) - 20px);
+                    align-self: flex-end;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+        }
+    }
+    > a {
+        align-self: flex-end;
+        margin-top: ratio-space(2px);
+        font-weight: 500;
+    }
+
+    @media #{$media-down-lg} {
+        section {
+            form {
+                .field {
+                    flex-wrap: wrap;
+                    &:nth-child(3) {
+                        justify-content: center;
+                        width: 100%;
+                    }
+                    
+                    &:nth-child(4) {
+                        width: 100%;
+                        justify-content: flex-end;
+                        margin-top: ratio-space(2px);
+                        input[type='submit'] {
+                            position: static;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media #{$media-down-md} {
+        section {
+            form {
+                .field {
+                    width: 100%;
+
+                    input[type='submit'] {
+                        position: static;
+                    }
+                }
             }
         }
     }
@@ -55,7 +121,7 @@ form#crud-quizz {
                 width: calc(100% - 84px);
                 &:empty:before {
                     content: attr(data-placeholder);
-                    opacity: .8;
+                    opacity: 0.8;
                 }
             }
 
@@ -97,7 +163,7 @@ form#crud-quizz {
 
                             &:empty:before {
                                 content: attr(data-placeholder);
-                                opacity: .8;
+                                opacity: 0.8;
                             }
                         }
                     }
@@ -110,7 +176,7 @@ form#crud-quizz {
                         box-shadow: $buttonShadow;
                         position: relative;
                         right: 10px;
-                        
+
                         &.checked::before {
                             content: '';
                             width: 34px;
@@ -119,28 +185,29 @@ form#crud-quizz {
                             top: -5px;
                             right: -10px;
 
-                            background: center / contain no-repeat url('/assets/img/check.svg');
+                            background: center / contain no-repeat
+                                url('/assets/img/check.svg');
                         }
                     }
 
                     &:nth-child(1) {
                         .reponse i:before {
-                        content: "{";
-                        color: $green;
+                            content: '{';
+                            color: $green;
                         }
                     }
 
                     &:nth-child(2) {
                         .reponse i:before {
-                        content: "}";
-                        color: $lightBlue;
+                            content: '}';
+                            color: $lightBlue;
                         }
                     }
 
                     &:nth-child(3) {
                         .reponse i:before {
-                        content: "o";
-                        color: $pink;
+                            content: 'o';
+                            color: $pink;
                         }
                     }
                 }
@@ -156,22 +223,22 @@ form#crud-quizz {
                     padding: ratio-space(1px) ratio-space(2px);
                     margin-top: ratio-space(2px);
                     text-transform: none;
-        
+
                     background: $blueGradient;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-        
+
                     img {
                         width: 16px;
                         height: 16px;
                         display: block;
                     }
-    
+
                     &:nth-child(1) {
                         background: $red;
                     }
-    
+
                     &:last-child {
                         background: $purpleGradient;
                     }
@@ -207,7 +274,7 @@ form#crud-quizz {
                         &:nth-child(3) {
                             order: 1;
                         }
-                        
+
                         &:last-child {
                             order: 4;
                         }
@@ -233,18 +300,6 @@ form#crud-quizz {
             }
             .bottom {
                 .reponses .row {
-                    .reponse {
-                        // i {
-                        //     margin-right: ratio-space(2px);
-                        //     width: 25px;
-                        //     height: 25px;
-                        //     &:before {
-                        //         width: 25px;
-                        //         line-height: 25px;
-                        //         font-size: 39px;
-                        //     }
-                        // }
-                    }
                     .checkbox {
                         width: 22px;
                         height: 22px;
@@ -266,6 +321,24 @@ form#crud-quizz {
                         width: 100%;
                     }
                 }
+            }
+        }
+    }
+}
+
+.cards {
+    .card-text {
+        i {
+            font-style: italic;
+        }
+        form {
+            display: inline;
+            margin: 0;
+            button {
+                padding: 0;
+                background: none;
+                font-weight: 500;
+                color: $red;
             }
         }
     }
