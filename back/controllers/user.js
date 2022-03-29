@@ -10,7 +10,7 @@ router.get('/deconnexion', (req, res) => {
 
 // Si connecté :
 router.get('/mon-compte', (req, res) => {
-    req.session.id_user = 2
+    
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         console.log('utilisateur:', req.session.id_user)
         User.get({...req.session}, (err, data) => {
@@ -100,7 +100,7 @@ router.post('/connexion', (req, res) => {
     if (req.session.id_user === undefined) { // Si aucun utilisateur est connecté
         User.check({...req.body}, (err, data) => {
             if (!err) {
-                // message succes flash
+                // message succes flash               
                 req.session.id_user = data // on connecte l'utilisateur
                 res.redirect('/jeu')
             } else {

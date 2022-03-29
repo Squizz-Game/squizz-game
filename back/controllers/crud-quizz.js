@@ -5,7 +5,7 @@ const Quizz = require('../models/quizz')
 
 // Lister ses quizz
 router.get('/', (req, res) => {
-    req.session.id_user = 2 // à supprimer
+    
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.getByUser(req.session.id_user, (err, data) => {
             if (err) throw err
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 // Créer un nouveau quizz
 router.get('/nouveau', (req, res) => {
-    req.session.id_user = 2 // à supprimer
+    
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.getCategories((err, data) => {
             if (err) throw err
@@ -32,7 +32,7 @@ router.get('/nouveau', (req, res) => {
 })
 
 router.post('/nouveau', (req, res) => {
-    req.session.id_user = 2 // à supprimer
+    
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         // Gérer l'upload d'image
         const form = formidable({ multiples: false })
@@ -81,7 +81,7 @@ router.post('/nouveau', (req, res) => {
 
 // Modifier un quizz
 router.get('/:id_quizz', (req, res) => {
-    req.session.id_user = 2 // à supprimer
+    
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.get(req.params.id_quizz, (err, data) => {
             if (err) throw err
@@ -99,7 +99,7 @@ router.get('/:id_quizz', (req, res) => {
 
 router.post('/:id_quizz', (req, res) => {
     console.log(req.originalUrl)
-    req.session.id_user = 2 // à supprimer
+    
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
        
         const form = formidable({ multiples: false })
@@ -155,7 +155,7 @@ router.post('/:id_quizz', (req, res) => {
 
 // Gérer les questions
 router.get('/:id_quizz/questions', (req, res) => {
-    req.session.id_user = 2 // à supprimer
+    
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.get(req.params.id_quizz, (err, data) => {
             if (err) {
@@ -175,7 +175,7 @@ router.get('/:id_quizz/questions', (req, res) => {
 
 //Supprimer un quizz
 router.delete('/:id_quizz', (req, res) => {
-    req.session.id_user = 2 // à supprimer
+    
     // to-do : add JWT verification
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.remove(req.params.id_quizz, (err, data) => {
