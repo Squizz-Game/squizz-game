@@ -1,30 +1,31 @@
 <%- include('_head') %> <%- include('_header') %>
 
 <main>
-    <h1><%= scores[0].nom_quizz %></h1>
+    <h1><%= quizz.nom_quizz %></h1>
     
     <section id="quizz_rank_top3">
-        
+        <% if(scores[1]) { %>  
         <div id="rank2">
             <span class="player_name_rank2"><%= scores[1].user_name %> </span>
             <img src="/assets/img/avatars/<%= scores[1].filename %> " alt="">
             <span class="rank2">2</span>
             <span class="player_rank2_pts"><%= scores[1].score %>pts </span>
         </div>
-        
+        <% } if(scores[0]) { %> 
         <div id="rank1">
             <span class ="player_name_rank1"><%= scores[0].user_name %></span>
             <img src="/assets/img/avatars/<%= scores[0].filename %> " alt="">
             <span class="rank1">1</span>
             <span class = player_rank1_pts><%= scores[0].score %>pts </span>
         </div>
-        
+        <% } if(scores[2]) { %> 
         <div id="rank3">
             <span class="player_name_rank3"><%= scores[2].user_name %> </span>
             <img src="/assets/img/avatars/<%= scores[2].filename %> " alt="">
             <span class = "rank3">3</span>
             <span class = "player_rank3_pts"><%= scores[2].score %>pts </span>
-        </div>        
+        </div>      
+        <% } %>   
     </section>
     <!--  ranking table  -->
     <% if(scores.length > 3) {

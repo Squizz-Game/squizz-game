@@ -12,21 +12,21 @@ const Score = {
       (err, rows) => {
         if (err) return action(true, err);
         let top3 = false;
-        rows.forEach((row) => {
-          if (row.id_user === id_user) {
-            top3 = true;
-          }
-        });
-        if (!top3 && id_user !== undefined) {
+        // rows.forEach((row) => {
+        //   if (row.id_user === id_user) {
+        //     top3 = true;
+        //   }
+        // });
+        if (/*!top3 && */id_user !== undefined) {
           mysql.execute(
             "SELECT s.id_quizz, s.score, s.id_user, u.user_name, u.id_avatar, a.filename FROM scores s " +
               "INNER JOIN utilisateurs u ON s.id_user = u.id_user " +
               "INNER JOIN avatars a ON u.id_avatar = a.id_avatar " +
               "WHERE s.id_quizz = ? AND s.id_user = ?",
             [id_quizz, id_user],
-            (err, scores) => {
-              if (err) return action(true, err);
-              rows.push(scores[0]);
+              (err, scores) => {
+                  if (err) return action(true, err);
+                  rows.push(scores[0]);
               return action(false, rows);
             }
           );
