@@ -50,6 +50,15 @@ const Quizz = {
             return action(false, rows[0])
         })
     },
+    getForAdmin: (id, action) => {
+        mysql.execute(
+            'SELECT q.* FROM quizz q ' +
+            'WHERE q.id_quizz = ?',
+            [id], (err, rows) => {
+            if (err) return action(true, err)
+            return action(false, rows[0])
+        })
+    },
     create: ({nom_quizz, image, id_categorie, id_user}, action) => {
         if (
             nom_quizz === (undefined || '') ||

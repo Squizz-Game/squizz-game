@@ -155,9 +155,9 @@ router.post('/:id_quizz', (req, res) => {
 
 // Gérer les questions
 router.get('/:id_quizz/questions', (req, res) => {
-    
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
-        Quizz.get(req.params.id_quizz, (err, data) => {
+        Quizz.getForAdmin(req.params.id_quizz, (err, data) => {
+            console.log(data);
             if (err) {
                 // flash: ce quizz n'existe pas
                 res.redirect('/mes-quizz')

@@ -20,7 +20,7 @@ const displayReponses = () => {
         rep.innerText = ''
     })
 
-    quizz[id_quizz].questions[index].reponses?.forEach((r, i) => {
+    quizz[id_quizz].questions[index]?.reponses?.forEach((r, i) => {
         // Met à jour les blocks réponses
         reponses_p[i].innerText = r.reponse
 
@@ -46,6 +46,17 @@ const init = (async () => {
     if (quizz[id_quizz] === undefined) {
         quizz[id_quizz] = {}
         quizz[id_quizz].questions = (await (await fetch('/api/quizz/' + id_quizz)).json()).data
+        if (quizz[id_quizz].questions.length === 0) {
+            quizz[id_quizz].questions.push({
+                id_question: null,
+                question: '',
+                id_quizz,
+                reponses: [{
+                    correct: 1,
+                    reponse: ''
+                }]
+            })
+        }
         quizz[id_quizz].saved = true
         localStorage.quizz = JSON.stringify(quizz)
     }
