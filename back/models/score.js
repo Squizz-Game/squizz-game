@@ -3,7 +3,8 @@ const mysql = require("./mysql");
 const Score = {
   get: ({ id_quizz, id_user }, action) => {
     mysql.execute(
-      "SELECT s.id_quizz, s.score, s.id_user, u.user_name, u.id_avatar, a.filename FROM scores s " +
+        "SELECT s.id_quizz, s.score, s.id_user, q.nom_quizz, u.user_name, u.id_avatar, a.filename FROM scores s " +
+        "INNER JOIN quizz q ON s.id_quizz = q.id_quizz " +
         "INNER JOIN utilisateurs u ON s.id_user = u.id_user " +
         "INNER JOIN avatars a ON u.id_avatar = a.id_avatar " +
         "WHERE s.id_quizz = ? ORDER BY score DESC LIMIT 3",
@@ -43,7 +44,7 @@ const Score = {
         if (rows.length === 0) {
           mysql.execute(
             "INSERT INTO `scores`(`score`, `date`, `id_user`, `id_quizz`) VALUES (?, now(), ?, ?)",
-            [req.body.score, req.body.id_user, req.body.id_quizz],
+            [score, id_user, id_quizz],
             (err, data) => {
               if (err) return action(true, err);
               return action(false, "score enregistré");
@@ -63,7 +64,20 @@ const Score = {
         }
       }
     );
-  },
+    },
+    getAll: (id_quizz, action) => {
+        mysql.execute(
+            "SELECT s.id_quizz, s.score, s.id_user, q.nom_quizz, u.user_name, u.id_avatar, a.filename FROM scores s " +
+            "INNER JOIN quizz q ON s.id_quizz = q.id_quizz " +
+            "INNER JOIN utilisateurs u ON s.id_user = u.id_user " +
+            "INNER JOIN avatars a ON u.id_avatar = a.id_avatar " +
+            "WHERE s.id_quizz = ? ORDER BY score DESC", [id_quizz],
+            (err, rows) => {
+                if (err) return action(true, err);
+              return action(false, rows);
+            }
+      )
+  }
 };
 
 module.exports = Score;

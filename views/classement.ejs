@@ -1,74 +1,44 @@
 <%- include('_head') %> <%- include('_header') %>
 
 <main>
-    <h1>Quizz Name</h1>
+    <h1><%= scores[0].nom_quizz %></h1>
     
     <section id="quizz_rank_top3">
         
         <div id="rank2">
-            <span class="player_name_rank2">Bigbear212</span>
-            <img src="./assets/img/rank2.jpg" alt="">
+            <span class="player_name_rank2"><%= scores[1].user_name %> </span>
+            <img src="/assets/img/avatars/<%= scores[1].filename %> " alt="">
             <span class="rank2">2</span>
-            <span class="player_rank2_pts">400pts</span>
+            <span class="player_rank2_pts"><%= scores[1].score %>pts </span>
         </div>
         
         <div id="rank1">
-            <span class ="player_name_rank1">Bigbear213</span>
-            <img src="./assets/img/rank1.png" alt="">
+            <span class ="player_name_rank1"><%= scores[0].user_name %></span>
+            <img src="/assets/img/avatars/<%= scores[0].filename %> " alt="">
             <span class="rank1">1</span>
-            <span class = player_rank1_pts>500pts</span>
+            <span class = player_rank1_pts><%= scores[0].score %>pts </span>
         </div>
         
         <div id="rank3">
-            <span class="player_name_rank3">BigBear216</span>
-            <img src="./assets/img/rank 3.png" alt="">
+            <span class="player_name_rank3"><%= scores[2].user_name %> </span>
+            <img src="/assets/img/avatars/<%= scores[2].filename %> " alt="">
             <span class = "rank3">3</span>
-            <span class = "player_rank3_pts">300pts</span>
+            <span class = "player_rank3_pts"><%= scores[2].score %>pts </span>
         </div>        
     </section>
     <!--  ranking table  -->
+    <% if(scores.length > 3) {
+        for(let i = 3; i < scores.length; i++) {%>
+        
     <section id="rank4_and_more">
         <div class="ranking_table">
-            <span class= " other_rank">04</span>
-            <span class="other_rank_name_player">Bigbear444</span>
-            <span class="other_rank_pts">180</span>
+            <span class= " other_rank"><%=i+1 %> </span>
+            <span class="other_rank_name_player"><%= scores[i].user_name %></span>
+            <span class="other_rank_pts"><%= scores[i].score %>pts </span>
         </div>
-
-        <div class="ranking_table">
-            <span class= " other_rank">05</span>
-            <span class="other_rank_name_player">Bigbear444</span>
-            <span class="other_rank_pts">160</span>
-        </div>
-
-        <div class="ranking_table">
-            <span class= " other_rank">06</span>
-            <span class="other_rank_name_player">Bigbear444</span>
-            <span class="other_rank_pts">150</span>
-        </div>
-
-        <div class="ranking_table">
-            <span class= " other_rank">07</span>
-            <span class="other_rank_name_player">Bigbear444</span>
-            <span class="other_rank_pts">110</span>
-        </div>
-
-        <div class="ranking_table">
-            <span class= " other_rank">08</span>
-            <span class="other_rank_name_player">Bigbear444</span>
-            <span class="other_rank_pts">100</span>
-        </div>
-
-        <div class="ranking_table">
-            <span class= " other_rank">09</span>
-            <span class="other_rank_name_player">Bigbear444</span>
-            <span class="other_rank_pts">90</span>
-        </div>
-
-        <div class="ranking_table">
-            <span class= " other_rank">10</span>
-            <span class="other_rank_name_player">Bigbear444</span>
-            <span class="other_rank_pts">80</span>
-        </div>
+        <%}
+        } %>
+       
     </section>
 </main>
 
