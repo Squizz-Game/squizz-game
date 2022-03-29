@@ -1,6 +1,42 @@
 <header>
     <a href="/">
-        <img src="/assets/img/logo-header.svg" alt="logo squizz game"/>
+        <figure>
+            <img  class="logo" src="/assets/img/logo-header.svg" alt="logo squizz game"
+            />
+        </figure>
     </a>
-    <a href="/jeu" class="btn btn_play">Jouer</a>
+
+    <nav class="full_size" >
+        <ul>
+            <% if (locals.session.id_user) { %> 
+                <li><a href="/mes-quizz">Mes Quizz</a></li>
+                <li><a href="">Statistique</a></li>
+                <li><a href="/mes-quizz/nouveau">Créer Quizz</a></li>
+                <li><a href="/mon-compte">Mon compte</a></li>
+                <li><a href="/deconnexion">Se déconnecter</a></li>
+                <% } else { %>
+                    <li><a href="/connexion">Connexion</a></li>
+                    <li><a href="/inscription">Inscription</a></li>
+                <% } %>
+                <li><a href="/jeu">Jouer</a></li>
+        </ul>
+    </nav> 
+  
+    <nav class="menu_burger">
+      <label for="toggle">☰</label>
+      <input type="checkbox"  id="toggle">
+      <ul class ="ul_burger">
+          <% if (locals.session.id_user) { %> 
+            <li><a href="/mes-quizz">Mes Quizz</a></li>
+            <li><a href="">Statistique</a></li>
+            <li><a href="/mes-quizz/nouveau">Créer Quizz</a></li>
+            <li><a href="/mon-compte">Mon compte</a></li>
+            <li><a href="/deconnexion">Se déconnecter</a></li>
+            <% } else { %>
+                <li><a href="/connexion">Connexion</a></li>
+                <li><a href="/inscription">Inscription</a></li>
+            <% } %>
+            <li><a href="/jeu">Jouer</a></li>
+      </ul>
+  </nav>
 </header>
