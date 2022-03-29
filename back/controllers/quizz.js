@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Quizz = require('../models/quizz')
+const Score = require('../models/score')
 
 router.get('/', (req, res) => {
     Quizz.getCategories((err, data) => {
@@ -33,10 +34,24 @@ router.get('/:id_cat/:id_quizz', (req, res) => {
             res.render('quizz', { quizz })
         }
         else {
-            console.log(data)
             res.send('error')
         }
     })
 })
+
+router.get('/:id_cat/:id_quizz/end-game', (req, res) => {
+    
+    Score.get({
+        id_quizz: req.params.id_quizz,
+        id_user: req.session.id_user
+    }, (err, data) => {
+        res.render('quizz-end-game', {
+            scores: data,
+            score: req.query.score
+        })
+    })
+    
+})
+
 
 module.exports = router

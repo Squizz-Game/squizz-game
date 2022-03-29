@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const mysql = require("../models/mysql.js");
 const Question = require("../models/question.js");
-const Reponse = require("../models/reponse.js");
+const Score = require("../models/score.js");
 
 // Récupérer les questions par quizz
 router.get("/questions/:id_quizz", (req, res) => {
@@ -31,15 +31,9 @@ router.get("/reponses/:id_question", (req, res) => {
 
 // Enregistrer le score d'un joueur
 router.post("/score", (req, res) => {
-  mysql.execute(
-    "INSERT INTO `scores`(`score`, `date`, `id_user`, `id_quizz`) VALUES (?, now(), ?, ?)",
-    [req.body.score, req.body.id_user, req.body.id_quizz],
-    (err, data) => {
-      console.log(data);
-      console.log(err);
-      res.json(data);
-    }
-  );
+  Score.create({ ...req.body }, (err, data) => {
+    res.json({err, data})
+  })
 });
 
 // Récupérer les avatars
