@@ -33,7 +33,6 @@ router.get('/:id_cat/:id_quizz', (req, res) => {
             res.render('quizz', { quizz })
         }
         else {
-            console.log(data)
             res.send('error')
         }
     })
