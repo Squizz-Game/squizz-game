@@ -9,20 +9,19 @@ const Quizz = {
     },
     getByCategory: (id, action) => {
         mysql.execute(
-            'SELECT q.id_quizz, q.image q_img, q.nom_quizz, q.id_categorie, u.user_name, c.nom_categorie, COUNT(qu.id_question) total ' +
+            'SELECT q.id_quizz, q.image q_img, q.nom_quizz, q.id_categorie, u.user_name, COUNT(qu.id_question) total ' +
             'FROM quizz q ' +
-            'RIGHT JOIN categories c ' +
-            'ON c.id_categorie = q.id_categorie ' +
             'LEFT JOIN utilisateurs u ' +
             'ON u.id_user = q.id_user ' +
             'LEFT JOIN questions qu ' +
             'ON qu.id_quizz = q.id_quizz ' +
-            'WHERE c.id_categorie = 1 ' +
+            'WHERE q.id_categorie = ? ' +
             'GROUP BY q.id_quizz ' +
             'HAVING total > 9',
             [id],
             (err, rows) => {
             if (err) return action(true, err)
+            console.log(rows.length);
             return action(false, rows)
         })
     },

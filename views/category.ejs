@@ -4,7 +4,8 @@
 <main>
     <h1><%= category %></h1>
     <section class="cards quizz-cards">
-        <% for (quizz of cat) { if (quizz.id_quizz) { %>
+        <% if (cat.length) { %> 
+        <% for (quizz of cat) { %>
             <article class="card quizz-card">
                 <a class="card-image" href="/jeu/<%= quizz.id_categorie %>/<%= quizz.id_quizz %>">
                     <img src="/assets/img/quizz/<%= quizz.q_img %>" alt="<%= quizz.nom_quizz %>">
@@ -15,7 +16,10 @@
                     <span>par <%= quizz.user_name %></span>
                 </div>
             </article>
-        <% }} %>
+        <% } %>
+        <% } else { %>
+            Il n'y a aucun quizz dans cette catégorie pour le moment..
+        <% } %> 
     </section>
 </main>
 

@@ -1,4 +1,6 @@
 const router = require('express').Router()
+const { send } = require('express/lib/response')
+const mysql = require('../models/mysql')
 const Quizz = require('../models/quizz')
 const Score = require('../models/score')
 
@@ -13,8 +15,15 @@ router.get('/', (req, res) => {
 router.get('/:id_cat', (req, res) => {
     Quizz.getByCategory(req.params.id_cat, (err, data) => {
         if (!err) {
-            console.log(data)
-            res.render('category', { cat: data, category: data[0].nom_categorie })
+            mysql.execute(
+                'SELECT nom_categorie FROM categories WHERE id_categorie = ?',
+                [req.params.id_cat],
+                (err, rows) => {
+                    console.log(err);
+                    if (err) return res.send('error')
+                    return res.render('category', { cat: data, category: rows[0].nom_categorie })
+                }
+            )
         }
         else {
             console.log(data)
