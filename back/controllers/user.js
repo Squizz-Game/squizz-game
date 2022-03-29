@@ -10,11 +10,10 @@ router.get('/deconnexion', (req, res) => {
 
 // Si connecté :
 router.get('/mon-compte', (req, res) => {
-    
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
-        console.log('utilisateur:', req.session.id_user)
-        User.get({...req.session}, (err, data) => {
+        User.get(req.session.id_user, (err, data) => {
             if (!err) {
+                // console.log(data);
                 mysql.query(
                     "SELECT * FROM `avatars`",
                     (err, avatars) => {

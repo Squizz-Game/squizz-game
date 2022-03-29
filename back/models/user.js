@@ -81,7 +81,7 @@ const User = {
             )
         }
     },
-    get: ({user_id}, action) => {
+    get: (user_id, action) => {
         if (user_id === (undefined || ''))
             return action(true, 'Aucun utilisateur connecté')
 
