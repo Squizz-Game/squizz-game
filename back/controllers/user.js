@@ -59,6 +59,9 @@ router.get('/statistiques', (req, res) => {
 			if (err) return res.json(stats)
             else res.render('user/stats', { stats })
         })
+    } else {
+        // flash : vous n'êtes pas connecté
+        res.redirect('/connexion')
     }
 })
 
@@ -73,7 +76,6 @@ router.get('/inscription', (req, res) => {
               res.render('user/inscription', {avatars:data})
             }
           );
-        
     } else {
         // flash : vous êtes déjà connecté
         res.redirect('/jeu')
