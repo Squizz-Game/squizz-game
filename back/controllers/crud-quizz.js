@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
             else return res.render('crud/index', {myQuizz: data})
         })
     } else {
+        req.flash('error', 'Vous n\'êtes pas connecté.')  
         res.redirect('/connexion')
     }
 })
@@ -24,7 +25,7 @@ router.get('/nouveau', (req, res) => {
             res.render('crud/create', {categories: data})
         })
     } else {
-        // flash : vous n'êtes pas connecté
+        req.flash('error', 'Vous n\'êtes pas connecté.')  
         res.redirect('/connexion')
     }
 })
@@ -37,7 +38,8 @@ router.post('/nouveau', (req, res) => {
         form.parse(req, (err, fields, file) => {
             // Vérifier s'il y a une erreur ou si le format de l'image est incorrect
             if (err || (file.image?.mimetype !== 'image/png' && file.image?.mimetype !== 'image/jpeg')) {
-                // flash : err
+                res.locals.flash = {}
+                res.locals.flash['error'] = err ?? 'Format d\'image incorrect'
                 Quizz.getCategories((err, data) => {
                     if (err) throw err
                     res.render('crud/create', { ...fields, categories: data })
@@ -50,7 +52,7 @@ router.post('/nouveau', (req, res) => {
     
                 // Uploader l'image avec fs
                 fs.rename(file.image.filepath, newpath, err => {
-                    if (err) return console.log(err)                    
+                    if (err) return req.flash('error', data)                 
                     // Enregistrer le quizz en bdd
                     Quizz.create({
                         ...fields,
@@ -58,12 +60,15 @@ router.post('/nouveau', (req, res) => {
                         id_user: req.session.id_user
                     }, (err, data) => {
                         if (err) {
-                            // flash: error
+                            res.locals.flash = {}
+                            res.locals.flash['error'] = data
                             Quizz.getCategories((err, data) => {
                                 if (err) throw err
                                 res.render('crud/create', { ...fields, categories: data })
                             })
                         } else {
+                            console.log('hello');
+                            req.flash('success', 'Votre quizz a été créé : vous pouvez ajouter des questions !')
                             res.redirect(data + '/questions')
                         }
                     })
@@ -71,7 +76,7 @@ router.post('/nouveau', (req, res) => {
             }
         })
     } else {
-        // flash : vous n'êtes pas connecté
+        req.flash('error', 'Vous n\'êtes pas connecté.')  
         res.redirect('/connexion')
     }
 })
@@ -89,6 +94,7 @@ router.get('/:id_quizz', (req, res) => {
             }
         })
     } else {
+        req.flash('error', 'Vous n\'êtes pas connecté.')  
         res.redirect('/connexion')
     }
 })
@@ -97,40 +103,44 @@ router.post('/:id_quizz', (req, res) => {
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         const form = formidable({ multiples: false })
         form.parse(req, (err, fields, file) => {
+            
             // Si aucune image est uploadé
             if (file.image?.originalFilename === '') {
                 Quizz.update({...fields, ...req.params}, (err, data) => {
+                    req.flash('success', 'Quizz modifié.')
                     res.redirect('./' + req.params.id_quizz + '/questions')
                 })
+            // Si une image est uploadé et qu'il y a une erreur
             } else if (err || (file.image?.mimetype !== 'image/png' && file.image?.mimetype !== 'image/jpeg')) {
-                // flash : error, format image incorrect
+                res.locals.flash = {}
+                res.locals.flash['error'] = err ?? 'Format d\'image incorrect'
                 Quizz.getCategories((err, categories) => {
-                    console.log('2', err)
                     if (err) throw err
                     Quizz.getForAdmin(req.params.id_quizz, (err, data) => {
-                        console.log('3', err)
                         if (err) throw err
                         res.render('crud/create', { ...data, ...fields, categories })
                     })
                 })
+            // Si une image est uploadé sans erreur
             } else {
                 Quizz.getForAdmin(req.params.id_quizz, (err, data) => {
                     if (err) throw err
 
+                    // Supprimer l'ancienne image
                     fs.unlink('./public/assets/img/quizz/' + data.image, err => {
-                        if (err) console.log(err)
+                        if (err) req.flash('error', err)
 
                         const filename = file.image.originalFilename
                         const ext = filename.substr(filename.lastIndexOf('.'), filename.length)
                         const newFilename = file.image.newFilename + ext
                         const newpath = './public/assets/img/quizz/' + newFilename
 
-                        // Uploader l'image avec fs
+                        // Uploader la nouvelle image avec fs
                         fs.rename(file.image.filepath, newpath, err => {
                             if (err) throw err
 
                             Quizz.update({...fields, ...req.params, image: newFilename}, (err, data) => {
-                                console.log(err, data, req.url)
+                                req.flash('success', 'Quizz modifié')
                                 res.redirect(req.originalUrl + '/questions')
                             })
                         })
@@ -139,6 +149,7 @@ router.post('/:id_quizz', (req, res) => {
             }
         })
     } else {
+        req.flash('error', 'Vous n\'êtes pas connecté.')  
         res.redirect('/connexion')
     }
 })
@@ -147,18 +158,18 @@ router.post('/:id_quizz', (req, res) => {
 router.get('/:id_quizz/questions', (req, res) => {
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.getForAdmin(req.params.id_quizz, (err, data) => {
-            console.log(data);
             if (err) {
-                // flash: ce quizz n'existe pas
+                req.flash('error', 'Ce quizz n\'existe pas.')
                 res.redirect('/mes-quizz')
             } else if (data.id_user === req.session.id_user) {
-                res.render('crud/update', { quizz: data})
+                res.render('crud/update', { quizz: data })
             } else {
-                // flash: vous n'avez pas les droits pour modifier ce quizz
+                req.flash('error', 'Vous n\'avez pas les droits pour modifier ce quizz.')
                 res.redirect('/mes-quizz')
             }
         })
     } else {
+        req.flash('error', 'Vous n\'êtes pas connecté.')  
         res.redirect('/connexion')
     }
 })
@@ -167,15 +178,16 @@ router.get('/:id_quizz/questions', (req, res) => {
 router.delete('/:id_quizz', (req, res) => {
     // to-do : add JWT verification
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
-        Quizz.remove(req.params.id_quizz, (err, data) => {
+        Quizz.remove({ id_quizz: req.params.id_quizz, id_user: req.session.id_user }, (err, data) => {
             if (err) {
-                // flash: ce quizz n'existe pas
-            } else if (data.id_user !== req.session.id_user) {
-                // flash: vous n'avez pas les droits pour supprimer ce quizz
+                req.flash('error', 'Ce quizz n\'existe pas.')
+            } else {
+                req.flash('success', 'Quizz supprimé')
             }
             res.redirect('/mes-quizz')
         })
     } else {
+        req.flash('error', 'Vous n\'êtes pas connecté.')  
         res.redirect('/connexion')
     }
 })
