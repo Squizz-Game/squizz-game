@@ -6,14 +6,14 @@
         <% for (stat of stats) { %>
             <article class="card quizz-card">
                 <a class="card-image" href="/jeu/<%= stat.id_categorie %>/<%= stat.id_quizz %>">
-                    <img src="/assets/img/jeu/<%= stat.image %>" alt="<%= stat.nom_quizz %>">
+                    <img src="/assets/img/quizz/<%= stat.image %>" alt="<%= stat.nom_quizz %>">
                     <h2 class="card-title"><%= stat.nom_quizz %></h2>
                 </a>
                 <div class="card-text">
-                    <span><%= stat.date %> </span>
+                    <span><%= stat.date %></span>
                     <span>Rang : <%= stat.rank %></span>     
                     <span>Record : <%= stat.score %></span>
-                    <a href="#">Voir le classement</a>
+                    <a href="/classement/<%= stat.id_quizz %>">Voir le classement</a>
                 </div>
             </article>
         <% } %>
