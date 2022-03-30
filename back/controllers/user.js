@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const User = require('../models/user')
 const mysql = require('../models/mysql')
+const Score = require('../models/score')
 
 router.get('/deconnexion', (req, res) => {
     req.session.id_user = undefined
@@ -49,6 +50,16 @@ router.post('/mon-compte', (req, res) => {
     } else {
         // flash : vous n'êtes pas connecté
         res.redirect('/connexion')
+    }
+})
+
+router.get('/statistiques', (req, res) => {
+    req.session.id_user = 2 // à supprimer
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
+        Score.getAllByUser(req.session.id_user, (err, stats) => {
+			if (err) return res.json(stats)
+            else res.render('user/stats', { stats })
+        })
     }
 })
 
