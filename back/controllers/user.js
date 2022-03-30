@@ -54,7 +54,6 @@ router.post('/mon-compte', (req, res) => {
 })
 
 router.get('/statistiques', (req, res) => {
-    req.session.id_user = 2 // à supprimer
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Score.getAllByUser(req.session.id_user, (err, stats) => {
 			if (err) return res.json(stats)
