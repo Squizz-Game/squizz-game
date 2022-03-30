@@ -25,6 +25,11 @@
             background-color: lighten($red, 25);
         }
 
+        &.warning {
+            border: solid 2px $gold;
+            background-color: lighten($gold, 25);
+        }
+
         &.hide {
             height: 0;
             padding: 0;

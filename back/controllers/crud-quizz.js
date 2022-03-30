@@ -67,7 +67,6 @@ router.post('/nouveau', (req, res) => {
                                 res.render('crud/create', { ...fields, categories: data })
                             })
                         } else {
-                            console.log('hello');
                             req.flash('success', 'Votre quizz a été créé : vous pouvez ajouter des questions !')
                             res.redirect(data + '/questions')
                         }
@@ -103,7 +102,7 @@ router.post('/:id_quizz', (req, res) => {
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         const form = formidable({ multiples: false })
         form.parse(req, (err, fields, file) => {
-            
+
             // Si aucune image est uploadé
             if (file.image?.originalFilename === '') {
                 Quizz.update({...fields, ...req.params}, (err, data) => {
