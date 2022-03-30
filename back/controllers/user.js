@@ -20,7 +20,7 @@ router.get('/mon-compte', (req, res) => {
                     (err, avatars) => {
                       console.log(data);
                       console.log(err);
-                      return res.render('mon-compte', { ...data, avatars })
+                      return res.render('user/update', { ...data, avatars })
                     }
                   );
                 
@@ -40,7 +40,7 @@ router.post('/mon-compte', (req, res) => {
             if (err) {
                 console.log('error :', data)
                 // flash: error
-                return res.render('mon-compte', { ... req.body })
+                return res.render('user/update', { ... req.body })
             } else {
                 // flash: succès
                 console.log(data)
@@ -71,7 +71,7 @@ router.get('/inscription', (req, res) => {
             (err, data) => {
               console.log(data);
               console.log(err);
-              res.render('inscription', {avatars:data})
+              res.render('user/inscription', {avatars:data})
             }
           );
         
@@ -91,7 +91,7 @@ router.post('/inscription', (req, res) => {
             } else {
                 console.log(data)
                 // message erreur flash
-                res.render('inscription', {...req.body})
+                res.render('user/inscription', {...req.body})
             }
         })
     }
@@ -99,7 +99,7 @@ router.post('/inscription', (req, res) => {
 
 router.get('/connexion', (req, res) => {
     if (req.session.id_user === undefined) { // Si aucun utilisateur est connecté
-        res.render('connexion')
+        res.render('user/connexion')
     } else {
         // flash : vous êtes déjà connecté
         res.redirect('/jeu')
@@ -116,7 +116,7 @@ router.post('/connexion', (req, res) => {
             } else {
                 console.log(data)
                 // message erreur flash
-                res.render('connexion', {...req.body})
+                res.render('user/connexion', {...req.body})
             }
         })
     }
