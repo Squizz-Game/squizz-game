@@ -10,6 +10,8 @@
         border-radius: 5px;
         margin-top: ratio-space(2px);
         cursor: pointer;
+        transition: .5s;
+        overflow: hidden;
 
         &.success {
             border: solid 2px $green;
@@ -19,6 +21,12 @@
         &.error {
             border: solid 2px $red;
             background-color: lighten($red, 25);
+        }
+
+        &.hide {
+            height: 0;
+            padding: 0;
+            border: 0px;
         }
     }
 }

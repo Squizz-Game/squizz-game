@@ -42,6 +42,10 @@
 </header>
 
 <div class="alerts">
-    <div class="alert success">Bien joué !</div>
-    <div class="alert error">Oh oh..</div>
+    <% if (locals.flash?.success) { %>
+        <div class="alert success"><%= flash.success %></div>
+    <% } %>
+    <% if (locals.flash?.error) { %>
+        <div class="alert error"><%= flash.error %></div>
+    <% } %>
 </div>
