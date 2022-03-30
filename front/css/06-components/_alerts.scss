@@ -1,0 +1,24 @@
+.alerts {
+    width: 100%;
+    position: absolute;
+    top: 10%;
+    
+    .alert {
+        width: col(8);
+        margin: auto;
+        padding: ratio-space(2px);
+        border-radius: 5px;
+        margin-top: ratio-space(2px);
+        cursor: pointer;
+
+        &.success {
+            border: solid 2px $green;
+            background-color: lighten($green, 25);
+        }
+
+        &.error {
+            border: solid 2px $red;
+            background-color: lighten($red, 25);
+        }
+    }
+}
