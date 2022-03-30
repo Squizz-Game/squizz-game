@@ -8,7 +8,7 @@ router.get("/:id_quizz", (req, res) => {
       console.log(scores);
     } else {
       Quizz.get(req.params.id_quizz, (err, quizz) => {
-        res.render("classement", {
+        res.render("jeu/classement", {
           scores,
           quizz,
         });

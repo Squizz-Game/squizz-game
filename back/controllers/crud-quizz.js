@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.getByUser(req.session.id_user, (err, data) => {
             if (err) throw err
-            else return res.render('mes-quizz', {myQuizz: data})
+            else return res.render('crud/index', {myQuizz: data})
         })
     } else {
         res.redirect('/connexion')
@@ -21,7 +21,7 @@ router.get('/nouveau', (req, res) => {
         Quizz.getCategories((err, data) => {
             if (err) throw err
 
-            res.render('mon-quizz', {categories: data})
+            res.render('crud/create', {categories: data})
         })
     } else {
         // flash : vous n'êtes pas connecté
@@ -40,7 +40,7 @@ router.post('/nouveau', (req, res) => {
                 // flash : err
                 Quizz.getCategories((err, data) => {
                     if (err) throw err
-                    res.render('mon-quizz', { ...fields, categories: data })
+                    res.render('crud/create', { ...fields, categories: data })
                 })
             } else {
                 const filename = file.image.originalFilename
@@ -61,7 +61,7 @@ router.post('/nouveau', (req, res) => {
                             // flash: error
                             Quizz.getCategories((err, data) => {
                                 if (err) throw err
-                                res.render('mon-quizz', { ...fields, categories: data })
+                                res.render('crud/create', { ...fields, categories: data })
                             })
                         } else {
                             res.redirect(data + '/questions')
@@ -84,7 +84,7 @@ router.get('/:id_quizz', (req, res) => {
             else {
                 Quizz.getCategories((err, categories) => {
                     if (err) throw err
-                    return res.render('mon-quizz', {...data, categories})
+                    return res.render('crud/create', {...data, categories})
                 })
             }
         })
@@ -110,7 +110,7 @@ router.post('/:id_quizz', (req, res) => {
                     Quizz.getForAdmin(req.params.id_quizz, (err, data) => {
                         console.log('3', err)
                         if (err) throw err
-                        res.render('mon-quizz', { ...data, ...fields, categories })
+                        res.render('crud/create', { ...data, ...fields, categories })
                     })
                 })
             } else {
@@ -152,7 +152,7 @@ router.get('/:id_quizz/questions', (req, res) => {
                 // flash: ce quizz n'existe pas
                 res.redirect('/mes-quizz')
             } else if (data.id_user === req.session.id_user) {
-                res.render('questions', { quizz: data})
+                res.render('crud/update', { quizz: data})
             } else {
                 // flash: vous n'avez pas les droits pour modifier ce quizz
                 res.redirect('/mes-quizz')
