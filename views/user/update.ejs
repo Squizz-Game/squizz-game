@@ -1,5 +1,5 @@
-<%- include('_head') %> 
-<%- include('_header') %> 
+<%- include('../_head') %>
+<%- include('../_header') %>
 
 <main>
   <h1>Mon compte</h1>
@@ -9,7 +9,7 @@
         <label for="btn_avatar">
           <img src="/assets/img/avatars/<%= avatars[id_avatar-1].filename %> " alt=""/>
         </label>
-        <input type="hidden" name="avatar_id" value="<%= (locals.id_avatar && id_avatar !== '') ? id_avatar : 1 %>"/>
+        <input type="hidden" name="id_avatar" value="<%= (locals.id_avatar && id_avatar !== '') ? id_avatar : 1 %>"/>
         <button id="btn_avatar">Modifier l'avatar</button>
       </div>
 
@@ -46,4 +46,4 @@
 </main>
 <script src="/assets/js/avatars.js"></script>
 
-<%- include('_footer') %> 
+<%- include('../_footer') %>

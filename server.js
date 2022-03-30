@@ -36,8 +36,8 @@ app.use(method((req, res) => { // transforme les méthodes POST qui ont des cham
         return method
     }
 }))
-app.use(require('./back/middlewares/flash'))
 app.use(require('./back/middlewares/session'))
+app.use(require('./back/middlewares/flash'))
 
 // Controllers
 app.use('/', user)
@@ -48,7 +48,7 @@ app.use('/classement', classement)
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index")
+    res.render("index")
 })
 
 app.listen(9090, () => console.log("listening on http://localhost:9090/"));

@@ -188,7 +188,7 @@ validate.addEventListener('click', e => {
         const verify = () => {
             let len = quizz[id_quizz].questions.length
             if (len < 10) {
-                return alert('Vous devez avoir au moins 10 questions.')
+                createAlert('Vous devez avoir au moins 10 questions.', 'error')
             } else {
                 saveQuestions()
             }
@@ -208,10 +208,13 @@ validate.addEventListener('click', e => {
                         localStorage.quizz = JSON.stringify(quizz)
                         index = quizz[id_quizz].questions.length - 1
                         displayQuestion()
+                        createAlert('Questions enregistrées', 'success')
                     } else {
-                        console.log(res.data)
+                        createAlert('Une erreur s\'est produite.', 'error')
                     }
                 })
         }
+    } else {
+        createAlert('Aucun changement à enregistrer.', 'warning')
     }
 })

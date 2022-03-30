@@ -7,7 +7,7 @@ const Score = require("../models/score");
 router.get("/", (req, res) => {
   Quizz.getCategories((err, data) => {
     if (!err) {
-      res.render("categories", { categories: data });
+      res.render("jeu/categories", { categories: data });
     }
   });
 });
@@ -21,7 +21,7 @@ router.get("/:id_cat", (req, res) => {
         (err, rows) => {
           console.log(err);
           if (err) return res.send("error");
-          return res.render("category", {
+          return res.render("jeu/category", {
             cat: data,
             category: rows[0].nom_categorie,
           });
@@ -44,7 +44,7 @@ router.get("/:id_cat/:id_quizz", (req, res) => {
         return res.redirect(
           "/jeu/" + quizz.id_categorie + "/" + quizz.id_quizz
         );
-      res.render("quizz", { quizz });
+      res.render("jeu/game", { quizz });
     } else {
       console.log(data);
       res.send("error");
@@ -60,7 +60,7 @@ router.get("/:id_cat/:id_quizz/end-game", (req, res) => {
     },
       (err, data) => {
       Quizz.get(req.params.id_quizz, (err, quizz) => {
-        res.render("quizz-end-game", {
+        res.render("jeu/end-game", {
           scores: data,
           score: req.query.score,
             quizz,

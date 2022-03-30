@@ -40,3 +40,12 @@
       </ul>
   </nav>
 </header>
+
+<div class="alerts">
+    <% if (locals.flash?.success) { %>
+        <div class="alert success"><%= flash.success %></div>
+    <% } %>
+    <% if (locals.flash?.error) { %>
+        <div class="alert error"><%= flash.error %></div>
+    <% } %>
+</div>
