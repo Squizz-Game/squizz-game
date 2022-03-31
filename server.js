@@ -3,6 +3,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const method = require('method-override')
+const dotenv = require('dotenv')
+const cookieParser = require('cookie-parser')
 
 // Controllers imports
 const user = require('./back/controllers/user')
@@ -11,6 +13,7 @@ const crudQuizz = require('./back/controllers/crud-quizz')
 const api = require('./back/controllers/api')
 const classement = require('./back/controllers/classement')
 
+dotenv.config()
 const app = express()
 
 // Moteur de template
@@ -29,6 +32,7 @@ app.use(session({
         maxAge: 604800 // 1 semaine
     }
 }))
+app.use(cookieParser())
 app.use(method((req, res) => { // transforme les méthodes POST qui ont des champs _method=DELETE ou _method=PUT
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         const method = req.body._method
@@ -38,6 +42,7 @@ app.use(method((req, res) => { // transforme les méthodes POST qui ont des cham
 }))
 app.use(require('./back/middlewares/session'))
 app.use(require('./back/middlewares/flash'))
+app.use(require('./back/middlewares/verify-token'))
 
 // Controllers
 app.use('/', user)
