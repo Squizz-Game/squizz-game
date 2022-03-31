@@ -1,0 +1,20 @@
+.icone {
+    width: 80%;
+    margin: 100px auto 10px;
+}
+
+.icone path {
+    stroke-dasharray: 800px;
+    stroke-dashoffset: 800px;
+    animation: anim 4s ease forwards;
+}
+
+@keyframes anim {
+    from {
+        fill: transparent;
+    }
+    to {
+        fill: white;
+        stroke-dashoffset: 0;
+    }
+}

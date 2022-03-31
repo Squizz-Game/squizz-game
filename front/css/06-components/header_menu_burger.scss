@@ -54,3 +54,12 @@ label[for=toggle]{
   justify-content: center;
   align-items: center;  
 }
+
+@media #{$media-down-md} {
+    .full_size {
+        display: none;
+      }
+      .menu_burger {
+        display: contents;
+      }
+}

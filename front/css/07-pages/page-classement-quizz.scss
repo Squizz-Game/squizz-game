@@ -61,9 +61,6 @@ label[for=toggle]{
   border-radius: 5px;
   justify-content: center;
   align-items: center;
-  
-  
-  
 }
 
 // ===========
@@ -185,7 +182,9 @@ font-size: 1rem,
 .ranking_table{ 
     display: flex;  
     width: 80%;
-    height: 50px;
+    // height: 50px;
+    flex-wrap: wrap;
+    padding: 5px;
     margin:10px auto;
     background: $purpleGradient;
     justify-content:space-between;
@@ -194,8 +193,9 @@ font-size: 1rem,
     align-items: center;
 }
 .ranking_table > span{
-    margin-left:10px;
-    margin-right:10px;
+    margin: 5px;
+    // margin-left:10px;
+    // margin-right:10px;
     text-align: center;
     align-items: center;
     color:$white ;

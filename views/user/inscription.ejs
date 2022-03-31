@@ -1,43 +1,64 @@
-<%- include('../_head') %>
-<%- include('../_header') %>
+<%- include('../_head') %> <%- include('../_header') %>
 
 <main>
   <h1>Inscription</h1>
-    <section>    
-        <form class ="form_registration" method="POST">
-          <div id="avatar">
-            <label for="btn_avatar">
-              <img src="/assets/img/avatars/avatar01.jpg" alt=""/>
-            </label>
-            <input type="hidden" name="id_avatar" value="<%= (locals.id_avatar && id_avatar !== '') ? id_avatar : 1 %>"/>
-            <button id="btn_avatar">Modifier l'avatar</button>
-          </div>
-    
-          <div>
-            <label for="mail">Adresse e-mail :</label>
-            <input type="email" id="mail" name="user_mail" value="<%= locals.user_mail %>"/>
-          </div>
-    
-          <div>
-            <label for="username">Nom d'utilisateur :</label>
-            <input type="text" id="username" name="user_name" value="<%= locals.user_name %>"/>
-          </div>
-    
-          <div>
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" name="user_password" />
-          </div>
-    
-          <div class="registration">
-            <button type="submit" class="btn btn_registration">Inscription</button>
-          </div>
-        </form>
-    </section>
-    <section class="section_avatar">
-      <% for(avatar of avatars){ %> 
-      <img class="img_avatar" src="/assets/img/avatars/<%= avatar.filename %>" data-avatar="<%= avatar.id_avatar %>">
-      <% } %> 
-    </section>
+  <section>
+    <form class="form_registration" method="POST">
+      <div id="avatar">
+        <figure>
+          <label for="btn_avatar">
+            <img src="/assets/img/avatars/avatar01.jpg" alt="" />
+          </label>
+        </figure>
+        <figcaption>
+          <input
+            type="hidden"
+            name="id_avatar"
+            value="<%= (locals.id_avatar && id_avatar !== '') ? id_avatar : 1 %>"
+          />
+          <button id="btn_avatar">Modifier l'avatar</button>
+        </figcaption>
+      </div>
+
+      <div>
+        <label for="mail">Adresse e-mail :</label>
+        <input
+          type="email"
+          id="mail"
+          name="user_mail"
+          value="<%= locals.user_mail %>"
+        />
+      </div>
+
+      <div>
+        <label for="username">Nom d'utilisateur :</label>
+        <input
+          type="text"
+          id="username"
+          name="user_name"
+          value="<%= locals.user_name %>"
+        />
+      </div>
+
+      <div>
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="user_password" />
+      </div>
+
+      <div class="registration">
+        <button type="submit" class="btn btn_registration">Inscription</button>
+      </div>
+    </form>
+  </section>
+  <section class="section_avatar">
+    <% for(avatar of avatars){ %>
+    <img
+      class="img_avatar"
+      src="/assets/img/avatars/<%= avatar.filename %>"
+      data-avatar="<%= avatar.id_avatar %>"
+    />
+    <% } %>
+  </section>
 </main>
 <script src="/assets/js/avatars.js"></script>
 
