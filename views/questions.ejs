@@ -4,49 +4,44 @@
 <main
     id="create-quizz"
     data-quizz="<%= quizz.id_quizz %>"
-    data-user="<%= locals.session.user_id %>"
+    data-user="<%= locals.session.id_user %>"
     >
     <h1>Modifier le quizz <%= quizz.nom_quizz %></h1>
     <section>
-        <blockquote class="question" contenteditable data-placeholder="Écrivez votre question ici"></blockquote>
-        <div class="reponses">
-            <div class="row">
-                <button class="reponse">
-                    <i></i><p contenteditable data-placeholder="Écrivez une réponse ici"></p>
-                </button>
-                <div class="checkbox"></div>
-            </div>
-            <div class="row">
-                <button class="reponse">
-                    <i></i><p contenteditable data-placeholder="Écrivez une réponse ici"></p>
-                </button>
-                <div class="checkbox"></div>
-            </div>
-            <div class="row">
-                <button class="reponse">
-                    <i></i><p contenteditable data-placeholder="Écrivez une réponse ici"></p>
-                </button>
-                <div class="checkbox"></div>
-            </div>
-    </section>
-    <aside>
         <div class="head">
+            <blockquote class="question" contenteditable data-placeholder="Écrivez votre question ici"></blockquote>
             <span class="counter">12/15</span>
-            <div class="field">
-                <label for="type">Type de question :</label>
-                <select name="type" id="type">
-                    <option value="1">Réponse unique</option>
-                    <option value="2">Vrai ou faux</option>
-                </select>
-            </div>
         </div>
         <div class="bottom">
-            <button id="remove">Supprimer la question<img src="/assets/img/trash.svg"></button>
-            <button id="next">Question suivante<img src="/assets/img/arrow-right.svg"></button>
-            <button id="prev">Question précédente<img src="/assets/img/arrow-left.svg"></button>
-            <button id="validate">Valider le questionnaire<img src="/assets/img/w-check.svg"></button>
+            <div class="reponses">
+                <div class="row">
+                    <button class="reponse">
+                        <i></i><p contenteditable data-placeholder="Écrivez une réponse ici"></p>
+                    </button>
+                    <div class="checkbox"></div>
+                </div>
+                <div class="row">
+                    <button class="reponse">
+                        <i></i><p contenteditable data-placeholder="Écrivez une réponse ici"></p>
+                    </button>
+                    <div class="checkbox"></div>
+                </div>
+                <div class="row">
+                    <button class="reponse">
+                        <i></i><p contenteditable data-placeholder="Écrivez une réponse ici"></p>
+                    </button>
+                    <div class="checkbox"></div>
+                </div>
+            </div>
+            
+            <aside>
+                <button id="remove">Supprimer la question<img src="/assets/img/trash.svg"></button>
+                <button id="next">Question suivante<img src="/assets/img/arrow-right.svg"></button>
+                <button id="prev">Question précédente<img src="/assets/img/arrow-left.svg"></button>
+                <button id="validate">Valider le questionnaire<img src="/assets/img/w-check.svg"></button>
+            </aside>
         </div>
-    </aside>
+    </section>
 </main>
 
 <script src="/assets/js/crud-quizz.js"></script>

@@ -9,6 +9,7 @@ const user = require('./back/controllers/user')
 const quizz = require('./back/controllers/quizz')
 const crudQuizz = require('./back/controllers/crud-quizz')
 const api = require('./back/controllers/api')
+const classement = require('./back/controllers/classement')
 
 const app = express()
 
@@ -43,6 +44,7 @@ app.use('/', user)
 app.use('/jeu', quizz)
 app.use('/mes-quizz', crudQuizz)
 app.use("/api", api)
+app.use('/classement', classement)
 
 // Home page
 app.get("/", (req, res) => {

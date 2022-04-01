@@ -136,7 +136,7 @@ function nextQuestion() {
     }
     localStorage.result = json;
     // redirection sur la page des scores
-    window.location.assign("/score");
+    window.location.assign(window.location.href + "/end-game?score="+score);
   }
 }
 

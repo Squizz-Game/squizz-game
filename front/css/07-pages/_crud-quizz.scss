@@ -1,41 +1,107 @@
-form#crud-quizz {
-    margin: 0;
-    .field {
-        display: flex;
-        align-items: center;
-        gap: ratio-space(2px);
-        width: calc(col(4) - 20px);
-        position: relative;
-
-        input, select {
-            border-radius: 5px;
-            min-width: col(2);
-        }
-
-        input[type=file] {
-            display: none;
-        }
-
-        input[type=submit] {
-            height: 50px;
-            // width: 50%;
-            position: absolute;
-            right: 0;
+#crud-quizz {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    section {
+        form {
             margin: 0;
-            bottom: 0;
-        }
-        
-        .preview {
-            margin: ratio-space(2px) 0 0 0;
-            width: 60%;
-            height: 200px;
-            border-radius: 15px;
-            overflow: hidden;
-            padding: 0;
+            .field {
+                display: flex;
+                align-items: center;
+                gap: ratio-space(2px);
+                width: calc(col(4) - 20px);
+                position: relative;
+                // flex-wrap: wrap;
+    
+                input,
+                select {
+                    border-radius: 5px;
+                    // min-width: col(2);
+                    width: 100%;
+                }
+                label {
+                    width: 100%;
+                }
+    
+                input[type='file'] {
+                    display: none;
+                }
+    
+                input[type='submit'] {
+                    height: 50px;
+                    width: auto;
+                    margin: 0;
+                }
 
-            &[src$="empty.jpg"] {
-                height: 60px;
-                object-fit: contain;
+                &:nth-child(3) {
+                    width: calc(col(5) - 20px);
+                    label {
+                        width: auto;
+                    }
+                    .preview {
+                        margin: ratio-space(2px) 0 0 0;
+                        width: 360px;
+                        height: 200px;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        padding: 0;
+        
+                        &[src$='empty.jpg'] {
+                            height: 60px;
+                            object-fit: contain;
+                        }
+                    }
+                }
+
+                &:nth-child(4) {
+                    width: calc(col(2) - 20px);
+                    align-self: flex-end;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+        }
+    }
+    > a {
+        align-self: flex-end;
+        margin-top: ratio-space(2px);
+        font-weight: 500;
+    }
+
+    @media #{$media-down-lg} {
+        section {
+            form {
+                .field {
+                    flex-wrap: wrap;
+                    &:nth-child(3) {
+                        justify-content: center;
+                        width: 100%;
+                    }
+                    
+                    &:nth-child(4) {
+                        width: 100%;
+                        justify-content: flex-end;
+                        margin-top: ratio-space(2px);
+                        input[type='submit'] {
+                            position: static;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media #{$media-down-md} {
+        section {
+            form {
+                .field {
+                    width: 100%;
+
+                    input[type='submit'] {
+                        position: static;
+                    }
+                }
             }
         }
     }
@@ -43,103 +109,26 @@ form#crud-quizz {
 
 #create-quizz {
     @extend #quizz;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-
-    h1 {
-        width: 100%;
-    }
 
     section {
-        width: calc(col(6) - 20px);
-
-        .question {
-            &:empty:before {
-                content: attr(data-placeholder);
-                opacity: .8;
-            }
-        }
-
-        .reponses {
-            .row {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: ratio-space(2px);
-
-                .reponse {
-                    width: 100%;
-                    p {
-                        width: 100%;
-
-                        &:empty:before {
-                            content: attr(data-placeholder);
-                            opacity: .8;
-                        }
-                    }
-                }
-
-                .checkbox {
-                    width: 34px;
-                    height: 34px;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    box-shadow: $buttonShadow;
-                    position: relative;
-                    right: 10px;
-                    
-                    &.checked::before {
-                        content: '';
-                        width: 34px;
-                        height: 34px;
-                        position: absolute;
-                        top: -5px;
-                        right: -10px;
-
-                        background: center / contain no-repeat url('/assets/img/check.svg');
-                    }
-                }
-
-                &:nth-child(1) {
-                    .reponse i:before {
-                    content: "{";
-                    color: $green;
-                    }
-                }
-
-                &:nth-child(2) {
-                    .reponse i:before {
-                    content: "}";
-                    color: $lightBlue;
-                    }
-                }
-
-                &:nth-child(3) {
-                    .reponse i:before {
-                    content: "o";
-                    color: $pink;
-                    }
-                }
-            }
-        }
-    }
-
-    aside {
-        width: col(2);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
         .head {
             display: flex;
-            gap: ratio-space(2px);
-            flex-direction: column;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: 20px;
+            justify-content: space-between;
+            .question {
+                width: calc(100% - 84px);
+                &:empty:before {
+                    content: attr(data-placeholder);
+                    opacity: 0.8;
+                }
+            }
+
             .counter {
+                font-weight: 600;
                 width: 64px;
                 height: 64px;
-                align-self: flex-end;
 
                 border: solid 4px $lightGrey;
                 display: inline-block;
@@ -149,43 +138,207 @@ form#crud-quizz {
                 border-radius: 50%;
                 font-size: 20px;
             }
-            select {
-                width: 100%;
-                border-radius: 5px;
+        }
+
+        .bottom {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: 20px;
+
+            .reponses {
+                width: calc(col(6) - 20px);
+                .row {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: ratio-space(2px);
+
+                    .reponse {
+                        width: calc(100% - 44px);
+                        min-width: 0;
+                        p {
+                            width: 100%;
+
+                            &:empty:before {
+                                content: attr(data-placeholder);
+                                opacity: 0.8;
+                            }
+                        }
+                    }
+
+                    .checkbox {
+                        width: 34px;
+                        height: 34px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        box-shadow: $buttonShadow;
+                        position: relative;
+                        right: 10px;
+
+                        &.checked::before {
+                            content: '';
+                            width: 34px;
+                            height: 34px;
+                            position: absolute;
+                            top: -5px;
+                            right: -10px;
+
+                            background: center / contain no-repeat
+                                url('/assets/img/check.svg');
+                        }
+                    }
+
+                    &:nth-child(1) {
+                        .reponse i:before {
+                            content: '{';
+                            color: $green;
+                        }
+                    }
+
+                    &:nth-child(2) {
+                        .reponse i:before {
+                            content: '}';
+                            color: $lightBlue;
+                        }
+                    }
+
+                    &:nth-child(3) {
+                        .reponse i:before {
+                            content: 'o';
+                            color: $pink;
+                        }
+                    }
+                }
+            }
+
+            aside {
+                width: calc(col(2) - 20px);
+                align-self: flex-end;
+                button {
+                    @extend .btn;
+                    width: 100%;
+                    text-align: left;
+                    padding: ratio-space(1px) ratio-space(2px);
+                    margin-top: ratio-space(2px);
+                    text-transform: none;
+
+                    background: $blueGradient;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    img {
+                        width: 16px;
+                        height: 16px;
+                        display: block;
+                    }
+
+                    &:nth-child(1) {
+                        background: $red;
+                    }
+
+                    &:last-child {
+                        background: $purpleGradient;
+                    }
+                }
             }
         }
-        
-        .bottom {
-            button {
-                @extend .btn;
-                width: 100%;
-                text-align: left;
-                padding: ratio-space(1px) ratio-space(2px);
-                margin-top: ratio-space(2px);
-                text-transform: none;
-    
-                background: $blueGradient;
-                display: flex;
-                align-items: center;
+
+        @media #{$media-down-lg} {
+            .bottom {
+                .reponses {
+                    width: 100%;
+                }
+
+                aside {
+                    width: 100%;
+                    margin: auto;
+
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                    justify-content: space-between;
+
+                    button {
+                        width: calc(50% - 20px);
+                        &:nth-child(1) {
+                            order: 3;
+                        }
+
+                        &:nth-child(2) {
+                            order: 2;
+                        }
+
+                        &:nth-child(3) {
+                            order: 1;
+                        }
+
+                        &:last-child {
+                            order: 4;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media #{$media-down-md} {
+            .head {
                 justify-content: space-between;
-    
-                img {
-                    width: 16px;
-                    height: 16px;
-                    display: block;
+                .question {
+                    width: 100%;
+                    margin: 0;
                 }
+                .counter {
+                    display: inline;
+                    font-size: 16px;
+                    border: none;
+                    text-align: right;
+                    width: 100%;
+                }
+            }
+            .bottom {
+                .reponses .row {
+                    .checkbox {
+                        width: 22px;
+                        height: 22px;
 
-                &:nth-child(1) {
-                    background: $red;
+                        &.checked::before {
+                            width: 22px;
+                            height: 22px;
+                            right: -5px;
+                        }
+                    }
                 }
+            }
+        }
 
-                &:nth-child(2) {
-                    background: $green;
+        @media #{$media-down-sm} {
+            .bottom {
+                aside {
+                    button {
+                        width: 100%;
+                    }
                 }
+            }
+        }
+    }
+}
 
-                &:last-child {
-                    background: $purpleGradient;
-                }
+.cards {
+    .card-text {
+        i {
+            font-style: italic;
+        }
+        form {
+            display: inline;
+            margin: 0;
+            button {
+                padding: 0;
+                background: none;
+                font-weight: 500;
+                color: $red;
             }
         }
     }
