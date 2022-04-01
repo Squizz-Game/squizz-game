@@ -13,4 +13,11 @@ h4 {
     font-size: 25px;
     text-transform: uppercase;
     font-weight: 700;
+
+    @media #{$media-down-md} {
+        font-size: 20px;
+    }
+    @media #{$media-down-sm} {
+        font-size: 15px;
+    }
 }

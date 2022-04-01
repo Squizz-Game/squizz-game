@@ -9,20 +9,19 @@ const Quizz = {
     },
     getByCategory: (id, action) => {
         mysql.execute(
-            'SELECT q.id_quizz, q.image q_img, q.nom_quizz, q.id_categorie, u.user_name, c.nom_categorie, COUNT(qu.id_question) total ' +
+            'SELECT q.id_quizz, q.image q_img, q.nom_quizz, q.id_categorie, u.user_name, COUNT(qu.id_question) total ' +
             'FROM quizz q ' +
-            'RIGHT JOIN categories c ' +
-            'ON c.id_categorie = q.id_categorie ' +
             'LEFT JOIN utilisateurs u ' +
             'ON u.id_user = q.id_user ' +
             'LEFT JOIN questions qu ' +
             'ON qu.id_quizz = q.id_quizz ' +
-            'WHERE c.id_categorie = 1 ' +
+            'WHERE q.id_categorie = ? ' +
             'GROUP BY q.id_quizz ' +
             'HAVING total > 9',
             [id],
             (err, rows) => {
             if (err) return action(true, err)
+            console.log(rows.length);
             return action(false, rows)
         })
     },
@@ -46,6 +45,15 @@ const Quizz = {
             'WHERE q.id_quizz = ? ' +
             'GROUP BY q.id_quizz ' +
             'HAVING total > 9',
+            [id], (err, rows) => {
+            if (err) return action(true, err)
+            return action(false, rows[0])
+        })
+    },
+    getForAdmin: (id, action) => {
+        mysql.execute(
+            'SELECT q.* FROM quizz q ' +
+            'WHERE q.id_quizz = ?',
             [id], (err, rows) => {
             if (err) return action(true, err)
             return action(false, rows[0])
@@ -95,8 +103,8 @@ const Quizz = {
             )
         }
     },
-    remove: (id_quizz, next) => {
-        mysql.execute('DELETE FROM quizz WHERE id_quizz = ?', [id_quizz], (err, rows) => {
+    remove: ({id_quizz, id_user}, next) => {
+        mysql.execute('DELETE FROM quizz WHERE id_quizz = ? AND id_user = ?', [id_quizz, id_user], (err, rows) => {
             if (err) return next(true, err)
             return next(false, rows)
         })

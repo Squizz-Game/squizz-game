@@ -1,5 +1,5 @@
-<%- include('_head') %>
-<%- include('_header') %>
+<%- include('../_head') %>
+<%- include('../_header') %>
 
 <main id="crud-quizz">
     <h1><%= locals.id_quizz ? 'Modifier le' : 'Nouveau' %> quizz</h1>
@@ -33,4 +33,6 @@
     <% } %> 
 </main>
 
-<%- include('_footer') %>
+<script src="/assets/js/upload-preview.js"></script>
+
+<%- include('../_footer') %>

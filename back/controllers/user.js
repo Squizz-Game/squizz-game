@@ -1,114 +1,147 @@
 const router = require('express').Router()
 const User = require('../models/user')
 const mysql = require('../models/mysql')
+const Score = require('../models/score')
+const jwt = require('jsonwebtoken')
 
 router.get('/deconnexion', (req, res) => {
     req.session.id_user = undefined
-    // flash : à bientôt
+    req.flash('success', 'À bientôt !')
     res.redirect('/connexion')
 })
 
 // Si connecté :
 router.get('/mon-compte', (req, res) => {
-    
-    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
-        console.log('utilisateur:', req.session.id_user)
-        User.get({...req.session}, (err, data) => {
+    if (req.session.id_user !== undefined) {
+        // Si un utilisateur est connecté
+        User.get(req.session.id_user, (err, data) => {
             if (!err) {
-                mysql.query(
-                    "SELECT * FROM `avatars`",
-                    (err, avatars) => {
-                      console.log(data);
-                      console.log(err);
-                      return res.render('mon-compte', { ...data, avatars })
-                    }
-                  );
-                
+                mysql.query('SELECT * FROM `avatars`', (err, avatars) => {
+                    console.log(data)
+                    console.log(err)
+                    return res.render('user/update', { ...data, avatars })
+                })
             } else {
+                req.flash('error', "Une erreur s'est produite.")
                 res.redirect('/connexion')
             }
         })
     } else {
-        // flash : vous n'êtes pas connecté
+        req.flash('error', "Vous n'êtes pas connecté.")
         res.redirect('/connexion')
     }
 })
 
 router.post('/mon-compte', (req, res) => {
-    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
-        User.update({...req.body, id_user: req.session.id_user}, (err, data) => {
-            if (err) {
-                console.log('error :', data)
-                // flash: error
-                return res.render('mon-compte', { ... req.body })
-            } else {
-                // flash: succès
-                console.log(data)
-                return res.redirect('/jeu')
+    if (req.session.id_user !== undefined) {
+        // Si un utilisateur est connecté
+        User.update(
+            { ...req.body, id_user: req.session.id_user },
+            (err, data) => {
+                if (err) {
+                    mysql.query('SELECT * FROM `avatars`', (err, avatars) => {
+                        res.locals.flash = {}
+                        res.locals.flash['error'] = data
+                        return res.render('user/update', {
+                            ...data,
+                            ...req.body,
+                            avatars,
+                        })
+                    })
+                } else {
+                    req.flash('success', 'Votre compte a bien été modifié.')
+                    return res.redirect('/jeu')
+                }
             }
+        )
+    } else {
+        req.flash('error', "Vous n'êtes pas connecté.")
+        res.redirect('/connexion')
+    }
+})
+
+router.get('/statistiques', (req, res) => {
+    if (req.session.id_user !== undefined) {
+        // Si un utilisateur est connecté
+        Score.getAllByUser(req.session.id_user, (err, stats) => {
+            if (err) return res.json({ error: stats })
+            else res.render('user/stats', { stats })
         })
     } else {
-        // flash : vous n'êtes pas connecté
+        req.flash('error', "Vous n'êtes pas connecté.")
         res.redirect('/connexion')
     }
 })
 
 // Si non connecté :
 router.get('/inscription', (req, res) => {
-    if (req.session.id_user === undefined) { // Si aucun utilisateur est connecté
-        mysql.query(
-            "SELECT * FROM `avatars`",
-            (err, data) => {
-              console.log(data);
-              console.log(err);
-              res.render('inscription', {avatars:data})
-            }
-          );
-        
+    if (req.session.id_user === undefined) {
+        // Si aucun utilisateur est connecté
+        mysql.query('SELECT * FROM `avatars`', (err, avatars) => {
+            res.render('user/inscription', { avatars })
+        })
     } else {
-        // flash : vous êtes déjà connecté
+        req.flash('error', 'Vous êtes déjà inscrit.')
         res.redirect('/jeu')
     }
 })
 
 router.post('/inscription', (req, res) => {
-    if (req.session.id_user === undefined) { // Si aucun utilisateur est connecté
-        User.create({...req.body}, (err, data) => {
+    if (req.session.id_user === undefined) {
+        // Si aucun utilisateur est connecté
+        User.create({ ...req.body }, (err, data) => {
             if (!err) {
-                // message succes flash
+                req.flash('success', 'Bienvenu !')
                 req.session.id_user = data // on connecte l'utilisateur
                 res.redirect('/jeu')
             } else {
-                console.log(data)
-                // message erreur flash
-                res.render('inscription', {...req.body})
+                res.locals.flash = {}
+                res.locals.flash['error'] = data
+                mysql.query('SELECT * FROM `avatars`', (err, avatars) => {
+                    res.render('user/inscription', { ...req.body, avatars })
+                })
             }
         })
+    } else {
+        req.flash('error', 'Vous êtes déjà inscrit.')
+        res.redirect('/jeu')
     }
 })
 
 router.get('/connexion', (req, res) => {
-    if (req.session.id_user === undefined) { // Si aucun utilisateur est connecté
-        res.render('connexion')
+    if (req.session.id_user === undefined) {
+        // Si aucun utilisateur est connecté
+        res.render('user/connexion')
     } else {
-        // flash : vous êtes déjà connecté
+        req.flash('error', 'Vous êtes déjà connecté.')
         res.redirect('/jeu')
     }
 })
 
 router.post('/connexion', (req, res) => {
-    if (req.session.id_user === undefined) { // Si aucun utilisateur est connecté
-        User.check({...req.body}, (err, data) => {
+    if (req.session.id_user === undefined) {
+        // Si aucun utilisateur est connecté
+        User.check({ ...req.body }, (err, data) => {
             if (!err) {
-                // message succes flash               
-                req.session.id_user = data // on connecte l'utilisateur
+                req.flash('success', 'Ravi de vous revoir !')
+                req.session.id_user = data.id_user // on connecte l'utilisateur
+
+                const token = jwt.sign({
+                        name: data.user_name,
+                        id: data.id_user
+                    }, process.env.JWTSECRET
+                )
+                res.cookie('token', token)
                 res.redirect('/jeu')
             } else {
-                console.log(data)
-                // message erreur flash
-                res.render('connexion', {...req.body})
+                res.locals.flash = {}
+                res.locals.flash['error'] = data
+                res.render('user/connexion', { ...req.body })
             }
         })
+    } else {
+        req.flash('error', 'Vous êtes déjà connecté.')
+        res.redirect('/jeu')
     }
 })
 

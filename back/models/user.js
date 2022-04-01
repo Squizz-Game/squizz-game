@@ -2,10 +2,10 @@ const mysql = require('./mysql')
 const bcrypt = require('bcrypt')
 
 const User = {
-    create: ({avatar_id, user_mail, user_name, user_password}, action) => {
+    create: ({id_avatar, user_mail, user_name, user_password}, action) => {
         // Vérifier si tous les champs sont renseignés
         if (
-            avatar_id === (undefined || '') ||
+            id_avatar === (undefined || '') ||
             user_mail === (undefined || '') ||
             user_name === (undefined || '') ||
             user_password === (undefined || '')
@@ -20,18 +20,18 @@ const User = {
             
             // Enregistrer en bdd
             mysql.execute('INSERT INTO utilisateurs SET user_name = ?, mail = ?, password = ?, id_avatar = ?',
-            [user_name, user_mail, user_password, avatar_id],
+            [user_name, user_mail, user_password, id_avatar],
             (err, rows) => {
                 if (err) return action(true, err)
                 return action(false, rows.insertId)
             })
         })
     },
-    update: ({avatar_id, user_mail, user_name, old_password, new_password, id_user}, action) => {
+    update: ({id_avatar, user_mail, user_name, old_password, new_password, id_user}, action) => {
         // Vérifier si tous les champs obligatoires sont renseignés
         if (
             id_user === (undefined || '') ||
-            avatar_id === (undefined || '') ||
+            id_avatar === (undefined || '') ||
             user_mail === (undefined || '') ||
             user_name === (undefined || '')
         ) return action(true, 'Veuillez renseigner tous les champs requis.')
@@ -42,7 +42,7 @@ const User = {
                 return action(true, 'Nouveau mot de passe trop court (6 caractères min.).')
             } else {
                 mysql.execute(
-                    'SELECT password FROM utilisateurs WHERE id_user = ?',
+                    'SELECT id_avatar, password FROM utilisateurs WHERE id_user = ?',
                     [id_user],
                     async (err, rows) => {
                         // Vérifier si l'ancien mot de passe tapé correspond à l'ancien
@@ -55,7 +55,7 @@ const User = {
                                 'UPDATE utilisateurs ' +
                                 'SET user_name = ?, mail = ?, password = ?, id_avatar = ? '+
                                 'WHERE id_user = ?',
-                                [user_name, user_mail, new_password, avatar_id, id_user],
+                                [user_name, user_mail, new_password, id_avatar, id_user],
                                 (err, rows) => {
                                     if (err) return action(true, err)
                                     return action(false, rows)
@@ -73,7 +73,7 @@ const User = {
                 'UPDATE utilisateurs ' +
                 'SET user_name = ?, mail = ?, id_avatar = ? '+
                 'WHERE id_user = ?',
-                [user_name, user_mail, avatar_id, id_user],
+                [user_name, user_mail, id_avatar, id_user],
                 (err, rows) => {
                     if (err) return action(true, err)
                     return action(false, rows)
@@ -81,7 +81,7 @@ const User = {
             )
         }
     },
-    get: ({user_id}, action) => {
+    get: (user_id, action) => {
         if (user_id === (undefined || ''))
             return action(true, 'Aucun utilisateur connecté')
 
@@ -106,7 +106,7 @@ const User = {
                 return action(true, 'Nom d\'utilisateur ou mot de passe incorrect.')
 
             // Envoyer l'id utilisateur
-            return action(false, rows[0].id_user)
+            return action(false, rows[0])
         })
     }
 }

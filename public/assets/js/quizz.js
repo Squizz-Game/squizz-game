@@ -98,7 +98,7 @@ function showAnswerDelay() {
       stopTimer();
       noClick();
       removeNoClickNext();
-    }, 5000)
+    }, 30000)
   );
 }
 

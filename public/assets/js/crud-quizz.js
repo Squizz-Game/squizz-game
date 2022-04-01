@@ -20,7 +20,7 @@ const displayReponses = () => {
         rep.innerText = ''
     })
 
-    quizz[id_quizz].questions[index].reponses?.forEach((r, i) => {
+    quizz[id_quizz].questions[index]?.reponses?.forEach((r, i) => {
         // Met à jour les blocks réponses
         reponses_p[i].innerText = r.reponse
 
@@ -46,6 +46,17 @@ const init = (async () => {
     if (quizz[id_quizz] === undefined) {
         quizz[id_quizz] = {}
         quizz[id_quizz].questions = (await (await fetch('/api/quizz/' + id_quizz)).json()).data
+        if (quizz[id_quizz].questions.length === 0) {
+            quizz[id_quizz].questions.push({
+                id_question: null,
+                question: '',
+                id_quizz,
+                reponses: [{
+                    correct: 1,
+                    reponse: ''
+                }]
+            })
+        }
         quizz[id_quizz].saved = true
         localStorage.quizz = JSON.stringify(quizz)
     }
@@ -157,7 +168,7 @@ validate.addEventListener('click', e => {
                     }
                 })
 
-                if (are_true !== 1 && total_reps !== (2|3)) {
+                if (are_true !== 1 || total_reps < 2 || total_reps > 3) {
                     alert('Vous devez avoir au moins deux réponses par question dont une correcte.')
                     clearInterval(interval)
                 } else {
@@ -177,7 +188,7 @@ validate.addEventListener('click', e => {
         const verify = () => {
             let len = quizz[id_quizz].questions.length
             if (len < 10) {
-                return alert('Vous devez avoir au moins 10 questions.')
+                createAlert('Vous devez avoir au moins 10 questions.', 'error')
             } else {
                 saveQuestions()
             }
@@ -197,10 +208,13 @@ validate.addEventListener('click', e => {
                         localStorage.quizz = JSON.stringify(quizz)
                         index = quizz[id_quizz].questions.length - 1
                         displayQuestion()
+                        createAlert('Questions enregistrées', 'success')
                     } else {
-                        console.log(res.data)
+                        createAlert('Une erreur s\'est produite.', 'error')
                     }
                 })
         }
+    } else {
+        createAlert('Aucun changement à enregistrer.', 'warning')
     }
 })

@@ -11,21 +11,10 @@
     align-items: center;
     justify-content: center;
   }
-}
-// =============== section top 3 =========
-@media screen and (max-width: 700px) {
   .full_size {
     display: none;
   }
   nav .menu_burger {
     display: contents;
-  }
-  .cards {
-    .card.quizz-card {
-      flex-wrap: wrap;
-    }
-    .card.quizz-card .card-image {
-      width: 215px;
-    }
   }
 }
