@@ -4,6 +4,9 @@ const alertParent = document.querySelector('.alerts')
 const timeoutHide = (alert) => {
     setTimeout(() => {
         alert.classList.add('hide')
+        setTimeout(() => {
+            alertParent.removeChild(alert)
+        }, 1000)
     }, 3000)
 }
 

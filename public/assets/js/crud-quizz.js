@@ -168,7 +168,7 @@ validate.addEventListener('click', e => {
                     }
                 })
 
-                if (are_true !== 1 && total_reps !== (2|3)) {
+                if (are_true !== 1 || total_reps < 2 || total_reps > 3) {
                     alert('Vous devez avoir au moins deux réponses par question dont une correcte.')
                     clearInterval(interval)
                 } else {
