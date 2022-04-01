@@ -228,7 +228,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-
+                    
                     img {
                         width: 16px;
                         height: 16px;
@@ -238,9 +238,14 @@
                     &:nth-child(1) {
                         background: $red;
                     }
-
+                    
                     &:last-child {
                         background: $purpleGradient;
+                    }
+
+                    &:disabled {
+                        background: lighten($grey, 25) !important;
+                        cursor: not-allowed;
                     }
                 }
             }
