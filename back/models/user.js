@@ -14,6 +14,9 @@ const User = {
         // Vérifier si aucun utilisateur n'existe avec ce username
         mysql.execute('SELECT * FROM utilisateurs WHERE user_name = ?', [user_name], async (err, rows) => {
             if (rows.length) return action(true, 'Le nom d\'utilisateur est déjà pris.')
+
+            if (user_password.length < 6)
+                return action(true, 'Nouveau mot de passe trop court (6 caractères min.).')
             
             // Hasher le password
             user_password = await bcrypt.hash(user_password, await bcrypt.genSalt(8))
