@@ -175,7 +175,6 @@ router.get('/:id_quizz/questions', (req, res) => {
 
 //Supprimer un quizz
 router.delete('/:id_quizz', (req, res) => {
-    // to-do : add JWT verification
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.remove({ id_quizz: req.params.id_quizz, id_user: req.session.id_user }, (err, data) => {
             if (err) {

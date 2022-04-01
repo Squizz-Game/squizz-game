@@ -106,7 +106,7 @@ const User = {
                 return action(true, 'Nom d\'utilisateur ou mot de passe incorrect.')
 
             // Envoyer l'id utilisateur
-            return action(false, rows[0].id_user)
+            return action(false, rows[0])
         })
     }
 }

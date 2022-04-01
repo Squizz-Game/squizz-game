@@ -1,5 +1,27 @@
 const mysql = require('./mysql')
 
+const verify = (questions) => {
+    // Vérifier la longueur
+    if (questions.length < 9) return false
+    for (question of questions) {
+
+        // Vérifier que la question n'est pas vide
+        if (question.question === '') return false
+
+        // Vérifier qu'il y a bien deux ou trois réponses non vides dont une correcte
+        let are_true = 0
+        let total_reps = 0
+        question.reponses.forEach(reponse => {
+            if (reponse.reponse !== '') {
+                total_reps++
+                if (reponse.correct) are_true++
+            }
+        })
+        if (are_true !== 1 || total_reps < 2 || total_reps > 3) return false
+    }
+    return true
+}
+
 const Question = {
     get: (id_question, next) => {
         mysql.execute(
@@ -21,7 +43,8 @@ const Question = {
         return next(false, questions)
     },
     updateAll: async ({questions, id_quizz}, next) => {
-        if (questions.length > 9) {
+        console.log(verify(questions));
+        if (verify(questions)) {
             const ids_questions = [] // pour vérifier si des questions ont été supprimées
             for (const q of questions) {
                 if (q.id_question) { // Si la question existe déjà en bdd, on la modifie
@@ -47,8 +70,8 @@ const Question = {
                             )
                             ids_reponses.push(rows.insertId)
                         }
-
                     }
+
                     await mysql.promise().execute(
                         'DELETE FROM reponses WHERE id_question = ? AND id_reponse NOT IN (' + ids_reponses.join() + ')',
                         [q.id_question]
@@ -81,7 +104,7 @@ const Question = {
                 }
             )
         } else {
-            next(true, 'Vous devez renseignez au moins 10 questions.')
+            next(true, 'Veuillez vérifier vos questions.')
         }
     }
 }
