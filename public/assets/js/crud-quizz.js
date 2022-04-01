@@ -191,6 +191,7 @@ validate.addEventListener('click', e => {
 
         let i = index
         const interval = setInterval(() => {
+            quizz[id_quizz].questions[i].question = quizz[id_quizz].questions[i].question.trim()
             if (quizz[id_quizz].questions[i].question === '') { // Si la question est vide
                 if (confirm('La question ' + (i + 1) + ' est vide, voulez-vous la supprimer ?')) {
                     quizz[id_quizz].questions.splice(index, 1)
@@ -217,7 +218,8 @@ validate.addEventListener('click', e => {
                 // Si plus d'une réponse est vide ou non cochée
                 let are_true = 0
                 let total_reps = 0
-                quizz[id_quizz].questions[i].reponses.forEach(rep => {
+                quizz[id_quizz].questions[i].reponses.forEach((rep, j) => {
+                    quizz[id_quizz].questions[i].reponses[j].reponse = rep.reponse
                     if (rep.reponse !== '') {
                         total_reps++
                         if (rep.correct) are_true++
