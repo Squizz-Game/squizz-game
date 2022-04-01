@@ -4,13 +4,15 @@
   justify-content: center;
   gap: ratio-space(8px);
   
-  img {
+  img  {
     display: flex;
     width: 60%;
-  //   padding: 3%;
+     padding: 3%;
     margin: 0 auto;
-    // padding-right: 20px;
+     padding-right: 20px;
+     
   }
+ 
   #btn_rc {
     text-align: center;
     // width: 100%;
