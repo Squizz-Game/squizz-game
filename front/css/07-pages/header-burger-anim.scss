@@ -1,0 +1,173 @@
+ header {
+  position: relative;
+   width: 95vw;
+  
+ }
+ .menu_burger{
+     display: none;
+ }
+
+//    ==== nav full size =====
+.full-size {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   width: 70vw;
+  padding-top: 50px;
+  color: $white;
+  font-family: $font-primary;
+  font-size: 1rem;
+   position: relative;
+  top: 1rem;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  padding-bottom: 50px;
+}
+
+/* ==== box color===
+ #350048 (premier idée)
+ choix final : #410058 */
+.btn-nav {
+  width: 20%;
+  height: 5vh;
+  margin: 5px;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  
+  background: linear-gradient(90deg, #180822 0%, #c055c1 116.65%);
+}
+
+.full-size .btn-nav a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border: solid 2px $white;
+  color: $white;
+  letter-spacing: 1px;
+  transition: 0.5;
+  backdrop-filter: blur(15px);
+}
+
+.btn-nav a:hover {
+  letter-spacing: 3px;
+}
+
+.btn-nav a::before {
+    content: "";
+  position: absolute;
+  top: 0;
+  left: -15;
+  width: 50%;
+  height: 100%;
+  transform: skewX(45deg) translateX(0);
+  background: rgba(255, 255, 255, 0.25);
+  transition: 0.5s;
+}
+
+.btn-nav:hover a::before {
+  transform: skewX(45deg) translateX(300%);
+  background: rgba(255, 255, 255, 0.25);
+}
+.btn-nav::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 10px;
+  border-radius: 5px;
+  transition: 0s;
+  transition-delay: 0s;
+  background: $grey;
+}
+
+.btn-nav:hover::before {
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  transition-delay: 0.2s;
+}
+.full-size .btn-nav:nth-child(2)::before{
+    background: $pink;
+}
+.full-size .btn-nav:nth-child(3)::before{
+    background: $grey;
+}
+.full-size .btn-nav:nth-child(4)::before{
+    background: $pink;
+}
+.full-size .btn-nav:nth-child(5)::before{
+    background: $grey;
+}
+.full-size .btn-nav:nth-child(6)::before{
+    background: $pink;
+}
+
+// ==== menu burger ====
+
+ .menu_burger{
+     display:none;
+}
+label[for=toggle]{
+    display:flex;
+    color:$white ;
+    position: absolute;
+    right:10%;
+    top: 3%;   
+    font-size: 2.5rem;
+    cursor:pointer;
+   
+}
+#toggle {
+    display: none;
+}
+.menu_burger > ul {
+    display:flex;
+    flex-direction: column;
+    display: none;
+    // position: absolute;   
+    width: 10vw;
+  
+}
+.ul_burger >li {
+    padding: 5px;
+    
+}
+
+
+#toggle:checked + .ul_burger {
+  display: flex;
+  width: 100vw;
+  height: 20vh;  
+ position:relative;
+  right: 38px; 
+  background: $darkPurple;
+  margin-top: 70px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  border-radius: 5px;
+  
+}
+
+// =========== responsive 
+
+@media screen and (max-width: 900px) {
+    .full-size {
+      display: none;
+    }
+    .menu_burger {
+      display: contents;
+    }
+}
