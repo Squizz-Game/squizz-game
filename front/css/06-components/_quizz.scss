@@ -1,6 +1,28 @@
+@keyframes chrono {
+    from {
+        opacity: 1;
+        font-size: 250px;
+    }
+    to {
+        opacity: 0;
+        font-size: 200px;
+    }
+}
+
 #quizz {
     position: relative;
-    section {
+    section.chrono {
+        height: 60vh;
+        font-size: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        animation: chrono 1s 4 forwards;
+    }
+
+    section.game {
+        display: none;
         .quizz-title {
             font-family: $font-primary;
             display: flex;
