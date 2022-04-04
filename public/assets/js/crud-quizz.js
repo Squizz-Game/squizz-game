@@ -41,6 +41,21 @@ const displayQuestion = () => {
     updateCounter()
 }
 
+const is_not_empty = () => {
+    if (quizz[id_quizz].questions[index].question === '') return false
+    let are_true = 0
+    let total_reps = 0
+
+    quizz[id_quizz].questions[index].reponses.forEach(rep => {
+        if (rep.reponse !== '') {
+            total_reps++
+            if (rep.correct) are_true++
+        }
+    })
+
+    return !(are_true !== 1 || total_reps < 2 || total_reps > 3)
+}
+
 const init = (async () => {
     // Récupérer toutes les questions liées au quizz
     if (quizz[id_quizz] === undefined) {
@@ -62,6 +77,10 @@ const init = (async () => {
     }
     index = quizz[id_quizz].questions.length - 1
     displayQuestion()
+
+    if (quizz[id_quizz].saved) validate.setAttribute('disabled', true)
+    if (index === 0) prev.setAttribute('disabled', true)
+    if (!is_not_empty() && index === quizz[id_quizz].questions.length - 1) next.setAttribute('disabled', true)
 })()
 
 /** Checkboxes */
@@ -86,11 +105,48 @@ checkboxes.forEach((checked, i) => {
 /** Actions */
 const persistChanges = () => {
     quizz[id_quizz].saved = false
+    validate.removeAttribute('disabled')
     localStorage.quizz = JSON.stringify(quizz)
+    if (is_not_empty()) next.removeAttribute('disabled')
 }
 
 next.addEventListener('click', () => {
-    if (index === quizz[id_quizz].questions.length - 1) {
+    if (is_not_empty()) {
+        if (index === quizz[id_quizz].questions.length - 1) {
+            quizz[id_quizz].questions.push({
+                id_question: null,
+                question: '',
+                id_quizz,
+                reponses: [{
+                    correct: 1,
+                    reponse: ''
+                }]
+            })
+        }
+    }
+    if (index < quizz[id_quizz].questions.length - 1) {
+        index ++
+        prev.removeAttribute('disabled')
+        displayQuestion()
+    }
+    if (!is_not_empty() && index === quizz[id_quizz].questions.length - 1) next.setAttribute('disabled', true)
+})
+
+prev.addEventListener('click', () => {
+    if (index > 0) {
+        index--
+        displayQuestion()
+        next.removeAttribute('disabled')
+    }
+
+    if (index < 1) prev.setAttribute('disabled', true)
+})
+
+remove.addEventListener('click', () => {
+    quizz[id_quizz].questions.splice(index, 1)
+    if (index > 0) index--
+
+    if (quizz[id_quizz].questions.length < 1) {
         quizz[id_quizz].questions.push({
             id_question: null,
             question: '',
@@ -101,21 +157,7 @@ next.addEventListener('click', () => {
             }]
         })
     }
-    index++
-    displayQuestion()
-})
-
-prev.addEventListener('click', () => {
-    if (index > 0) {
-        index--
-        displayQuestion()
-    }
-})
-
-remove.addEventListener('click', () => {
-    quizz[id_quizz].questions.splice(index, 1)
     persistChanges()
-    if (index > 0) index--
     displayQuestion()
 })
 
@@ -149,19 +191,35 @@ validate.addEventListener('click', e => {
 
         let i = index
         const interval = setInterval(() => {
+            quizz[id_quizz].questions[i].question = quizz[id_quizz].questions[i].question.trim()
             if (quizz[id_quizz].questions[i].question === '') { // Si la question est vide
                 if (confirm('La question ' + (i + 1) + ' est vide, voulez-vous la supprimer ?')) {
-                    quizz[id_quizz].questions.splice(i, 1)
-                    persistChanges()
+                    quizz[id_quizz].questions.splice(index, 1)
                     if (index > 0) index--
+
+                    if (quizz[id_quizz].questions.length < 1) {
+                        quizz[id_quizz].questions.push({
+                            id_question: null,
+                            question: '',
+                            id_quizz,
+                            reponses: [{
+                                correct: 1,
+                                reponse: ''
+                            }]
+                        })
+                    }
+                    persistChanges()
+                    displayQuestion()
                 } else { // S'il arrête la vérification et sort de la boucle
                     clearInterval(interval)
+                    validate.setAttribute('disabled', true)
                 }
             } else {
                 // Si plus d'une réponse est vide ou non cochée
                 let are_true = 0
                 let total_reps = 0
-                quizz[id_quizz].questions[i].reponses.forEach(rep => {
+                quizz[id_quizz].questions[i].reponses.forEach((rep, j) => {
+                    quizz[id_quizz].questions[i].reponses[j].reponse = rep.reponse
                     if (rep.reponse !== '') {
                         total_reps++
                         if (rep.correct) are_true++
@@ -170,6 +228,7 @@ validate.addEventListener('click', e => {
 
                 if (are_true !== 1 || total_reps < 2 || total_reps > 3) {
                     alert('Vous devez avoir au moins deux réponses par question dont une correcte.')
+                    validate.setAttribute('disabled', true)
                     clearInterval(interval)
                 } else {
                     // si tout est ok, on passe à la question suivante
@@ -189,6 +248,9 @@ validate.addEventListener('click', e => {
             let len = quizz[id_quizz].questions.length
             if (len < 10) {
                 createAlert('Vous devez avoir au moins 10 questions.', 'error')
+                validate.setAttribute('disabled', true)
+                index = quizz[id_quizz].questions.length - 1
+                displayQuestion()
             } else {
                 saveQuestions()
             }
@@ -205,6 +267,7 @@ validate.addEventListener('click', e => {
                     if (!res.err) {
                         quizz[id_quizz].questions = res.data
                         quizz[id_quizz].saved = true
+                        validate.setAttribute('disabled', true)
                         localStorage.quizz = JSON.stringify(quizz)
                         index = quizz[id_quizz].questions.length - 1
                         displayQuestion()

@@ -1,20 +1,24 @@
 .mon_score {
-  background: $blueGradient;
+    background: $blueGradient;
+    .other_rank_pts {
+        font-size: 21px;
+        font-weight: 500;
+    }
 }
 // ===== responsive  ====
 
 //  ===== middle size  =====
 
 @media #{$media-down-md} {
-  main {
-    //   text-align: center;
-    align-items: center;
-    justify-content: center;
-  }
-  .full_size {
-    display: none;
-  }
-  nav .menu_burger {
-    display: contents;
-  }
+    main {
+        //   text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+    .full_size {
+        display: none;
+    }
+    nav .menu_burger {
+        display: contents;
+    }
 }

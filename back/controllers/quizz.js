@@ -58,12 +58,12 @@ router.get("/:id_cat/:id_quizz/end-game", (req, res) => {
       id_quizz: req.params.id_quizz,
       id_user: req.session.id_user,
     },
-      (err, data) => {
+      (err, scores) => {
       Quizz.get(req.params.id_quizz, (err, quizz) => {
+        console.log(scores);
         res.render("jeu/end-game", {
-          scores: data,
-          score: req.query.score,
-            quizz,
+          scores,
+          quizz,
         });
       });
     }

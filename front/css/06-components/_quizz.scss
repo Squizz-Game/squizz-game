@@ -1,6 +1,17 @@
 #quizz {
     position: relative;
-    section {
+    section.chrono {
+        height: 60vh;
+        font-size: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        animation: chrono 1s 3 forwards;
+    }
+
+    section.game {
+        display: none;
         .quizz-title {
             font-family: $font-primary;
             display: flex;

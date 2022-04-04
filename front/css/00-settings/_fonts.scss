@@ -8,7 +8,13 @@
     src: url("./fonts/GTWalsheimPro/GTWalsheimPro-Regular.ttf") format("ttf");
 }
 
+@font-face {
+    font-family: 'Good Times';
+    src: url("./fonts/GoodTimes/GoodTimes.otf") format("opentype");
+}
+
 $font-size: 15px;
 $font-primary: GT Walsheim Pro, sans-serif;
 $font-secondary: Game Of Squids, serif;
+$font-tertiary: Good Times, serif;
 $font-color: $darkPurple;

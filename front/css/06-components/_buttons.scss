@@ -6,16 +6,47 @@
   padding: 0px 20px;
 }
 
+%backgroundTransition {
+  // Background transition :
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+  z-index: 0;
+
+  &:after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    width: 150%;
+    height: 100%;
+    background: $purpleGradient;
+    top: 0;
+    left: -50%;
+    transition: .3s;
+  }
+
+  &:hover {
+    &:after {
+      left: 0;
+    }
+  }
+}
+
 .btn {
   @extend %btn;
+  @extend %backgroundTransition;
+
   &_play ,&_mon_compte {
     text-decoration: none;
-    background: $blueGradient;
     &:before {
       content: "O ";
       font-family: $font-secondary;
       font-size: 20px;
       color: $green;
+    }
+    
+    &:after {
+      background: $blueGradient;
     }
   }
   &_edit,
@@ -47,15 +78,13 @@
   font-size: 12px;
   font-weight: 300;
   color: $white;
-  background: $purpleGradient;
   border-radius: 5px;
   box-shadow: $buttonShadow;
   padding: 5px;
-  // margin-left: 20px;
   cursor: pointer;
+  @extend %backgroundTransition;
 }
 
 .btn_next:disabled {
   background: #ccc;
 }
-
