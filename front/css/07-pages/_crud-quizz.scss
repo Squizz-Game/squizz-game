@@ -107,10 +107,11 @@
     }
 }
 
-#create-quizz {
+#create-quizz {    
     @extend #quizz;
-
     section {
+        @extend .game;
+        display: block;
         .head {
             display: flex;
             flex-wrap: wrap;
