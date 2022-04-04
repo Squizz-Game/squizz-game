@@ -246,6 +246,11 @@
                         background: lighten($grey, 25) !important;
                         cursor: not-allowed;
                     }
+                    
+                    transition: .2s;
+                    &:hover:not(:disabled) {
+                        box-shadow: $buttonShadow;
+                    }
                 }
             }
         }
