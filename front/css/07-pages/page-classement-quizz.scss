@@ -150,7 +150,7 @@ font-size: 1rem,
     padding: 5px;
     margin:10px auto;
     background: $purpleGradient;
-    justify-content:space-between;
+    justify-content: space-between;
     border-radius: 5px;
     
     align-items: center;
@@ -158,23 +158,39 @@ font-size: 1rem,
 }
 .ranking_table > span{
     margin: 5px;
-    // margin-left:10px;
-    // margin-right:10px;
-    text-align: center;
-    align-items: center;
     color:$white ;
+}
+
+.other_rank_name_player{
+    font-style: italic;
+}
+
+.mon_score {
+    background: $blueGradient;
+    .other_rank_pts {
+        font-size: 21px;
+        font-weight: 500;
+    }
 }
 // ===== responsive  ====
 
 //  ===== middle size  =====
 
+@media #{$media-down-sm} {
+    .ranking_table > span{
+        width: 100%;
+        text-align: center;
+    }
+}
+
 @media #{$media-down-md} {
     .classement_title{
-        margin-bottom: 0;
+        margin-bottom: 20px;
     }
     #quizz_rank_top3 {
         display: flex;
         flex-wrap: wrap;
+        margin-bottom: 20px;
     }
     #rank1, #rank2, #rank3 {
         height: 125px;
@@ -193,6 +209,10 @@ font-size: 1rem,
     .rank1, .rank2{
         left:52px;
         bottom:19px;
+    }
+    .mon_score > span{
+        width: 100%;
+        text-align: center;
     }
 }
 
