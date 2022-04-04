@@ -17,13 +17,11 @@ let counter = 3
 
 const intervalChrono = setInterval(() => {
   counter--
-  if (counter < 0) {
-    setTimeout(() => {
-      clearInterval(intervalChrono)
-      chrono.style.display = 'none'
-      game.style.display = 'block'
-      startGame()
-    }, 100)
+  if (counter < 1) {
+    clearInterval(intervalChrono)
+    chrono.style.display = 'none'
+    game.style.display = 'block'
+    startGame()
   } else {
     chrono.innerText = counter
   }
@@ -78,7 +76,7 @@ const startGame = () => {
           showAnswerDelay();
           noClickNext();
           // compteur des questions
-          counterQuestion.innerHTML = index + 1 + "/" + questions.length;
+          counterQuestion.innerHTML = index + 1 + "/10";
         });
       });
   }
