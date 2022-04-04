@@ -152,11 +152,13 @@ function removeNoClick() {
 
 // empécher le clic sur le bouton question suivante
 function noClickNext() {
+  next.disabled = true;
   next.style = "pointer-events: none";
 }
 
 // réactiver le clic sur le bouton question suivante
 function removeNoClickNext() {
+  next.disabled = false;
   next.style = "pointer-events: auto";
 }
 

@@ -34,18 +34,19 @@ figure {
     display: flex;
      justify-content: center;
      align-items: center;
-     margin-bottom: 100px;        
+     margin-bottom: 100px;  
+     font-weight: 500;      
 }
 //  rank 2
 #rank2 {
-    width: 125px;
-    height: 128px;
+    width: 150px;
+    height: 150px;
     margin: 10px;
     text-align: center;
 }
 #rank2 >  img{
-    width: 128px;
-    height: 128px;
+    // width: 125px;
+    // height: 128px;
     border-radius: 50%;
     border :solid 5px $grey;
 }
@@ -55,8 +56,8 @@ figure {
     display: flex;
   align-items: center;
   justify-content: center;    
-    bottom:18px;
-    left:51px;
+    bottom:19px;
+    left:64px;
     background: $grey;
   border-radius: 50%;  
 width: 24px;
@@ -64,48 +65,57 @@ height: 24px;
 font-size: 1rem,
 }
 
+.player_rank2_pts {
+    position: relative;
+    top: -15px;
+}
 
 //  rank 1
 #rank1{
     text-align: center;
-    width: 188px;
-    height: 188px; 
+    width: 180px;
+    height: 180px; 
     margin: 10px;
 }
 
 
 #rank1 > img {
         
-    width: 188px;
-    height: 188px;
+    // width: 180px;
+    // height: 188px;
     border-radius: 50%;
-    border: solid 6px $gold;
+    border: solid 5px $gold;
 }
 .rank1{
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    left:82px;
-    bottom:20px;
+    left:80px;
+    bottom:19px;
     background: $gold;
     border-radius: 50%;
     width: 24px;
     height: 24px;
     font-size: 1rem;
 }
+
+.player_rank1_pts {
+    position: relative;
+    top: -15px;
+}
 // rank 3
 #rank3{
-    height: 128px;
-    width: 128px;
+    height: 125px;
+    width: 125px;
     margin: 10px;
     text-align: center;
     
 }
 #rank3 > img {
-    display: flex;
-    width: 128px;
-    height: 128px;
+    // display: flex;
+    // width: 128px;
+    // height: 128px;
     border-radius: 50%;
     border: solid 5px $bronze;    
 }
@@ -118,8 +128,13 @@ font-size: 1rem,
     border-radius: 50%;
     background: $bronze;
     position:relative;
-    left:54px;
-    bottom:14px;
+    left:52px;
+    bottom:19px;
+}
+
+.player_rank3_pts {
+    position: relative;
+    top: -15px;
 }
 
 // ==== table- rank 
@@ -153,88 +168,116 @@ font-size: 1rem,
 
 //  ===== middle size  =====
 
-
-   @media #{$media-down-md}{
-       main {
-        //   text-align: center;
-        align-items: center;
-        justify-content: center; 
-       }
-         }
-// =============== section top 3 =========
-@media screen  and (max-width: 700px){
-    .full_size{
-        display: none;
+@media #{$media-down-md} {
+    .classement_title{
+        margin-bottom: 0;
     }
-    .menu_burger{
-        display: contents;
+    #quizz_rank_top3 {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #rank1, #rank2, #rank3 {
+        height: 125px;
+        width: 125px;
+        margin-bottom: 60px;
+    }
+    #rank1{
+        order: 1;
     }
     #rank2{
-        width: 80px;
-        height: 80px;
-        text-align: center;
-        }
-        .rank2{
-            width: 24px;
-            height: 24px;
-            position: relative;
-            left:29px;
-        }
+        order: 2;
+    }
+    #rank3{
+        order: 3;
+    }
+    .rank1, .rank2{
+        left:52px;
+        bottom:19px;
+    }
+}
+
+
+//    @media #{$media-down-md}{
+//        main {
+//         //   text-align: center;
+//         align-items: center;
+//         justify-content: center; 
+//        }
+//          }
+// // =============== section top 3 =========
+// @media screen  and (max-width: 700px){
+//     .full_size{
+//         display: none;
+//     }
+//     .menu_burger{
+//         display: contents;
+//     }
+//     #rank2{
+//         width: 80px;
+//         height: 80px;
+//         text-align: center;
+//         }
+//         .rank2{
+//             width: 24px;
+//             height: 24px;
+//             position: relative;
+//             left:29px;
+//         }
     
-   #rank2 > img  {
-       width: 80px;
-       height: 80px;   
-}
-#rank1{
-    width: 100px;
-    height: 100px;
-    text-align: center;
-}
-.rank1{
-    width: 24px;
-    height: 24px;
-    position: relative;
+//    #rank2 > img  {
+//        width: 80px;
+//        height: 80px;   
+// }
+// #rank1{
+//     width: 100px;
+//     height: 100px;
+//     text-align: center;
+// }
+// .rank1{
+//     width: 24px;
+//     height: 24px;
+//     position: relative;
   
-    left: 40px;
-}
-#rank1 > img {
-    width: 100px;
-    height: 100px;   
-    margin: 0 auto;
-}
-#rank3{
-    width: 60px;
-    height: 60px;
-    text-align: center;
-}
-#rank3 > img {
-    height: 60px;
-    width: 60px;
-}
-.rank3{
-    width: 24px;
-    height: 24px;
-    position: relative;
-    left: 19px;
-    bottom: 14px; 
-}
-}
+//     left: 40px;
+// }
+// #rank1 > img {
+//     width: 100px;
+//     height: 100px;   
+//     margin: 0 auto;
+// }
+// #rank3{
+//     width: 60px;
+//     height: 60px;
+//     text-align: center;
+// }
+// #rank3 > img {
+//     height: 60px;
+//     width: 60px;
+// }
+// .rank3{
+//     width: 24px;
+//     height: 24px;
+//     position: relative;
+//     left: 19px;
+//     bottom: 14px; 
+// }
+// }
 // ====== small size =====
 
- @media #{$media-down-sm}{
-   .rank1{
-      position: relative;
-      left: 28px;
-   }
-   .rank2{
-       position:relative;
-       left:26px;
-       bottom:20px;
-   }
+//  @media #{$media-down-sm}{
+//    .rank1{
+//       position: relative;
+//       left: 28px;
+//    }
+//    .rank2{
+//        position:relative;
+//        left:26px;
+//        bottom:20px;
+//    }
        
     
     
- }
+//  }
 
 
 
