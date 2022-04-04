@@ -10,7 +10,6 @@
   // Background transition :
   overflow: hidden;
   position: relative;
-  background: transparent;
   z-index: 0;
 
   &:after {
@@ -28,6 +27,12 @@
   &:hover {
     &:after {
       left: 0;
+    }
+  }
+
+  &:disabled {
+    &:after {
+      background: lighten($grey, 25) !important;
     }
   }
 }
@@ -83,8 +88,4 @@
   padding: 5px;
   cursor: pointer;
   @extend %backgroundTransition;
-}
-
-.btn_next:disabled {
-  background: #ccc;
 }
