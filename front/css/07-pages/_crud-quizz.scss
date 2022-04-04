@@ -12,12 +12,10 @@
                 gap: ratio-space(2px);
                 width: calc(col(4) - 20px);
                 position: relative;
-                // flex-wrap: wrap;
     
                 input,
                 select {
                     border-radius: 5px;
-                    // min-width: col(2);
                     width: 100%;
                 }
                 label {
@@ -107,10 +105,11 @@
     }
 }
 
-#create-quizz {
+#create-quizz {    
     @extend #quizz;
-
     section {
+        @extend .game;
+        display: block;
         .head {
             display: flex;
             flex-wrap: wrap;
@@ -246,6 +245,11 @@
                     &:disabled {
                         background: lighten($grey, 25) !important;
                         cursor: not-allowed;
+                    }
+                    
+                    transition: .2s;
+                    &:hover:not(:disabled) {
+                        box-shadow: $buttonShadow;
                     }
                 }
             }
