@@ -47,10 +47,32 @@
   font-size: 12px;
   font-weight: 300;
   color: $white;
-  background: $purpleGradient;
   border-radius: 5px;
   box-shadow: $buttonShadow;
   padding: 5px;
-  // margin-left: 20px;
   cursor: pointer;
+
+  // Background transition :
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+  z-index: 0;
+
+  &:after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    width: 150%;
+    height: 100%;
+    background: linear-gradient(90deg, $darkPurple 0%, $pink 100%);
+    top: 0;
+    left: -50%;
+    transition: .3s;
+  }
+
+  &:hover {
+    &:after {
+      left: 0;
+    }
+  }
 }
