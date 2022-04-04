@@ -6,15 +6,15 @@ const method = require('method-override')
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
 
+dotenv.config()
+const app = express()
+
 // Controllers imports
 const user = require('./back/controllers/user')
 const quizz = require('./back/controllers/quizz')
 const crudQuizz = require('./back/controllers/crud-quizz')
 const api = require('./back/controllers/api')
 const classement = require('./back/controllers/classement')
-
-dotenv.config()
-const app = express()
 
 // Moteur de template
 app.set("view engine", "ejs");
@@ -28,7 +28,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        secure: false, //if https : true
+        secure: false, // if https : true
         maxAge: 604800 // 1 semaine
     }
 }))
@@ -56,4 +56,5 @@ app.get("/", (req, res) => {
     res.render("index")
 })
 
-app.listen(9090, () => console.log("listening on http://localhost:9090/"));
+const port = process.env.PORT
+app.listen(port, () => console.log("listening on http://localhost:" + port + "/"));
