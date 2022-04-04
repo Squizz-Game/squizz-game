@@ -3,6 +3,11 @@
 
 <main>
   <h1><%= quizz.nom_quizz %></h1>
+  <% if(scores.length < 4) { %>
+    <div class="gg-container">
+      <div class="slots"></div>
+    </div>
+  <% } %>
   <section id="quizz_rank_top3">
     <% if(scores[1] && scores.length > 1) { %> 
     <div id="rank2">
@@ -47,9 +52,6 @@
   </section>
 </main>
 
-<script>
-  const score = document.querySelector('.mon_score .other_rank_pts')
-  score.innerText = JSON.parse(window.localStorage.result)?.score + ' pts'
-</script>
+<script src="/assets/js/end-game.js"></script>
 
 <%- include('../_footer') %>
