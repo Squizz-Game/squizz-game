@@ -33,7 +33,7 @@
   border-radius: 5px;
   overflow: hidden;
   
-  background: linear-gradient(90deg, #180822 0%, #c055c1 116.65%);
+  background: $purpleGradient;
 }
 
 .full-size .btn-nav a {
@@ -47,10 +47,9 @@
   justify-content: center;
   text-align: center;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  border: solid 2px $white;
+  // border: solid 2px $white;
   color: $white;
   letter-spacing: 1px;
-  transition: 0.5;
   backdrop-filter: blur(15px);
 }
 
@@ -62,11 +61,11 @@
     content: "";
   position: absolute;
   top: 0;
-  left: -15;
+  left: -15%;
   width: 50%;
   height: 100%;
   transform: skewX(45deg) translateX(0);
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.10);
   transition: 0.5s;
 }
 
@@ -142,7 +141,6 @@ label[for=toggle]{
     
 }
 
-
 #toggle:checked + .ul_burger {
   display: flex;
   width: 100vw;
@@ -150,7 +148,6 @@ label[for=toggle]{
  position:relative;
   right: 38px;
   margin-top: 70px;
-  border-radius: 5px;
   justify-content: center;
   align-items: center;
   color: $white;

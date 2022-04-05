@@ -222,11 +222,10 @@
                     padding: ratio-space(1px) ratio-space(2px);
                     margin-top: ratio-space(2px);
                     text-transform: none;
-
-                    background: $blueGradient;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    transition: .2s;
                     
                     img {
                         width: 16px;
@@ -234,22 +233,24 @@
                         display: block;
                     }
 
+                    &:after {
+                        background: $blueGradient;
+                    }
+
                     &:nth-child(1) {
-                        background: $red;
+                        &:after {
+                            background: $red;
+                        }
                     }
                     
                     &:last-child {
-                        background: $purpleGradient;
+                        &:after {
+                            background: $purpleGradient;
+                        }
                     }
 
                     &:disabled {
-                        background: lighten($grey, 25) !important;
                         cursor: not-allowed;
-                    }
-                    
-                    transition: .2s;
-                    &:hover:not(:disabled) {
-                        box-shadow: $buttonShadow;
                     }
                 }
             }

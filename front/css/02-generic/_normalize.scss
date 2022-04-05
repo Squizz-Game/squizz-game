@@ -20,6 +20,10 @@ q:after {
     font: inherit;
     color: inherit;
     box-sizing: border-box;
+    &::selection {
+        background: $darkPurple;
+        color: $white;
+    }
 }
 
 html, body {
