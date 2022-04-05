@@ -1,33 +1,3 @@
-
-#toggle:checked + .ul_burger {
-  display: flex;
-  width: 100vw;
-  height: 20vh;  
- position:relative;
-//   right: 38px; 
-  margin-top: 70px;
-  border-radius: 5px;
-  justify-content: center;
-  align-items: center;
-}
-
-// ===========
-
-// ================ logo ==========
-figure {
-    min-height: 15px;
-    margin-bottom: 10px;
-}
-.logo{    
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-}
-// ===========================================
-
-
-
-
 //  classement des joueur  top 3 
 #quizz_rank_top3{   
     display: flex;
