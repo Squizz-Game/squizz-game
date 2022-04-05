@@ -6,7 +6,7 @@ const reponses_p = document.querySelectorAll('.reponse p')
 const counter = document.querySelector('.counter')
 const id_quizz = main.dataset.quizz
 let index = 0
-const quizz = JSON.parse(localStorage.quizz ?? '{}')
+const quizz = {}
 
 /** Afficher les questions - réponses */
 const displayReponses = () => {
@@ -20,7 +20,7 @@ const displayReponses = () => {
         rep.innerText = ''
     })
 
-    quizz[id_quizz].questions[index]?.reponses?.forEach((r, i) => {
+    quizz.questions[index]?.reponses?.forEach((r, i) => {
         // Met à jour les blocks réponses
         reponses_p[i].innerText = r.reponse
 
@@ -32,21 +32,21 @@ const displayReponses = () => {
 }
 
 const updateCounter = () => {
-    counter.innerText = index + 1 + '/' + quizz[id_quizz].questions.length
+    counter.innerText = index + 1 + '/' + quizz.questions.length
 }
 
 const displayQuestion = () => {
-    question.innerHTML = quizz[id_quizz].questions[index]?.question
+    question.innerHTML = quizz.questions[index]?.question
     displayReponses()
     updateCounter()
 }
 
-const is_not_empty = () => {
-    if (quizz[id_quizz].questions[index].question === '') return false
+const isValid = () => {
+    if (quizz.questions[index].question === '') return false
     let are_true = 0
     let total_reps = 0
 
-    quizz[id_quizz].questions[index].reponses.forEach(rep => {
+    quizz.questions[index].reponses.forEach(rep => {
         if (rep.reponse !== '') {
             total_reps++
             if (rep.correct) are_true++
@@ -58,29 +58,26 @@ const is_not_empty = () => {
 
 const init = (async () => {
     // Récupérer toutes les questions liées au quizz
-    if (quizz[id_quizz] === undefined) {
-        quizz[id_quizz] = {}
-        quizz[id_quizz].questions = (await (await fetch('/api/quizz/' + id_quizz)).json()).data
-        if (quizz[id_quizz].questions.length === 0) {
-            quizz[id_quizz].questions.push({
-                id_question: null,
-                question: '',
-                id_quizz,
-                reponses: [{
-                    correct: 1,
-                    reponse: ''
-                }]
-            })
-        }
-        quizz[id_quizz].saved = true
-        localStorage.quizz = JSON.stringify(quizz)
+    quizz.questions = (await (await fetch('/api/quizz/' + id_quizz)).json()).data
+    if (quizz.questions.length === 0) {
+        quizz.questions.push({
+            id_question: null,
+            question: '',
+            id_quizz,
+            reponses: [{
+                correct: 1,
+                reponse: ''
+            }]
+        })
     }
-    index = quizz[id_quizz].questions.length - 1
+    quizz.saved = true
+    
+    index = quizz.questions.length - 1
     displayQuestion()
 
-    if (quizz[id_quizz].saved) validate.setAttribute('disabled', true)
-    if (index === 0) prev.setAttribute('disabled', true)
-    if (!is_not_empty() && index === quizz[id_quizz].questions.length - 1) next.setAttribute('disabled', true)
+    validate.disabled = true
+    if (index === 0) prev.disabled = true
+    if (!isValid() && index === quizz.questions.length - 1) next.disabled = true
 })()
 
 /** Checkboxes */
@@ -88,14 +85,14 @@ checkboxes.forEach((checked, i) => {
     checked.addEventListener('click', e => {
         // on retire préalablement le check des autres réponses
         checkboxes.forEach((c, i) => {
-            if (quizz[id_quizz].questions[index].reponses[i] === undefined) {
-                quizz[id_quizz].questions[index].reponses[i] = {reponse: ''}
+            if (quizz.questions[index].reponses[i] === undefined) {
+                quizz.questions[index].reponses[i] = {reponse: ''}
             }
-            quizz[id_quizz].questions[index].reponses[i].correct = 0
+            quizz.questions[index].reponses[i].correct = 0
             c.classList.remove('checked')
         })
 
-        quizz[id_quizz].questions[index].reponses[i].correct = 1
+        quizz.questions[index].reponses[i].correct = 1
         checked.classList.add('checked')
 
         persistChanges()
@@ -104,16 +101,24 @@ checkboxes.forEach((checked, i) => {
 
 /** Actions */
 const persistChanges = () => {
-    quizz[id_quizz].saved = false
-    validate.removeAttribute('disabled')
-    localStorage.quizz = JSON.stringify(quizz)
-    if (is_not_empty()) next.removeAttribute('disabled')
+    quizz.saved = false
+    if (!isValid()) {
+        validate.disabled = true
+        if (index === quizz.questions.length - 1) {
+            next.disabled = true
+        } else {
+            next.disabled = false
+        }
+    } else {
+        next.disabled = false
+        validate.disabled = false
+    }
 }
 
 next.addEventListener('click', () => {
-    if (is_not_empty()) {
-        if (index === quizz[id_quizz].questions.length - 1) {
-            quizz[id_quizz].questions.push({
+    if (isValid()) {
+        if (index === quizz.questions.length - 1) {
+            quizz.questions.push({
                 id_question: null,
                 question: '',
                 id_quizz,
@@ -124,30 +129,31 @@ next.addEventListener('click', () => {
             })
         }
     }
-    if (index < quizz[id_quizz].questions.length - 1) {
+    if (index < quizz.questions.length - 1) {
         index ++
-        prev.removeAttribute('disabled')
+        prev.disabled = false
         displayQuestion()
     }
-    if (!is_not_empty() && index === quizz[id_quizz].questions.length - 1) next.setAttribute('disabled', true)
+    persistChanges()
 })
 
 prev.addEventListener('click', () => {
     if (index > 0) {
         index--
         displayQuestion()
-        next.removeAttribute('disabled')
+        next.disabled = false
     }
 
-    if (index < 1) prev.setAttribute('disabled', true)
+    if (index < 1) prev.disabled = true
+    persistChanges
 })
 
 remove.addEventListener('click', () => {
-    quizz[id_quizz].questions.splice(index, 1)
+    quizz.questions.splice(index, 1)
     if (index > 0) index--
 
-    if (quizz[id_quizz].questions.length < 1) {
-        quizz[id_quizz].questions.push({
+    if (quizz.questions.length < 1) {
+        quizz.questions.push({
             id_question: null,
             question: '',
             id_quizz,
@@ -162,19 +168,19 @@ remove.addEventListener('click', () => {
 })
 
 question.addEventListener('input', e => {
-    quizz[id_quizz].questions[index].question = question.innerHTML
+    quizz.questions[index].question = question.innerHTML
     persistChanges()
 })
 
 reponses_p.forEach((p, i) => {
     p.addEventListener('input', e => {
-        if (quizz[id_quizz].questions[index].reponses[i] === undefined) {
-            quizz[id_quizz].questions[index].reponses[i] = {
+        if (quizz.questions[index].reponses[i] === undefined) {
+            quizz.questions[index].reponses[i] = {
                 correct: 0,
                 reponse: ''
             }
         }
-        quizz[id_quizz].questions[index].reponses[i].reponse = p.innerHTML
+        quizz.questions[index].reponses[i].reponse = p.innerHTML
         persistChanges()
     })
 })
@@ -185,20 +191,20 @@ reponses_p.forEach((p, i) => {
  * Une (et une seule) réponse correcte par question
  */
 validate.addEventListener('click', e => {
-    if (!quizz[id_quizz].saved) {
-        index = quizz[id_quizz].questions.length - 1
+    if (!quizz.saved) {
+        index = quizz.questions.length - 1
         displayQuestion()
 
         let i = index
         const interval = setInterval(() => {
-            quizz[id_quizz].questions[i].question = quizz[id_quizz].questions[i].question.trim()
-            if (quizz[id_quizz].questions[i].question === '') { // Si la question est vide
+            quizz.questions[i].question = quizz.questions[i].question.trim()
+            if (quizz.questions[i].question === '') { // Si la question est vide
                 if (confirm('La question ' + (i + 1) + ' est vide, voulez-vous la supprimer ?')) {
-                    quizz[id_quizz].questions.splice(index, 1)
+                    quizz.questions.splice(index, 1)
                     if (index > 0) index--
 
-                    if (quizz[id_quizz].questions.length < 1) {
-                        quizz[id_quizz].questions.push({
+                    if (quizz.questions.length < 1) {
+                        quizz.questions.push({
                             id_question: null,
                             question: '',
                             id_quizz,
@@ -212,14 +218,14 @@ validate.addEventListener('click', e => {
                     displayQuestion()
                 } else { // S'il arrête la vérification et sort de la boucle
                     clearInterval(interval)
-                    validate.setAttribute('disabled', true)
+                    validate.disabled = true
                 }
             } else {
                 // Si plus d'une réponse est vide ou non cochée
                 let are_true = 0
                 let total_reps = 0
-                quizz[id_quizz].questions[i].reponses.forEach((rep, j) => {
-                    quizz[id_quizz].questions[i].reponses[j].reponse = rep.reponse
+                quizz.questions[i].reponses.forEach((rep, j) => {
+                    quizz.questions[i].reponses[j].reponse = rep.reponse
                     if (rep.reponse !== '') {
                         total_reps++
                         if (rep.correct) are_true++
@@ -228,7 +234,7 @@ validate.addEventListener('click', e => {
 
                 if (are_true !== 1 || total_reps < 2 || total_reps > 3) {
                     alert('Vous devez avoir au moins deux réponses par question dont une correcte.')
-                    validate.setAttribute('disabled', true)
+                    validate.disabled = true
                     clearInterval(interval)
                 } else {
                     // si tout est ok, on passe à la question suivante
@@ -245,11 +251,11 @@ validate.addEventListener('click', e => {
         }, 100)
 
         const verify = () => {
-            let len = quizz[id_quizz].questions.length
+            let len = quizz.questions.length
             if (len < 10) {
                 createAlert('Vous devez avoir au moins 10 questions.', 'error')
-                validate.setAttribute('disabled', true)
-                index = quizz[id_quizz].questions.length - 1
+                validate.disabled = true
+                index = quizz.questions.length - 1
                 displayQuestion()
             } else {
                 saveQuestions()
@@ -260,16 +266,15 @@ validate.addEventListener('click', e => {
             fetch('/api/quizz/' + id_quizz, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(quizz[id_quizz].questions)
+                body: JSON.stringify(quizz.questions)
             })
                 .then(res => res.json())
                 .then(res => {
                     if (!res.err) {
-                        quizz[id_quizz].questions = res.data
-                        quizz[id_quizz].saved = true
-                        validate.setAttribute('disabled', true)
-                        localStorage.quizz = JSON.stringify(quizz)
-                        index = quizz[id_quizz].questions.length - 1
+                        quizz.questions = res.data
+                        quizz.saved = true
+                        validate.disabled = true
+                        index = quizz.questions.length - 1
                         displayQuestion()
                         createAlert('Questions enregistrées', 'success')
                     } else {
