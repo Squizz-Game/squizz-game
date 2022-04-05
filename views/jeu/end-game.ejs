@@ -33,7 +33,7 @@
     <% if(locals.session.id_user !== undefined) { %>
     <div class="ranking_table mon_score">
       <span class="other_rank">Mon score</span>
-      <span class="other_rank_name_player"><%= scores[scores.length-1].user_name %></span>
+      <span class="other_rank_name_player"><%= scores[scores.length-1]?.user_name %></span>
       <span class="other_rank_pts">0 pts</span>
     </div>
     <% } else { %>

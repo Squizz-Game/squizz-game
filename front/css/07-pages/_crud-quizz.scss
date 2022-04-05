@@ -203,6 +203,10 @@
                             }
                             p:focus {
                                 outline: solid 1px $green;
+                                caret-color: $green;
+                            }
+                            p::selection {
+                                background: $green;
                             }
                         }
                     }
@@ -215,6 +219,10 @@
                             }
                             p:focus {
                                 outline: solid 1px $lightBlue;
+                                caret-color: $lightBlue;
+                            }
+                            p::selection {
+                                background: $lightBlue;
                             }
                         }
                     }
@@ -227,6 +235,10 @@
                             }
                             p:focus {
                                 outline: solid 1px $pink;
+                                caret-color: $pink;
+                            }
+                            p::selection {
+                                background: $pink;
                             }
                         }
                     }
