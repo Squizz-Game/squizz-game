@@ -1,6 +1,6 @@
 /** Afficher le score */
 const score = document.querySelector('.mon_score .other_rank_pts')
-score.innerText = JSON.parse(window.localStorage.result)?.score + ' pts'
+score.innerText = (JSON.parse(window.localStorage.result ?? '{}')?.score ?? 0) + ' pts'
 
 /** Emojis dispersion */
 const emojis = ['}', '{', 'o']

@@ -3,11 +3,7 @@
 
 <main>
   <h1 class="classement_title"><%= quizz.nom_quizz %></h1>
-  <% if(scores.length < 4) { %>
-    <div class="gg-container">
-      <div class="slots"></div>
-    </div>
-  <% } %>
+  <div class="slots"></div>
   <section id="quizz_rank_top3">
     <% if(scores[1] && scores.length > 1) { %> 
     <div id="rank2">
@@ -36,7 +32,6 @@
   <section id="rank4_and_more">
 
     <% if(locals.session.id_user !== undefined) { %>
-
     <div class="ranking_table mon_score">
       <span class="other_rank">Mon score</span>
       <span class="other_rank_name_player"><%= scores[scores.length-1].user_name %></span>
