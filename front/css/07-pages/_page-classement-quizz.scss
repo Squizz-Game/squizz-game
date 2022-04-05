@@ -146,13 +146,12 @@ font-size: 1rem,
     display: flex;  
     width: 80%;
     // height: 50px;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     padding: 5px;
     margin:10px auto;
     background: $purpleGradient;
     justify-content: space-between;
     border-radius: 5px;
-    
     align-items: center;
     font-weight: 300;
 }
@@ -163,6 +162,9 @@ font-size: 1rem,
 
 .other_rank_name_player{
     font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .mon_score {
@@ -172,16 +174,18 @@ font-size: 1rem,
         font-weight: 500;
     }
 }
+
+
 // ===== responsive  ====
 
 //  ===== middle size  =====
 
-@media #{$media-down-sm} {
-    .ranking_table > span{
-        width: 100%;
-        text-align: center;
-    }
-}
+// @media #{$media-down-sm} {
+//     .ranking_table > span{
+//         width: 100%;
+//         text-align: center;
+//     }
+// }
 
 @media #{$media-down-md} {
     .classement_title{

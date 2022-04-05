@@ -15,6 +15,9 @@ const User = {
         mysql.execute('SELECT * FROM utilisateurs WHERE user_name = ?', [user_name], async (err, rows) => {
             if (rows.length) return action(true, 'Le nom d\'utilisateur est déjà pris.')
 
+            // Vérifie si le nbr de caractère du username ne dépasse pas 20
+            if(user_name.length > 20) return action(true, 'Le nom d\'utilisateur doit contenir 20 caractères maximum')
+
             if (user_password.length < 6)
                 return action(true, 'Nouveau mot de passe trop court (6 caractères min.).')
             
@@ -38,6 +41,9 @@ const User = {
             user_mail === (undefined || '') ||
             user_name === (undefined || '')
         ) return action(true, 'Veuillez renseigner tous les champs requis.')
+
+        // Vérifie si le nbr de caractère du username ne dépasse pas 20
+        if(user_name.length > 20) return action(true, 'Le nom d\'utilisateur doit contenir 20 caractères maximum')
 
         // Si un nouveau mot de passe est renseigné et que l'ancien est correct
         if (new_password !== (undefined || '')) {
@@ -110,6 +116,12 @@ const User = {
 
             // Envoyer l'id utilisateur
             return action(false, rows[0])
+        })
+    },
+    remove: (id_user , action) => {
+        mysql.execute('DELETE FROM utilisateurs WHERE id_user = ?', [id_user], (err, rows) => {
+            if (err) return action(true, err)
+            return action(false, 'Compte supprimé')
         })
     }
 }

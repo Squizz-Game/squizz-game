@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 
 router.get('/deconnexion', (req, res) => {
     req.session.id_user = undefined
+    res.clearCookie('token')
     req.flash('success', 'À bientôt !')
     res.redirect('/connexion')
 })
@@ -56,6 +57,24 @@ router.post('/mon-compte', (req, res) => {
         )
     } else {
         req.flash('error', "Vous n'êtes pas connecté.")
+        res.redirect('/connexion')
+    }
+})
+
+router.delete('/mon-compte', (req, res) => {
+    if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
+        User.remove(req.session.id_user, (err, data) => {
+            if (err) {
+                req.flash('error', 'Le compte n\'existe pas.')
+            } else {
+                req.flash('success', 'Compte supprimé')
+                req.session.id_user = undefined
+                res.clearCookie('token')
+            }
+            res.redirect('/')
+        })
+    } else {
+        req.flash('error', 'Vous n\'êtes pas connecté.')  
         res.redirect('/connexion')
     }
 })

@@ -59,6 +59,11 @@
         <button type="submit" class="btn btn_edit">Modifier</button>
       </div>
     </form>
+
+    <form method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <button class="delete_account">Supprimer mon compte</button>
+  </form>
   </section>
   <section class="section_avatar">
     <% for(avatar of avatars){ %>
