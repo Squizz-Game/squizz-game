@@ -1,14 +1,26 @@
- header {
-  position: relative;
-   width: 95vw;
-  
- }
+// ================ logo ==========
+header {
+ position: relative;
+  width: 100vw;
+ 
+}
+figure {
+  min-height: 15px;
+  margin-bottom: 10px;
+}
+.logo{    
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+// ===========================================
  .menu_burger{
      display: none;
  }
 
 //    ==== nav full size =====
 .full-size {
+  margin-right: 7%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,9 +29,6 @@
   font-family: $font-primary;
   font-size: 1rem;
    position: relative;
-  top: 1rem;
-  left: 35%;
-  transform: translate(-50%, -50%);
 }
 
 /* ==== box color===
@@ -47,7 +56,6 @@
   justify-content: center;
   text-align: center;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  // border: solid 2px $white;
   color: $white;
   letter-spacing: 1px;
   backdrop-filter: blur(15px);
@@ -112,9 +120,6 @@
 
 // ==== menu burger ====
 
- .menu_burger{
-     display:none;
-}
 label[for=toggle]{
     display:flex;
     color:$white ;
@@ -123,36 +128,26 @@ label[for=toggle]{
     top: 3%;   
     font-size: 2.5rem;
     cursor:pointer;
-   
 }
 #toggle {
     display: none;
 }
 .menu_burger > ul {
-    display:flex;
     flex-direction: column;
     display: none;
-    // position: absolute;   
-    width: 10vw;
-  
 }
 .ul_burger >li {
     padding: 5px;
-    
 }
 
 #toggle:checked + .ul_burger {
   display: flex;
-  width: 100vw;
-  height: 20vh;  
+  width: 90vw;
  position:relative;
-  right: 38px;
-  margin-top: 70px;
-  justify-content: center;
+  margin-top: 40px;
   align-items: center;
   color: $white;
   border-radius: 5px;
-  
 }
 
 // =========== responsive 
