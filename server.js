@@ -43,6 +43,7 @@ app.use(method((req, res) => { // transforme les méthodes POST qui ont des cham
 app.use(require('./back/middlewares/session'))
 app.use(require('./back/middlewares/flash'))
 app.use(require('./back/middlewares/verify-token'))
+app.use(require('./back/middlewares/trailing-slash'))
 
 // Controllers
 app.use('/', user)
