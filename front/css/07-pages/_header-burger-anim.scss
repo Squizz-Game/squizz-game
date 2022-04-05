@@ -61,11 +61,11 @@
     content: "";
   position: absolute;
   top: 0;
-  left: -25%;
-  width: 150%;
+  left: -15%;
+  width: 50%;
   height: 100%;
   transform: skewX(45deg) translateX(0);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.10);
   transition: 0.5s;
 }
 
