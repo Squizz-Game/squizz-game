@@ -118,9 +118,13 @@
             justify-content: space-between;
             .question {
                 width: calc(100% - 84px);
+                
                 &:empty:before {
                     content: attr(data-placeholder);
                     opacity: 0.8;
+                }
+                &:focus {
+                    outline: solid 2px $purple;
                 }
             }
 
@@ -159,6 +163,8 @@
                         min-width: 0;
                         p {
                             width: 100%;
+                            cursor: pointer;
+                            padding: ratio-space(1px);
 
                             &:empty:before {
                                 content: attr(data-placeholder);
@@ -190,23 +196,38 @@
                     }
 
                     &:nth-child(1) {
-                        .reponse i:before {
-                            content: '{';
-                            color: $green;
+                        .reponse {
+                            i:before {
+                                content: '{';
+                                color: $green;
+                            }
+                            p:focus {
+                                outline: solid 1px $green;
+                            }
                         }
                     }
 
                     &:nth-child(2) {
-                        .reponse i:before {
-                            content: '}';
-                            color: $lightBlue;
+                        .reponse {
+                            i:before {
+                                content: '}';
+                                color: $lightBlue;
+                            }
+                            p:focus {
+                                outline: solid 1px $lightBlue;
+                            }
                         }
                     }
 
                     &:nth-child(3) {
-                        .reponse i:before {
-                            content: 'o';
-                            color: $pink;
+                        .reponse {
+                            i:before {
+                                content: 'o';
+                                color: $pink;
+                            }
+                            p:focus {
+                                outline: solid 1px $pink;
+                            }
                         }
                     }
                 }

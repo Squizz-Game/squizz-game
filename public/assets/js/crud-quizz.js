@@ -95,12 +95,12 @@ checkboxes.forEach((checked, i) => {
         quizz.questions[index].reponses[i].correct = 1
         checked.classList.add('checked')
 
-        persistChanges()
+        refreshButtons()
     })
 })
 
 /** Actions */
-const persistChanges = () => {
+const refreshButtons = () => {
     quizz.saved = false
     if (!isValid()) {
         validate.disabled = true
@@ -134,7 +134,7 @@ next.addEventListener('click', () => {
         prev.disabled = false
         displayQuestion()
     }
-    persistChanges()
+    refreshButtons()
 })
 
 prev.addEventListener('click', () => {
@@ -145,13 +145,15 @@ prev.addEventListener('click', () => {
     }
 
     if (index < 1) prev.disabled = true
-    persistChanges
+    refreshButtons()
 })
 
-remove.addEventListener('click', () => {
+const removeQuestion = () => {
+    // on supprime la question affichée
     quizz.questions.splice(index, 1)
     if (index > 0) index--
 
+    // s'il n'y a plus de questions du tout, on en crée une vide
     if (quizz.questions.length < 1) {
         quizz.questions.push({
             id_question: null,
@@ -163,13 +165,17 @@ remove.addEventListener('click', () => {
             }]
         })
     }
-    persistChanges()
+    refreshButtons()
     displayQuestion()
+}
+
+remove.addEventListener('click', () => {
+    removeQuestion()
 })
 
 question.addEventListener('input', e => {
     quizz.questions[index].question = question.innerHTML
-    persistChanges()
+    refreshButtons()
 })
 
 reponses_p.forEach((p, i) => {
@@ -181,7 +187,7 @@ reponses_p.forEach((p, i) => {
             }
         }
         quizz.questions[index].reponses[i].reponse = p.innerHTML
-        persistChanges()
+        refreshButtons()
     })
 })
 
@@ -192,75 +198,52 @@ reponses_p.forEach((p, i) => {
  */
 validate.addEventListener('click', e => {
     if (!quizz.saved) {
+        // on place l'index à la fin
         index = quizz.questions.length - 1
         displayQuestion()
 
+        // on utilise un index temporaire
         let i = index
+        // on boucle sur nos questions avec setInterval (pour laisser le temps d'afficher les alertes)
         const interval = setInterval(() => {
+            // on retire les espaces en trop
             quizz.questions[i].question = quizz.questions[i].question.trim()
-            if (quizz.questions[i].question === '') { // Si la question est vide
+            // si la question est vide on la supprime ou on sort de la boucle sans enregistrer
+            if (quizz.questions[i].question === '') {
                 if (confirm('La question ' + (i + 1) + ' est vide, voulez-vous la supprimer ?')) {
-                    quizz.questions.splice(index, 1)
-                    if (index > 0) index--
-
-                    if (quizz.questions.length < 1) {
-                        quizz.questions.push({
-                            id_question: null,
-                            question: '',
-                            id_quizz,
-                            reponses: [{
-                                correct: 1,
-                                reponse: ''
-                            }]
-                        })
-                    }
-                    persistChanges()
-                    displayQuestion()
-                } else { // S'il arrête la vérification et sort de la boucle
+                    removeQuestion()
+                } else {
                     clearInterval(interval)
                     validate.disabled = true
                 }
             } else {
                 // Si plus d'une réponse est vide ou non cochée
-                let are_true = 0
-                let total_reps = 0
-                quizz.questions[i].reponses.forEach((rep, j) => {
-                    quizz.questions[i].reponses[j].reponse = rep.reponse
-                    if (rep.reponse !== '') {
-                        total_reps++
-                        if (rep.correct) are_true++
-                    }
-                })
-
-                if (are_true !== 1 || total_reps < 2 || total_reps > 3) {
+                if (!isValid()) {
                     alert('Vous devez avoir au moins deux réponses par question dont une correcte.')
-                    validate.disabled = true
                     clearInterval(interval)
                 } else {
                     // si tout est ok, on passe à la question suivante
                     if (index > 0) index--
+                    displayQuestion()
+                }
+                // on réduit l'index temporaire,
+                // s'il est trop bas, on sort de la boucle et on revérifie la longueur
+                i--
+                if (i === -1) {
+                    clearInterval(interval)
+
+                    if (quizz.questions.length < 10) {
+                        createAlert('Vous devez avoir au moins 10 questions.', 'error')
+                        validate.disabled = true
+                        index = quizz.questions.length - 1
+                        displayQuestion()
+                    } else {
+                        // si la longueur est correcte, on enregistre les questions
+                        saveQuestions()
+                    }
                 }
             }
-            displayQuestion()
-            i--
-
-            if (i === -1) { // S'il sort de la boucle après vérification, on revérifie la longueur
-                clearInterval(interval)
-                verify()
-            }
         }, 100)
-
-        const verify = () => {
-            let len = quizz.questions.length
-            if (len < 10) {
-                createAlert('Vous devez avoir au moins 10 questions.', 'error')
-                validate.disabled = true
-                index = quizz.questions.length - 1
-                displayQuestion()
-            } else {
-                saveQuestions()
-            }
-        }
 
         const saveQuestions = () => {
             fetch('/api/quizz/' + id_quizz, {
@@ -279,6 +262,7 @@ validate.addEventListener('click', e => {
                         createAlert('Questions enregistrées', 'success')
                     } else {
                         createAlert('Une erreur s\'est produite.', 'error')
+                        createAlert(res.err, 'error')
                     }
                 })
         }
