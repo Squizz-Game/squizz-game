@@ -130,6 +130,10 @@ const startGame = () => {
   // passer à la question suivante
   function nextQuestion() {
     index++;
+    // à la dernière question change le bouton question suivante en voir résultat
+    if (index === 9) {
+      next.innerHTML = "Voir mon résultat"
+    }
     // insérer une nouvelle question, limiter a 10 questions par quizz
     if (index < questions.length && index < 10) {
       question = questions[index];

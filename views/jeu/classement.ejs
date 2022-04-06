@@ -29,11 +29,13 @@
         <% } %>   
     </section>
     <!--  ranking table  -->
+    <section id="rank4_and_more">
     <% if(scores.length > 3) {
         for(let i = 3; i < scores.length; i++) {%>
         
-    <section id="rank4_and_more">
-        <div class="ranking_table">
+        <div class="ranking_table
+        <% if(locals.session.id_user === scores[i].id_user) {
+         %> user_score <% } %> " >
             <span class= " other_rank"><%=i+1 %> </span>
             <span class="other_rank_name_player"><%= scores[i].user_name %></span>
             <span class="other_rank_pts"><%= scores[i].score %>pts </span>

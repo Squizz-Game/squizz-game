@@ -1,284 +1,186 @@
-//  classement des joueur  top 3 
-#quizz_rank_top3{   
-    display: flex;
-     justify-content: center;
-     align-items: center;
-     margin-bottom: 100px;  
-     font-weight: 500;      
+//  classement des joueur  top 3
+#quizz_rank_top3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+  font-weight: 500;
 }
 //  rank 2
 #rank2 {
-    width: 150px;
-    height: 150px;
-    margin: 10px;
-    text-align: center;
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  text-align: center;
 }
-#rank2 >  img{
-    // width: 125px;
-    // height: 128px;
-    border-radius: 50%;
-    border :solid 5px $grey;
+#rank2 > img {
+  border-radius: 50%;
+  border: solid 5px $grey;
 }
 
- .rank2{
-    position: relative;
-    display: flex;
+.rank2 {
+  position: relative;
+  display: flex;
   align-items: center;
-  justify-content: center;    
-    bottom:19px;
-    left:64px;
-    background: $grey;
-  border-radius: 50%;  
-width: 24px;
-height: 24px;
-font-size: 1rem,
+  justify-content: center;
+  bottom: 19px;
+  left: 64px;
+  background: $grey;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 1rem;
 }
 
 .player_rank2_pts {
-    position: relative;
-    top: -15px;
+  position: relative;
+  top: -15px;
 }
 
 //  rank 1
-#rank1{
-    text-align: center;
-    width: 180px;
-    height: 180px; 
-    margin: 10px;
+#rank1 {
+  text-align: center;
+  width: 180px;
+  height: 180px;
+  margin: 10px;
 }
-
 
 #rank1 > img {
-        
-    // width: 180px;
-    // height: 188px;
-    border-radius: 50%;
-    border: solid 5px $gold;
+  border-radius: 50%;
+  border: solid 5px $gold;
 }
-.rank1{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    left:80px;
-    bottom:19px;
-    background: $gold;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    font-size: 1rem;
+.rank1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 80px;
+  bottom: 19px;
+  background: $gold;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 1rem;
 }
 
 .player_rank1_pts {
-    position: relative;
-    top: -15px;
+  position: relative;
+  top: -15px;
 }
 // rank 3
-#rank3{
-    height: 125px;
-    width: 125px;
-    margin: 10px;
-    text-align: center;
-    
+#rank3 {
+  height: 125px;
+  width: 125px;
+  margin: 10px;
+  text-align: center;
 }
 #rank3 > img {
-    // display: flex;
-    // width: 128px;
-    // height: 128px;
-    border-radius: 50%;
-    border: solid 5px $bronze;    
+  border-radius: 50%;
+  border: solid 5px $bronze;
 }
-.rank3{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: $bronze;
-    position:relative;
-    left:52px;
-    bottom:19px;
+.rank3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: $bronze;
+  position: relative;
+  left: 52px;
+  bottom: 19px;
 }
 
 .player_rank3_pts {
-    position: relative;
-    top: -15px;
+  position: relative;
+  top: -15px;
 }
 
-// ==== table- rank 
-#rank4_and_more{
-    margin: 0 auto;
-    width: 100%;
+// ==== table- rank
+#rank4_and_more {
+  margin: 0 auto;
+  width: 100%;
 }
 
-.ranking_table{ 
-    display: flex;  
-    width: 80%;
-    // height: 50px;
-    // flex-wrap: wrap;
-    padding: 5px;
-    margin:10px auto;
-    background: $purpleGradient;
-    justify-content: space-between;
-    border-radius: 5px;
-    align-items: center;
-    font-weight: 300;
+.ranking_table {
+  display: flex;
+  width: 80%;
+  padding: 5px;
+  margin: 10px auto;
+  background: $purpleGradient;
+  justify-content: space-between;
+  border-radius: 5px;
+  align-items: center;
+  font-weight: 300;
 }
-.ranking_table > span{
-    margin: 5px;
-    color:$white ;
+.ranking_table > span {
+  margin: 5px;
+  color: $white;
 }
 
-.other_rank_name_player{
-    font-style: italic;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.other_rank_name_player {
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mon_score {
-    background: $blueGradient;
-    .other_rank_pts {
-        font-size: 21px;
-        font-weight: 500;
-    }
+  background: $blueGradient;
+  .other_rank_pts {
+    font-size: 21px;
+    font-weight: 500;
+  }
 }
 
+.user_score {
+  background: $blueGradient;
+  padding: 10px 5px;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
 
 // ===== responsive  ====
 
 //  ===== middle size  =====
 
-// @media #{$media-down-sm} {
-//     .ranking_table > span{
-//         width: 100%;
-//         text-align: center;
-//     }
-// }
 
 @media #{$media-down-md} {
-    .classement_title{
-        margin-bottom: 20px;
-    }
-    #quizz_rank_top3 {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-    }
-    #rank1, #rank2, #rank3 {
-        height: 125px;
-        width: 125px;
-        margin-bottom: 60px;
-    }
-    #rank1{
-        order: 1;
-    }
-    #rank2{
-        order: 2;
-    }
-    #rank3{
-        order: 3;
-    }
-    .rank1, .rank2{
-        left:52px;
-        bottom:19px;
-    }
-    .mon_score > span{
-        width: 100%;
-        text-align: center;
-    }
-    .ranking_table > span{
-        width: 100%;
-        text-align: center;
-    }
+  .classement_title {
+    margin-bottom: 20px;
+  }
+  #quizz_rank_top3 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  #rank1,
+  #rank2,
+  #rank3 {
+    height: 125px;
+    width: 125px;
+    margin-bottom: 60px;
+  }
+  #rank1 {
+    order: 1;
+  }
+  #rank2 {
+    order: 2;
+  }
+  #rank3 {
+    order: 3;
+  }
+  .rank1,
+  .rank2 {
+    left: 52px;
+    bottom: 19px;
+  }
+  .mon_score > span {
+    width: 100%;
+    text-align: center;
+  }
+  .ranking_table > span {
+    width: 100%;
+    text-align: center;
+  }
 }
-
-
-//    @media #{$media-down-md}{
-//        main {
-//         //   text-align: center;
-//         align-items: center;
-//         justify-content: center; 
-//        }
-//          }
-// // =============== section top 3 =========
-// @media screen  and (max-width: 700px){
-//     .full_size{
-//         display: none;
-//     }
-//     .menu_burger{
-//         display: contents;
-//     }
-//     #rank2{
-//         width: 80px;
-//         height: 80px;
-//         text-align: center;
-//         }
-//         .rank2{
-//             width: 24px;
-//             height: 24px;
-//             position: relative;
-//             left:29px;
-//         }
-    
-//    #rank2 > img  {
-//        width: 80px;
-//        height: 80px;   
-// }
-// #rank1{
-//     width: 100px;
-//     height: 100px;
-//     text-align: center;
-// }
-// .rank1{
-//     width: 24px;
-//     height: 24px;
-//     position: relative;
-  
-//     left: 40px;
-// }
-// #rank1 > img {
-//     width: 100px;
-//     height: 100px;   
-//     margin: 0 auto;
-// }
-// #rank3{
-//     width: 60px;
-//     height: 60px;
-//     text-align: center;
-// }
-// #rank3 > img {
-//     height: 60px;
-//     width: 60px;
-// }
-// .rank3{
-//     width: 24px;
-//     height: 24px;
-//     position: relative;
-//     left: 19px;
-//     bottom: 14px; 
-// }
-// }
-// ====== small size =====
-
-//  @media #{$media-down-sm}{
-//    .rank1{
-//       position: relative;
-//       left: 28px;
-//    }
-//    .rank2{
-//        position:relative;
-//        left:26px;
-//        bottom:20px;
-//    }
-       
-    
-    
-//  }
-
-
-
-
-
-

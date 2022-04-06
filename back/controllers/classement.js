@@ -2,11 +2,12 @@ const router = require("express").Router();
 const Score = require("../models/score");
 const Quizz = require("../models/quizz");
 
+
 router.get("/:id_quizz", (req, res) => {
   Score.getAll(req.params.id_quizz, (err, scores) => {
     if (err) {
       console.log(err, scores);
-      req.flash('error', 'Une erreur s\est produite.')
+      req.flash('error', 'Une erreur s\'est produite.')
       res.redirect('/jeu')
     } else {
       Quizz.get(req.params.id_quizz, (err, quizz) => {
