@@ -144,7 +144,6 @@
 
 //  ===== middle size  =====
 
-
 @media #{$media-down-md} {
   .classement_title {
     margin-bottom: 20px;
@@ -182,5 +181,11 @@
   .ranking_table > span {
     width: 100%;
     text-align: center;
+  }
+  .ranking_table > span:nth-child(1) {
+    text-align: left;
+  }
+  .ranking_table > span:nth-child(3) {
+    text-align: right;
   }
 }
