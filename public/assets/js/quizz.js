@@ -13,6 +13,12 @@ let index = 0;
 let score = 0;
 let counter = 3
 
+// Définis le nombre de questions par quizz (10 par défaut)
+
+const nb_questions = parseInt((document.cookie.split('; ').find((e) => {
+  return e.startsWith('min_questions')
+}) ?? 'min_questions=10').replace('min_questions=', ''))
+
 // CHRONO 3s
 
 const intervalChrono = setInterval(() => {
@@ -76,7 +82,7 @@ const startGame = () => {
           showAnswerDelay();
           noClickNext();
           // compteur des questions
-          counterQuestion.innerHTML = index + 1 + "/10";
+          counterQuestion.innerHTML = index + 1 + "/" + nb_questions;
         });
       });
   }
@@ -92,7 +98,7 @@ const startGame = () => {
       if (correct) {
         // si réponse correct, incrémente la variable score avec le temps restant multiplié par 10
         score += temps * 10;
-        console.log(score);
+        // console.log(score);
       } 
     });
   }
@@ -135,7 +141,7 @@ const startGame = () => {
       next.innerHTML = "Voir mon résultat"
     }
     // insérer une nouvelle question, limiter a 10 questions par quizz
-    if (index < questions.length && index < 10) {
+    if (index < questions.length && index < nb_questions) {
       question = questions[index];
       sectionQuestion.innerHTML = question.question;
       insertAswers();

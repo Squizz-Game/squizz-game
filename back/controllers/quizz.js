@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const { send } = require("express/lib/response");
 const mysql = require("../models/mysql");
 const Quizz = require("../models/quizz");
 const Score = require("../models/score");
 
+/** Listing des catégories */
 router.get("/", (req, res) => {
   Quizz.getCategories((err, data) => {
     if (!err) {
@@ -12,6 +12,7 @@ router.get("/", (req, res) => {
   });
 });
 
+/** Listing des quizz par catégories */
 router.get("/:id_cat", (req, res) => {
   Quizz.getByCategory(req.params.id_cat, (err, data) => {
     if (!err) {
@@ -34,7 +35,9 @@ router.get("/:id_cat", (req, res) => {
   });
 });
 
+/** Jeu */
 router.get("/:id_cat/:id_quizz", (req, res) => {
+  res.cookie('min_questions', process.env.MIN_QUESTIONS)
   Quizz.get(req.params.id_quizz, (err, quizz) => {
     if (!err) {
       // Si aucun quizz, rediriger sur la page catégorie
@@ -52,6 +55,7 @@ router.get("/:id_cat/:id_quizz", (req, res) => {
   });
 });
 
+/** Fin de jeu */
 router.get("/:id_cat/:id_quizz/end-game", (req, res) => {
   Score.get(
     {

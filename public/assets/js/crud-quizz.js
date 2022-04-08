@@ -8,6 +8,11 @@ const id_quizz = main.dataset.quizz
 let index = 0
 const quizz = {}
 
+// Définis le nombre de questions par quizz (10 par défaut)
+const min_questions = parseInt((document.cookie.split('; ').find((e) => {
+    return e.startsWith('min_questions')
+  }) ?? 'min_questions=10').replace('min_questions=', ''))
+
 /** Afficher les questions - réponses */
 const displayReponses = () => {
     // Réinitialise les checkboxes
@@ -192,7 +197,7 @@ reponses_p.forEach((p, i) => {
 })
 
 /**
- * Au moins 10 questions non vide,
+ * Au moins 10 (ou min_questions) questions non vide,
  * Au moins deux réponses remplies par question
  * Une (et une seule) réponse correcte par question
  */
@@ -232,8 +237,8 @@ validate.addEventListener('click', e => {
                 if (i === -1) {
                     clearInterval(interval)
 
-                    if (quizz.questions.length < 10) {
-                        createAlert('Vous devez avoir au moins 10 questions.', 'error')
+                    if (quizz.questions.length < min_questions) {
+                        createAlert('Vous devez avoir au moins ' + min_questions + ' questions.', 'error')
                         validate.disabled = true
                         index = quizz.questions.length - 1
                         displayQuestion()

@@ -17,7 +17,7 @@ const Quizz = {
             'ON qu.id_quizz = q.id_quizz ' +
             'WHERE q.id_categorie = ? ' +
             'GROUP BY q.id_quizz ' +
-            'HAVING total > 9',
+            'HAVING total > ' + String(process.env.MIN_QUESTIONS - 1),
             [id],
             (err, rows) => {
             if (err) return action(true, err)
@@ -44,7 +44,7 @@ const Quizz = {
             'LEFT JOIN questions qu ON qu.id_quizz = q.id_quizz ' +
             'WHERE q.id_quizz = ? ' +
             'GROUP BY q.id_quizz ' +
-            'HAVING total > 9',
+            'HAVING total > ' + String(process.env.MIN_QUESTIONS - 1),
             [id], (err, rows) => {
             if (err) return action(true, err)
             return action(false, rows[0])

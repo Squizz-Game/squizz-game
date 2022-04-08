@@ -16,7 +16,7 @@
                         <input type="hidden" name="_method" value="DELETE">
                         <button>Supprimer</button>
                     </form>
-                    <% if (quizz.total_questions < 10) { %><i>quizz invalide</i><% } %>  
+                    <% if (quizz.total_questions < locals.session.MIN_QUESTIONS) { %><i>quizz invalide</i><% } %>  
                 </div>
             </article>
         <% }} %>

@@ -1,5 +1,6 @@
 module.exports = require('mysql2').createConnection({
   host: 'localhost',
-  user: 'root',
-  database: process.env.DB
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 })

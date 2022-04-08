@@ -28,5 +28,6 @@ main {
     // Pour qu'il soit au dessus
     #quizz_rank_top3 {
         position: relative;
+        user-select: none;
     }
 }
