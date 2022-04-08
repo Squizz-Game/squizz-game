@@ -2,6 +2,7 @@
 <%- include('../_header') %>
 
 <main>
+    
   <h1 class="classement_title"><%= quizz.nom_quizz %></h1>
   <div class="slots"></div>
   <section id="quizz_rank_top3">
@@ -38,22 +39,28 @@
       </div>
     <% } %> 
   </section>
-
   <section id="rank4_and_more">
     <% if(locals.session.id_user !== undefined) { %>
-    <div class="ranking_table mon_score">
-      <span class="other_rank">Mon score</span>
-      <span class="other_rank_name_player"><%= scores[scores.length-1]?.user_name %></span>
-      <span class="other_rank_pts">0 pts</span>
-    </div>
-    <% } else { %>
-    <div class="ranking_table mon_score">
-      <span class="other_rank">Mon score</span>
-      <span class="other_rank_name_player">Utilisateur non connecté</span>
-      <span class="other_rank_pts">0 pts</span>
-    </div>
-    <% } %>
-  </section>
+      <div class="ranking_table mon_score">
+        <span class="other_rank">Mon score</span>
+        <span class="other_rank_name_player"><%= scores[scores.length-1]?.user_name %></span>
+        <span class="other_rank_pts">0 pts</span>
+        </div>
+        <% } else { %>
+          <div class="ranking_table mon_score">
+            <span class="other_rank">Mon score</span>
+            <span class="other_rank_name_player">Utilisateur non connecté</span>
+            <span class="other_rank_pts">0 pts</span>
+            </div>
+            <% } %>
+            </section>
+
+            <section class="classement_buttons">
+              <a href="/classement/<%= quizz.id_quizz %>" class="classement_link">Voir le classement du quizz</a>
+              <a href="/jeu/<%= quizz.id_categorie %>/<%= quizz.id_quizz %>" class="btn btn_play btn_play_again">Rejouer</a>
+              </section>
+            
+            
 </main>
 
 <script src="/assets/js/end-game.js"></script>

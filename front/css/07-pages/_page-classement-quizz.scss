@@ -126,7 +126,7 @@
 }
 
 .mon_score {
-  background: $blueGradient;
+  background: $purpleGradient;
   .other_rank_pts {
     font-size: 21px;
     font-weight: 500;
@@ -138,6 +138,27 @@
   padding: 10px 5px;
   font-weight: 500;
   font-size: 1.2rem;
+}
+
+.classement_buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-bottom: -30px;
+    a {
+        margin: 5px;
+    }
+    @media screen and (max-width: 493px) {
+        justify-content: center;
+    }
+}
+.classement_link {
+    font-weight: 500;
+    // position: absolute;
+    // bottom: 23px;
+    // left: 23px;
 }
 
 // ===== responsive  ====
@@ -181,11 +202,5 @@
   .ranking_table > span {
     width: 100%;
     text-align: center;
-  }
-  .ranking_table > span:nth-child(1) {
-    text-align: left;
-  }
-  .ranking_table > span:nth-child(3) {
-    text-align: right;
   }
 }
