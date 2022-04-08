@@ -74,7 +74,7 @@ const startGame = () => {
           r = document.createElement("button");
           // pousse mes réponses dans un tableau pour pouvoir les vérifier par la suite
           button.push(r);
-          r.className = "reponse";
+          r.className = "reponse reponse_game";
           // insérer le logo(carré,rond ou triangle) sur les boutons réponses
           r.innerHTML = "<i></i>" + reponse.reponse;
           sectionReponse.appendChild(r);

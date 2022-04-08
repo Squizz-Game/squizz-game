@@ -10,6 +10,8 @@
         position: relative;
         // overflow: hidden;
         text-align: center;
+
+        
         
         .card-image {
             overflow: hidden;
@@ -20,7 +22,10 @@
             // height: 100%;
             width: 212px;
             height: 125px; 
-            
+            transition: 0.3s;
+            &:hover {
+            transform: scale(1.1);
+        }
             &:before {
                 background-color: rgba($darkPurple, .20);
                 z-index: 1;
