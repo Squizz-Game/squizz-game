@@ -8,7 +8,7 @@ router.get('/deconnexion', (req, res) => {
     req.session.id_user = undefined
     res.clearCookie('token')
     req.flash('success', 'À bientôt !')
-    res.redirect('/connexion')
+    res.redirect('/')
 })
 
 // Si connecté :
