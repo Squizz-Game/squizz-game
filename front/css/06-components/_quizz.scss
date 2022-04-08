@@ -22,6 +22,18 @@
             .timer {
                 @extend h4;
                 text-transform: lowercase;
+                
+                &.timer {
+                    color: darken($green, 10);
+                    
+                    &[data-time^="1"] {
+                        color: darken($gold, 10);
+                    }
+    
+                    &[data-time^="0"] {
+                        color: $red;
+                    }
+                }
             }
         }
 

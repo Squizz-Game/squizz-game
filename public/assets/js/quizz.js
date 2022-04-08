@@ -206,6 +206,7 @@ const startGame = () => {
     let secondes = parseInt(temps % 60, 10);
     secondes = secondes < 10 ? "0" + secondes : secondes;
     timerElement.innerText = `${secondes}s`;
+    timerElement.dataset.time = secondes;
   }
   
   // lancer le timer

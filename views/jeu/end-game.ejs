@@ -6,7 +6,6 @@
   <h1 class="classement_title"><%= quizz.nom_quizz %></h1>
   <div class="slots"></div>
   <section id="quizz_rank_top3">
-    <% console.log(scores.length) %>
     <% if((
         (locals.session.id_user && scores.length > 2) ||
         (!locals.session.id_user && scores.length > 1)
