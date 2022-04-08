@@ -104,10 +104,17 @@ const Quizz = {
         }
     },
     remove: ({id_quizz, id_user}, next) => {
-        mysql.execute('DELETE FROM quizz WHERE id_quizz = ? AND id_user = ?', [id_quizz, id_user], (err, rows) => {
+        mysql.execute('SELECT image FROM quizz WHERE id_quizz = ? AND id_user = ?', [id_quizz, id_user], (err, rows) => {
             if (err) return next(true, err)
-            return next(false, rows)
+            if (rows.length < 1) return next(true, 'none')
+            else {
+                mysql.execute('DELETE FROM quizz WHERE id_quizz = ? AND id_user = ?', [id_quizz, id_user], (err, _) => {
+                    if (err) return next(true, err)
+                    return next(false, rows[0].image)
+                })
+            }
         })
+        
     }
 }
 
