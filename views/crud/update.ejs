@@ -7,6 +7,7 @@
     data-user="<%= locals.session.id_user %>"
     >
     <h1>Modifier le quizz <%= quizz.nom_quizz %></h1>
+    <a href="/mes-quizz/<%= quizz.id_quizz %>">Retour</a>
     <section>
         <div class="head">
             <blockquote class="question" contenteditable="plaintext-only" data-placeholder="Écrivez votre question ici"></blockquote>

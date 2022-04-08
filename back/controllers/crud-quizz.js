@@ -4,7 +4,7 @@ const fs = require('fs')
 const Quizz = require('../models/quizz')
 
 // Lister ses quizz
-router.get('/', (req, res) => {    
+router.get('/', (req, res) => {
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
         Quizz.getByUser(req.session.id_user, (err, data) => {
             if (err) throw err
@@ -176,13 +176,20 @@ router.get('/:id_quizz/questions', (req, res) => {
 //Supprimer un quizz
 router.delete('/:id_quizz', (req, res) => {
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
-        Quizz.remove({ id_quizz: req.params.id_quizz, id_user: req.session.id_user }, (err, data) => {
+        Quizz.remove({ id_quizz: req.params.id_quizz, id_user: req.session.id_user }, (err, image) => {
             if (err) {
-                req.flash('error', 'Ce quizz n\'existe pas.')
+                req.flash('error', err === 'none' ? 'Ce quizz n\'existe pas.' : 'Une erreur est survenue.')
+                res.redirect('/mes-quizz')
             } else {
-                req.flash('success', 'Quizz supprimé')
+                fs.unlink('./public/assets/img/quizz/' + image, err => {
+                    if (err) {
+                        console.log(err)
+                        req.flash('error', 'Une erreur est survenue.')
+                    }
+                    else req.flash('success', 'Quizz supprimé !')
+                    res.redirect('/mes-quizz')
+                })
             }
-            res.redirect('/mes-quizz')
         })
     } else {
         req.flash('error', 'Vous n\'êtes pas connecté.')  

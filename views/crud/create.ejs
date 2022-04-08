@@ -30,6 +30,10 @@
     </section>
     <% if (locals.id_quizz) { %> 
         <a href="/mes-quizz/<%= id_quizz %>/questions">Voir les questions</a>
+        <form action="/mes-quizz/<%= id_quizz %>" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button>Supprimer</button>
+        </form>
     <% } %> 
 </main>
 
