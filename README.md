@@ -32,3 +32,4 @@ Application de Quiz comprenant la possibilité de :
 - importer la base de donnée
 - lancer `npm i`
 - lancer `npm start`
+- pour modifier le css : `npm run sass`

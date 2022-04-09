@@ -5,11 +5,15 @@
   <section class="chrono">3</section>
   <section class="game">
     <div class="quizz-title">
-      <span class="counter">01/<%= locals.session.MIN_QUESTIONS %></span>
+      <span class="counter">01/<%= locals.session.min_questions %></span>
       <h1><%= quizz.nom_quizz %></h1>
       <span class="timer">30s</span>
     </div>
-
+    <div class="dots">
+      <% for (var i = 0; i < locals.session.min_questions; i++) { %> 
+        <span class="dot"></span>
+      <% } %> 
+    </div>
     <blockquote
       class="question"
       data-quizz="<%= quizz.id_quizz %>"

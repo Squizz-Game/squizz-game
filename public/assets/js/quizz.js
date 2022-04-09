@@ -9,6 +9,7 @@ let next = document.querySelector(".btn_next");
 let counterQuestion = document.querySelector(".counter");
 let chrono = document.querySelector('.chrono')
 let game = document.querySelector('.game')
+let dots = document.querySelectorAll('.dots .dot')
 let index = 0;
 let score = 0;
 let counter = 3
@@ -18,20 +19,6 @@ let counter = 3
 const nb_questions = parseInt((document.cookie.split('; ').find((e) => {
   return e.startsWith('min_questions')
 }) ?? 'min_questions=10').replace('min_questions=', ''))
-
-// CHRONO 3s
-
-const intervalChrono = setInterval(() => {
-  counter--
-  if (counter < 1) {
-    clearInterval(intervalChrono)
-    chrono.style.display = 'none'
-    game.style.display = 'block'
-    startGame()
-  } else {
-    chrono.innerText = counter
-  }
-}, 1000)
 
 const startGame = () => {
   // VARIABLES POUR LES TIMER
@@ -98,8 +85,11 @@ const startGame = () => {
       if (correct) {
         // si réponse correct, incrémente la variable score avec le temps restant multiplié par 10
         score += temps * 10;
+        dots[index].classList.add('true')
         // console.log(score);
-      } 
+      } else {
+        dots[index].classList.add('false')
+      }
     });
   }
   
@@ -220,3 +210,17 @@ const startGame = () => {
     clearInterval(intervalTimer);
   }
 }
+
+// CHRONO 3s
+
+const intervalChrono = setInterval(() => {
+  counter--
+  if (counter < 1) {
+    clearInterval(intervalChrono)
+    chrono.style.display = 'none'
+    game.style.display = 'block'
+    startGame()
+  } else {
+    chrono.innerText = counter
+  }
+}, 1000)

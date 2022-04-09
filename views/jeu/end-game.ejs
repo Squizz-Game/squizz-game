@@ -5,39 +5,41 @@
     
   <h1 class="classement_title"><%= quizz.nom_quizz %></h1>
   <div class="slots"></div>
-  <section id="quizz_rank_top3">
-    <% if((
-        (locals.session.id_user && scores.length > 2) ||
-        (!locals.session.id_user && scores.length > 1)
-      )) { %>
-      <div id="rank2">
-        <span class="player_name_rank2"><%= scores[1].user_name %> </span>
-        <img src="/assets/img/avatars/<%= scores[1].filename %>" alt="<%= scores[1].user_name %>" />
-        <span class="rank2">2</span>
-        <span class="player_rank2_pts"><%= scores[1].score %>pts</span>
-      </div>
-    <% } if((
-      (locals.session.id_user && scores.length > 1) ||
-      (!locals.session.id_user && scores.length > 0)
-    )) { %>
-      <div id="rank1">
-        <span class="player_name_rank1"><%= scores[0].user_name %> </span>
-        <img src="/assets/img/avatars/<%= scores[0].filename %>" alt="<%= scores[0].user_name %>" />
-        <span class="rank1">1</span>
-        <span class="player_rank1_pts"><%= scores[0].score %>pts</span>
-      </div>
-    <% } if((
-      (locals.session.id_user && scores.length > 3) ||
-      (!locals.session.id_user && scores.length > 2)
-    )) { %>
-      <div id="rank3">
-        <span class="player_name_rank3"><%= scores[2].user_name %> </span>
-        <img src="/assets/img/avatars/<%= scores[2].filename %>" alt="<%= scores[2].user_name %>" />
-        <span class="rank3">3</span>
-        <span class="player_rank3_pts"><%= scores[2].score %>pts</span>
-      </div>
-    <% } %> 
-  </section>
+  <% if( // au moins un score
+    (locals.session.id_user && scores.length > 1) ||
+    (!locals.session.id_user && scores.length > 0)
+  ) { %>
+    <section id="quizz_rank_top3">
+      <% if( // au moins deux score
+          (locals.session.id_user && scores.length > 2) ||
+          (!locals.session.id_user && scores.length > 1)
+        ) { %>
+        <div id="rank2">
+          <span class="player_name_rank2"><%= scores[1].user_name %> </span>
+          <img src="/assets/img/avatars/<%= scores[1].filename %>" alt="<%= scores[1].user_name %>" />
+          <span class="rank2">2</span>
+          <span class="player_rank2_pts"><%= scores[1].score %>pts</span>
+        </div>
+      <% } %>
+        <div id="rank1">
+          <span class="player_name_rank1"><%= scores[0].user_name %> </span>
+          <img src="/assets/img/avatars/<%= scores[0].filename %>" alt="<%= scores[0].user_name %>" />
+          <span class="rank1">1</span>
+          <span class="player_rank1_pts"><%= scores[0].score %>pts</span>
+        </div>
+      <% if( // au moins trois scores
+        (locals.session.id_user && scores.length > 3) ||
+        (!locals.session.id_user && scores.length > 2)
+      ) { %>
+        <div id="rank3">
+          <span class="player_name_rank3"><%= scores[2].user_name %> </span>
+          <img src="/assets/img/avatars/<%= scores[2].filename %>" alt="<%= scores[2].user_name %>" />
+          <span class="rank3">3</span>
+          <span class="player_rank3_pts"><%= scores[2].score %>pts</span>
+        </div>
+      <% } %> 
+    </section>
+  <% } %>
   <section id="rank4_and_more">
     <% if(locals.session.id_user !== undefined) { %>
       <div class="ranking_table mon_score">
