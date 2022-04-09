@@ -17,14 +17,21 @@ preview.addEventListener('dragover', e => {
     e.preventDefault()
 })
 preview.addEventListener('dragenter', e => {
-    console.log('hello')
+    preview.classList.add('dragover')
 })
 preview.addEventListener('dragleave', e => {
-    console.log('bye')
+    preview.classList.remove('dragover')
 })
 document.addEventListener('drop', e => {
     e.preventDefault()
+    preview.classList.remove('dragover')
+    const type = e.dataTransfer.files[0].type
+    if (type === 'image/png' || type === 'image/jpeg') {
+        input.files = e.dataTransfer.files
+        changePreview(e.dataTransfer.files[0])
+    }
+})
 
-    input.files = e.dataTransfer.files
-    changePreview(e.dataTransfer.files[0])
+preview.addEventListener('click', e => {
+    input.click()
 })

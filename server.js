@@ -24,12 +24,12 @@ app.use("/assets", express.static("./public/assets"))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(session({
-    secret: "my-secret-key",
+    secret: process.env.JWTSECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
         secure: false, // if https : true
-        maxAge: 604800 // 1 semaine
+        maxAge: 7*24*60*60*1000, // 1 semaine (jours * heures * minutes * secondes * millisecondes)
     }
 }))
 app.use(cookieParser())

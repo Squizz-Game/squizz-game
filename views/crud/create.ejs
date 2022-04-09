@@ -18,9 +18,9 @@
                 </select>
             </div>
             <div class="field">
-                <img src="/assets/img/<%= locals.image ? 'quizz/' + image : 'empty.jpg' %>" class="preview">
+                <img src="/assets/img/<%= locals.image ? 'quizz/' + image : 'empty.svg' %>" class="preview">
                 <label for="image" class="small-button">Modifier l'image</label>
-                <input type="file" id="image" name="image" value="">
+                <input type="file" id="image" name="image" accept="image/png,image/jpeg">
             </div>
             
             <div class="field">

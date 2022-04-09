@@ -46,10 +46,17 @@
                         border-radius: 15px;
                         overflow: hidden;
                         padding: 0;
+                        user-select: none;
+                        cursor: pointer;
+                        transition: .2s;
         
-                        &[src$='empty.jpg'] {
-                            height: 60px;
-                            object-fit: contain;
+                        &[src$='empty.svg'] {
+                            border: dashed 2px lighten($grey, 25);
+                            object-fit: scale-down;
+                        }
+                        
+                        &.dragover {
+                            border: dashed 2px $grey;
                         }
                     }
                 }

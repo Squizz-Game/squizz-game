@@ -9,7 +9,6 @@ router.get("/questions/:id_quizz", (req, res) => {
     "SELECT * FROM `questions` WHERE `id_quizz` = ?",
     [req.params.id_quizz],
     (err, data) => {
-      console.log(data);
       console.log(err);
       res.json(data);
     }
@@ -22,7 +21,6 @@ router.get("/reponses/:id_question", (req, res) => {
     "SELECT * FROM `reponses` WHERE `id_question` = ?",
     [req.params.id_question],
     (err, data) => {
-      console.log(data);
       console.log(err);
       res.json(data);
     }
@@ -41,7 +39,6 @@ router.get("/avatars/", (req, res) => {
   mysql.query(
     "SELECT * FROM `avatars`",
     (err, data) => {
-      console.log(data);
       console.log(err);
       res.json(data);
     }
