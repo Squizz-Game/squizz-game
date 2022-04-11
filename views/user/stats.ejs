@@ -2,22 +2,27 @@
 <%- include('../_header') %>
 
 <main>
-    <section class="cards quizz-cards">
-        <% for (stat of stats) { %>
-            <article class="card quizz-card">
-                <a class="card-image" href="/classement/<%= stat.id_quizz %>">
-                    <img src="/assets/img/quizz/<%= stat.image %>" alt="<%= stat.nom_quizz %>">
-                    <h2 class="card-title"><%= stat.nom_quizz %></h2>
-                </a>
-                <div class="card-text">
-                    <span><%= stat.date %></span>
-                    <span>Rang : <%= stat.rank %></span>     
-                    <span>Record : <%= stat.score %></span>
-                    <a href="/classement/<%= stat.id_quizz %>">Voir le classement</a>
-                </div>
-            </article>
-        <% } %>
-    </section>
+    <h1>Mes statistiques</h1>
+    <% if (stats.length > 0) { %> 
+        <section class="cards quizz-cards">
+            <% for (stat of stats) { %>
+                <article class="card quizz-card">
+                    <a class="card-image" href="/classement/<%= stat.id_quizz %>">
+                        <img src="/assets/img/quizz/<%= stat.image %>" alt="<%= stat.nom_quizz %>">
+                        <h2 class="card-title"><%= stat.nom_quizz %></h2>
+                    </a>
+                    <div class="card-text">
+                        <span><%= stat.date %></span>
+                        <span>Rang : <%= stat.rank %></span>     
+                        <span>Record : <%= stat.score %></span>
+                        <a href="/classement/<%= stat.id_quizz %>">Voir le classement</a>
+                    </div>
+                </article>
+            <% } %>
+        </section>
+    <% } else { %>
+        <p>Vous n'avez aucune statistiques pour le moment, jouez à un quizz pour voir vos scores !</p>
+    <% } %> 
 </main>
 
 <%- include('../_footer') %>

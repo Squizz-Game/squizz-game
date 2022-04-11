@@ -90,26 +90,30 @@ const Score = {
             async (err, rows) => {
                 if (err) return action(true, err)
                 else {
-                    rows.forEach(async (row, i) => {
-                        rows[i].date = moment(rows[i].date).format('DD/MM/YYYY')
-                        const [ranks] = await mysql
-                            .promise()
-                            .execute(
-                                'SELECT id_score, id_quizz, id_user, score, ' +
-                                    '(RANK() OVER(ORDER BY score DESC)) rnk ' +
-                                    'FROM scores ' +
-                                    'WHERE id_quizz = ?',
-                                [row.id_quizz]
-                            )
-
-                            ranks.forEach(rank => {
-                                if (rank.id_user === id_user) return rows[i].rank = rank.rnk
-                            })
-
-                            if (i === rows.length - 1) {
-                                return action(false, rows)
-                            }
-                    })
+                    if (rows.length > 0) {
+                        rows.forEach(async (row, i) => {
+                            rows[i].date = moment(rows[i].date).format('DD/MM/YYYY')
+                            const [ranks] = await mysql
+                                .promise()
+                                .execute(
+                                    'SELECT id_score, id_quizz, id_user, score, ' +
+                                        '(RANK() OVER(ORDER BY score DESC)) rnk ' +
+                                        'FROM scores ' +
+                                        'WHERE id_quizz = ?',
+                                    [row.id_quizz]
+                                )
+    
+                                ranks.forEach(rank => {
+                                    if (rank.id_user === id_user) return rows[i].rank = rank.rnk
+                                })
+    
+                                if (i === rows.length - 1) {
+                                    return action(false, rows)
+                                }
+                        })
+                    } else {
+                        return action(false, rows)
+                    }
                 }
             }
         )

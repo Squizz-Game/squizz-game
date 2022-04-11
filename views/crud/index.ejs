@@ -3,24 +3,28 @@
 
 <main>
     <h1>Mes quizz</h1>
-    <section class="cards quizz-cards">
-        <% for (quizz of myQuizz) { if (quizz.id_quizz) { %>
-            <article class="card quizz-card">
-                <a class="card-image" href="/jeu/<%= quizz.id_categorie %>/<%= quizz.id_quizz %>">
-                    <img src="/assets/img/quizz/<%= quizz.image %>" alt="<%= quizz.nom_quizz %>">
-                    <h2 class="card-title"><%= quizz.nom_quizz %></h2>
-                </a>
-                <div class="card-text">
-                    <a href="/mes-quizz/<%= quizz.id_quizz %>">Modifier</a>
-                    <form action="/mes-quizz/<%= quizz.id_quizz %>" method="POST">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button>Supprimer</button>
-                    </form>
-                    <% if (quizz.total_questions < locals.session.min_questions) { %><i>quizz invalide</i><% } %>  
-                </div>
-            </article>
-        <% }} %>
-    </section>
+    <% if (myQuizz.length > 0) { %> 
+        <section class="cards quizz-cards">
+            <% for (quizz of myQuizz) { if (quizz.id_quizz) { %>
+                <article class="card quizz-card">
+                    <a class="card-image" href="/jeu/<%= quizz.id_categorie %>/<%= quizz.id_quizz %>">
+                        <img src="/assets/img/quizz/<%= quizz.image %>" alt="<%= quizz.nom_quizz %>">
+                        <h2 class="card-title"><%= quizz.nom_quizz %></h2>
+                    </a>
+                    <div class="card-text">
+                        <a href="/mes-quizz/<%= quizz.id_quizz %>">Modifier</a>
+                        <form action="/mes-quizz/<%= quizz.id_quizz %>" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button>Supprimer</button>
+                        </form>
+                        <% if (quizz.total_questions < locals.session.min_questions) { %><i>quizz invalide</i><% } %>  
+                    </div>
+                </article>
+            <% }} %>
+        </section>
+    <% } else { %>
+        <p>Vous n'avez créé aucun quizz</p>
+    <% } %>
 </main>
 
 <%- include('../_footer') %>
