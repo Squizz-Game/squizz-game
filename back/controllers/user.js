@@ -3,6 +3,7 @@ const User = require('../models/user')
 const mysql = require('../models/mysql')
 const Score = require('../models/score')
 const jwt = require('jsonwebtoken')
+const fs = require('fs')
 
 router.get('/deconnexion', (req, res) => {
     req.session.id_user = undefined
@@ -63,10 +64,18 @@ router.post('/mon-compte', (req, res) => {
 
 router.delete('/mon-compte', (req, res) => {
     if (req.session.id_user !== undefined) { // Si un utilisateur est connecté
-        User.remove(req.session.id_user, (err, data) => {
+        User.remove(req.session.id_user, (err, images) => {
             if (err) {
                 req.flash('error', 'Le compte n\'existe pas.')
             } else {
+                // Supprimer les images des quizz associés
+                if (images) {
+                    images.split(',').forEach(img => {
+                        fs.unlink('./public/assets/img/quizz/' + img, err => {
+                            if (err) console.log('error :', err)
+                        })
+                    })
+                }
                 req.flash('success', 'Compte supprimé')
                 req.session.id_user = undefined
                 res.clearCookie('token')
@@ -112,6 +121,12 @@ router.post('/inscription', (req, res) => {
             if (!err) {
                 req.flash('success', 'Bienvenu !')
                 req.session.id_user = data // on connecte l'utilisateur
+                const token = jwt.sign({
+                        name: req.body.user_name,
+                        id: data
+                    }, process.env.JWTSECRET
+                )
+                res.cookie('token', token)
                 res.redirect('/jeu')
             } else {
                 res.locals.flash = {}

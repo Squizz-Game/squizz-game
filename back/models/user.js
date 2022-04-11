@@ -119,9 +119,12 @@ const User = {
         })
     },
     remove: (id_user , action) => {
-        mysql.execute('DELETE FROM utilisateurs WHERE id_user = ?', [id_user], (err, rows) => {
+        mysql.execute('SELECT GROUP_CONCAT(image) images FROM quizz WHERE id_user = ?', [id_user], (err, data) => {
             if (err) return action(true, err)
-            return action(false, 'Compte supprimé')
+            mysql.execute('DELETE FROM utilisateurs WHERE id_user = ?', [id_user], (err, rows) => {
+                if (err) return action(true, err)
+                return action(false, data[0].images)
+            })
         })
     }
 }
