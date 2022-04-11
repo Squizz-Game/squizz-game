@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 04 avr. 2022 à 06:39
+-- Généré le : lun. 11 avr. 2022 à 06:53
 -- Version du serveur :  8.0.21
 -- Version de PHP : 7.3.21
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `id_quizz` int NOT NULL,
   PRIMARY KEY (`id_question`),
   KEY `questions_ibfk_1` (`id_quizz`)
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `questions`
@@ -149,7 +149,6 @@ INSERT INTO `questions` (`id_question`, `question`, `id_quizz`) VALUES
 (51, 'Qui est le/la meilleur(e)?', 6),
 (52, 'Qui est le meilleur marocain ?', 6),
 (53, 'Qui fait les plus beaux design ?', 6),
-(54, '<div style=\"text-align: left;\"><span style=\"font-size: 25px; font-weight: 700;\">Qui pourrait vendre un frigidaire à un Eskimo ?</span></div>', 6),
 (55, 'Qui est le meilleur aux échecs ?', 6),
 (56, 'Qui a le meilleur rire ?', 6),
 (57, 'Qui a un joli oeil tacheté ?', 6),
@@ -161,7 +160,7 @@ INSERT INTO `questions` (`id_question`, `question`, `id_quizz`) VALUES
 (63, 'Qui est le plus sexy ?', 6),
 (64, 'Qui est sponsorisé par Coca-cola ?', 6),
 (65, 'Quel club de foot anglais joue dans l’enceinte de l’Emirates Stadium ?', 7),
-(66, '<div>2: Quel basketteur américain a été le plus souvent sacré MVP du championnat NBA ?</div>', 7),
+(66, '<div> Quel basketteur américain a été le plus souvent sacré MVP du championnat NBA ?</div>', 7),
 (67, 'Quelle a été la première équipe non européenne à atteindre une finale de Championnats du monde de hand ?', 7),
 (68, '<div>&nbsp;Quel tennisman a gagné le plus de matchs à Roland-Garros ?</div>', 7),
 (69, '&nbsp;Au rugby, avec quelle danse les All Blacks débutent-ils leur match ?', 7),
@@ -186,11 +185,11 @@ INSERT INTO `questions` (`id_question`, `question`, `id_quizz`) VALUES
 (90, 'En quelle année, la guerre du Vietnam a-t-elle pris fin ?', 9),
 (91, '&nbsp;En quelle année, le pasteur Martin Luther King a-t-il été assassiné ?', 9),
 (92, 'En quelle année, la Révolution d’octobre russe a-t-elle eu lieu ?', 9),
-(93, 'En quelle année, en quelle année s’est déroulé le débarquement en Normandie ?', 9),
+(93, 'en quelle année s’est déroulé le débarquement en Normandie ?', 9),
 (94, 'En quelle année, Charlemagne a-t-il été couronné empereur ?', 9),
 (95, 'En quelle année, John Lennon a-t-il été assassiné ?', 9),
 (96, 'En quelle année, Napoléon a-t-il été battu à Waterloo ?', 9),
-(97, 'En quelle année, en quelle année Lady Di est-elle décédée à Paris ?', 9),
+(97, 'en quelle année Lady Di est-elle décédée à Paris ?', 9),
 (98, 'En quelle année, a été découvert le tombeau de Toutankhamon par Howard Carter ?', 9),
 (99, 'En quelle année, la Révolution française a-t-elle eu lieu ?', 9),
 (100, 'En quelle année, Jules César a-t-il été assassiné ?', 9),
@@ -213,13 +212,13 @@ INSERT INTO `questions` (`id_question`, `question`, `id_quizz`) VALUES
 (117, 'Qui est l’interprète du tube « Single Ladies (Put a Ring on It) » ?', 11),
 (118, 'Qui est l’interprète du tube « Nothing Compares 2 U » ?', 11),
 (119, 'Quel groupe a interprété la chanson « Paranoid Android » ?', 11),
-(120, '<div>&nbsp;Comment était surnommé Elvis Presley ?</div><div>The President</div>', 11),
+(120, '<div>&nbsp;Comment était surnommé Elvis Presley ?</div>', 11),
 (121, 'Quel groupe a interprété la chanson « Being Boring » ?', 11),
 (122, 'Qui a été ensorcelée dans l\'une de ses chansons, en 2004 ?', 11),
 (123, '&nbsp;À quel chanteur doit-on le tube « Natural Blues » ?', 11),
 (124, 'Quel groupe a interprété la chanson « Smells Like Teen Spirit » ?', 11),
 (125, 'À quelle chanteuse doit-on le titre « I\'m outta love » ?', 11),
-(126, '<div>De combien de sœurs est composé le groupe irlandais The Corrs ?</div><div>2</div>', 11),
+(126, '<div>De combien de sœurs est composé le groupe irlandais The Corrs ?</div><div><br></div>', 11),
 (127, '&nbsp;Que signifie le M de M-Pokora ?', 11),
 (128, 'Qui est l’interprète du tube « California Love » ?', 11),
 (129, 'Quel président français est à l’origine de la construction de la pyramide du Louvre ?', 12),
@@ -236,7 +235,41 @@ INSERT INTO `questions` (`id_question`, `question`, `id_quizz`) VALUES
 (140, 'À quel peintre doit-on « La Liberté guidant le peuple » ?', 12),
 (141, '&nbsp;À quel peintre doit-on « La Naissance de Vénus » ?', 12),
 (142, 'Dans quel musée, le tableau « Les Noces de Cana » de Véronèse est-il exposé ?', 12),
-(143, '&nbsp;Que représente le tableau « Persistance de la mémoire » de Dali ?', 12);
+(143, '&nbsp;Que représente le tableau « Persistance de la mémoire » de Dali ?', 12),
+(144, 'De quelle couleur est la robe du robot du jeu Un, deux, trois, soleil ?', 16),
+(145, 'Dans quelle main Sang-woo poignarde-t-il Gi-hun lors du dernier jeu ?', 16),
+(146, 'Combien de personnes meurent dans le premier jeu ?', 16),
+(147, 'De combien de membres sont composées les équipes lors du tir à la corde ?', 16),
+(148, 'Quel numéro porte le cheval sur lequel Gi-hun parie dans l’épisode 1 ?', 16),
+(149, 'Quelle forme n’existe pas dans le jeu du gâteau ?', 16),
+(150, 'Quelle forme Cho Sang-woo choisit-il dans l\'épreuve du gâteau Dalgona ?', 16),
+(151, 'De quel jeu pour enfants s\'inspire la quatrième épreuve ?', 16),
+(152, 'Hwang Jun-ho, le policier, est à la recherche de...', 16),
+(153, 'Où Seong Gi-hun rencontre t-il pour la première fois le recruteur des participants au jeu ?', 16),
+(154, 'L\'homme masqué qui supervise les jeux a lui-même gagné l\'une des éditions. En quelle année ?', 16),
+(155, 'Pourquoi Ji-Yeong a t-elle fait de la prison ?', 16),
+(156, 'Pourquoi Kang Sae-byeok décide t-elle de retourner dans le jeu ?', 16),
+(157, 'Quel mot de passe faut-il donner pour entrer dans la voiture et confirmer sa participation au jeu ?', 16),
+(158, 'Quelle somme d\'argent va remporter le vainqueur du jeu ?', 16),
+(159, 'Que stipule la règle 1 du formulaire de consentement du joueur ?', 16),
+(160, 'Quel symbole porte les gardiens qui sont tout en bas de la hiérarchie ?', 16),
+(161, 'Sur quelle planète vit Anakin avant de partir rejoindre les Jedi ?', 17),
+(162, 'Quel nom porte le vaisseau spatial du contrebandier Han Solo ?', 17),
+(163, 'Combien de films Star Wars ont été réalisés par Georges Lucas ?', 17),
+(164, 'Contre qui Han Solo remporte-t-il le Faucon Millénium lors d\'une partie de sabacc ?', 17),
+(165, 'Sur quelle planète Luke est-il parti pour apprendre à devenir un véritable Jedi ?', 17),
+(166, 'Quel célèbre chasseur de primes a été engagé par Dark Vador pour traquer Han Solo ?', 17),
+(167, 'Qui tue Boba Fett, chasseur de primes connu pour son adresse à traquer sa proie ?', 17),
+(168, 'Une fois mesurée, quelle molécule permet de savoir si un individu peut être un Jedi ?', 17),
+(169, 'Quel mystique de la connaissance est le maître de Dark Sidious ?', 17),
+(170, 'Quel apprenti Sith Obi-Wan va-t-il tuer en vengeant la mort de son maître ?', 17),
+(171, 'Que signifie la dernière phrase de Dark Vador avant de mourir : « Tu l\'as déjà fait Luke » ?', 17),
+(172, 'Dans « Star Wars », de George Lucas, qui tue le chancelier Palpatine alias Dark Sidious ?', 17),
+(173, 'En quelle année est sorti au cinéma le premier volet de Star Wars sous le nom \"La Guerre des Étoiles\" ?', 17),
+(174, 'À partir de quelle bataille peut-on mesurer la chronologie dans « Star Wars » ?', 17),
+(175, 'Sur quelle planète Ben Solo rencontre-t-il Palpatine ?', 17),
+(176, 'Qui brûle les ruines Jedi sur Ahch-To ?', 17),
+(177, 'QUI POURRAIT VENDRE UN FRIGIDAIRE À UN ESKIMO ?', 6);
 
 -- --------------------------------------------------------
 
@@ -256,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `quizz` (
   PRIMARY KEY (`id_quizz`),
   KEY `id_categorie` (`id_categorie`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `quizz`
@@ -274,7 +307,9 @@ INSERT INTO `quizz` (`id_quizz`, `nom_quizz`, `image`, `id_categorie`, `id_user`
 (9, 'Les Grandes dates de l\'histoire', 'f4816e49b0371501a2a4bc708.jpg', 7, 3, '2022-04-01 16:03:01', '2022-04-01 16:03:01'),
 (10, 'informatique', 'f4816e49b0371501a2a4bc709.jpg', 9, 3, '2022-04-01 16:21:50', '2022-04-01 16:21:50'),
 (11, 'quizz Musique', 'f4816e49b0371501a2a4bc70a.jpg', 5, 3, '2022-04-01 16:34:42', '2022-04-01 16:34:42'),
-(12, 'Art Quizz', 'f4816e49b0371501a2a4bc70c.jpg', 2, 3, '2022-04-01 16:45:59', '2022-04-01 16:45:59');
+(12, 'Art Quizz', 'f4816e49b0371501a2a4bc70c.jpg', 2, 3, '2022-04-01 16:45:59', '2022-04-01 16:45:59'),
+(16, 'Squid Game', '893d526cdf3a6c89ea7464d00.jpg', 4, 1, '2022-04-08 10:52:48', '2022-04-08 10:52:48'),
+(17, 'Star Wars', '893d526cdf3a6c89ea7464d01.jpg', 4, 1, '2022-04-08 11:30:37', '2022-04-08 11:30:37');
 
 -- --------------------------------------------------------
 
@@ -290,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `reponses` (
   `id_question` int NOT NULL,
   PRIMARY KEY (`id_reponse`),
   KEY `id_question` (`id_question`)
-) ENGINE=InnoDB AUTO_INCREMENT=425 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=547 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `reponses`
@@ -455,9 +490,6 @@ INSERT INTO `reponses` (`id_reponse`, `reponse`, `correct`, `id_question`) VALUE
 (156, 'Anastasiia', 1, 53),
 (157, 'Renaud', 0, 53),
 (158, 'Dylan', 0, 53),
-(159, 'Lucas', 1, 54),
-(160, 'Eric', 0, 54),
-(161, 'Romain', 0, 54),
 (162, 'Dylan', 1, 55),
 (163, 'Yassin', 0, 55),
 (164, 'Anthony', 0, 55),
@@ -490,16 +522,16 @@ INSERT INTO `reponses` (`id_reponse`, `reponse`, `correct`, `id_question`) VALUE
 (191, 'Yassin', 0, 64),
 (192, 'Manchester United', 0, 65),
 (193, 'Arsenal FC', 1, 65),
-(194, 'Sunderland AFC', 0, 65),
+(194, 'Manchester City', 0, 65),
 (195, 'Michael Jordan', 0, 66),
-(196, 'Michael Jordan', 0, 66),
+(196, 'Lebron James', 0, 66),
 (197, 'Kareem Abdul-Jabbar', 1, 66),
 (198, 'Le Qatar', 1, 67),
 (199, 'Le Brésil', 0, 67),
 (200, 'Le Canada', 0, 67),
-(201, 'André Agassi', 0, 68),
+(201, 'Rafael Nadal', 1, 68),
 (202, 'Roger Federer', 0, 68),
-(203, 'Guillermo Vilas', 1, 68),
+(203, 'Guillermo Vilas', 0, 68),
 (204, 'La Vuvuzela', 0, 69),
 (205, 'Le Haka', 1, 69),
 (206, 'Le Koka', 0, 69),
@@ -590,7 +622,7 @@ INSERT INTO `reponses` (`id_reponse`, `reponse`, `correct`, `id_question`) VALUE
 (296, '10 ap JC', 0, 100),
 (297, '2011', 1, 101),
 (298, '2005', 0, 101),
-(299, '2088', 0, 101),
+(299, '2008', 0, 101),
 (300, '1981', 1, 102),
 (301, '1986', 0, 102),
 (302, '1978', 0, 102),
@@ -715,7 +747,108 @@ INSERT INTO `reponses` (`id_reponse`, `reponse`, `correct`, `id_question`) VALUE
 (421, 'Centre Pompidou à Paris', 0, 142),
 (422, 'Des montres molles', 1, 143),
 (423, 'Un cheval volant', 0, 143),
-(424, 'Une femme nue', 0, 143);
+(424, 'Une femme nue', 0, 143),
+(425, 'Jaune', 0, 144),
+(426, 'Vert', 0, 144),
+(427, 'Orange', 1, 144),
+(428, 'La main gauche', 1, 145),
+(429, 'La main droite', 0, 145),
+(430, '255', 1, 146),
+(431, '224', 0, 146),
+(432, '243', 0, 146),
+(433, '6', 0, 147),
+(434, '8', 0, 147),
+(435, '10', 1, 147),
+(436, '4', 0, 148),
+(437, '6', 1, 148),
+(438, '8', 0, 148),
+(439, 'Triangle', 0, 149),
+(440, 'Carré', 1, 149),
+(441, 'Rond', 0, 149),
+(442, 'L\'étoile', 0, 150),
+(443, 'Le cercle', 0, 150),
+(444, 'Le triangle', 1, 150),
+(445, 'Des billes', 1, 151),
+(446, 'Cache-cache', 0, 151),
+(447, '1, 2, 3... Soleil !', 0, 151),
+(448, 'son père', 0, 152),
+(449, 'sa femme', 0, 152),
+(450, 'son frère', 1, 152),
+(451, 'Dans un aéroport', 0, 153),
+(452, 'Dans une gare', 0, 153),
+(453, 'Dans le métro', 1, 153),
+(454, 'En 2015', 1, 154),
+(455, 'En 2016', 0, 154),
+(456, 'En 2020', 0, 154),
+(457, 'Elle a fait un braquage', 0, 155),
+(458, 'Elle a tué son père violent', 1, 155),
+(459, 'Elle a volé de l\'argent à son employeur', 0, 155),
+(460, 'Pour rembourser ses dettes', 0, 156),
+(461, 'Pour payer l\'opération de sa mère malade', 0, 156),
+(462, 'Pour sortir son petit frère d\'un orphelinat', 1, 156),
+(463, 'Un, deux, trois, soleil', 1, 157),
+(464, 'Tir à la corde', 0, 157),
+(465, 'Gganbu', 0, 157),
+(466, '35,6 milliards de wons', 0, 158),
+(467, '45,6 milliards de wons', 1, 158),
+(468, '55,6 milliards de wons', 0, 158),
+(469, 'Les joueurs peuvent tuer d\'autres joueurs', 0, 159),
+(470, 'Les joueurs refusant de jouer seront éliminer', 0, 159),
+(471, 'Les joueurs n\'ont pas le droit d\'arrêter de jouer', 1, 159),
+(472, 'Le carré', 0, 160),
+(473, 'Le triangle', 0, 160),
+(474, 'Le rond', 1, 160),
+(475, 'Tatooine', 1, 161),
+(476, 'Naboo', 0, 161),
+(477, 'Mustafar', 0, 161),
+(478, 'Faucon Millénium', 1, 162),
+(479, 'Enterprise', 0, 162),
+(480, 'Intergalactique', 0, 162),
+(481, '2', 0, 163),
+(482, '4', 1, 163),
+(483, '6', 0, 163),
+(484, 'Lando Calrissian', 1, 164),
+(485, 'Jabba le Hutt', 0, 164),
+(486, 'Boba Fett', 0, 164),
+(487, 'Naboo', 0, 165),
+(488, 'Malastare', 0, 165),
+(489, 'Dagobah', 1, 165),
+(490, 'Boba Fett', 1, 166),
+(491, 'Zam Wesell', 0, 166),
+(492, 'Jabba le Hutt', 0, 166),
+(493, 'Han Solo', 1, 167),
+(494, 'Luke Skywalker', 0, 167),
+(495, 'Dark Vador', 0, 167),
+(496, 'Midi-chloriens', 1, 168),
+(497, 'Chlori-metica', 0, 168),
+(498, 'Chlorydrate', 0, 168),
+(499, 'Dark Plagueis', 1, 169),
+(500, 'Dark Tyranus', 0, 169),
+(501, 'Dark Vador', 0, 169),
+(502, 'Dark Maul', 1, 170),
+(503, 'Dark Sidious', 0, 170),
+(504, 'Dark Vador', 0, 170),
+(505, 'L\'avoir sauvé', 1, 171),
+(506, 'L\'avoir aimé', 0, 171),
+(507, 'L\'avoir retrouvé', 0, 171),
+(508, 'Dark Vador', 1, 172),
+(509, 'Luke Skywalker', 0, 172),
+(510, 'La princesse Leia', 0, 172),
+(511, '1977', 1, 173),
+(512, '1979', 0, 173),
+(513, '1981', 0, 173),
+(514, 'Bataille de Yavin', 1, 174),
+(515, 'Bataille de Naboo', 0, 174),
+(516, 'Bataille de Jaku', 0, 174),
+(517, 'Exegol', 1, 175),
+(518, 'Mustafar', 0, 175),
+(519, 'Hoth', 0, 175),
+(520, 'Maître Yoda', 1, 176),
+(521, 'Luke Skywalker', 0, 176),
+(522, 'Kylo Ren', 0, 176),
+(523, 'Lucas', 1, 177),
+(524, 'Eric', 0, 177),
+(525, 'Romain', 0, 177);
 
 -- --------------------------------------------------------
 
@@ -733,14 +866,53 @@ CREATE TABLE IF NOT EXISTS `scores` (
   PRIMARY KEY (`id_score`),
   KEY `id_user` (`id_user`),
   KEY `id_quizz` (`id_quizz`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `scores`
 --
 
 INSERT INTO `scores` (`id_score`, `score`, `date`, `id_user`, `id_quizz`) VALUES
-(3, 2590, '2022-04-01 15:56:58', 3, 8);
+(3, 2590, '2022-04-01 15:56:58', 3, 8),
+(4, 2910, '2022-04-07 14:14:29', 1, 8),
+(5, 2840, '2022-04-04 09:34:36', 2, 8),
+(9, 1180, '2022-04-04 14:21:34', 4, 8),
+(10, 1480, '2022-04-04 14:42:17', 5, 8),
+(13, 2420, '2022-04-05 15:39:09', 7, 8),
+(14, 2700, '2022-04-05 15:40:28', 7, 6),
+(15, 950, '2022-04-05 15:42:17', 7, 3),
+(16, 1430, '2022-04-06 11:53:31', 1, 1),
+(17, 2820, '2022-04-05 16:12:05', 1, 5),
+(34, 2370, '2022-04-08 09:59:03', 8, 7),
+(35, 1430, '2022-04-08 10:01:39', 8, 9),
+(36, 1120, '2022-04-08 10:10:40', 3, 7),
+(37, 1940, '2022-04-08 10:30:38', 1, 11),
+(38, 1360, '2022-04-08 10:32:02', 1, 12),
+(39, 2340, '2022-04-08 10:33:33', 1, 4),
+(40, 1320, '2022-04-08 10:35:08', 1, 9),
+(41, 2290, '2022-04-08 10:37:46', 1, 10),
+(42, 2850, '2022-04-08 11:12:05', 1, 6),
+(43, 790, '2022-04-08 11:13:32', 1, 7),
+(44, 2180, '2022-04-08 11:14:36', 1, 2),
+(45, 1810, '2022-04-08 11:15:44', 1, 3),
+(46, 2700, '2022-04-08 11:16:58', 1, 16),
+(47, 2690, '2022-04-08 11:46:40', 1, 17),
+(48, 1890, '2022-04-08 11:55:09', 8, 16),
+(49, 720, '2022-04-08 11:57:23', 8, 17),
+(50, 1660, '2022-04-08 11:59:14', 8, 10),
+(51, 770, '2022-04-08 12:01:14', 8, 11),
+(52, 2840, '2022-04-08 12:02:06', 8, 6),
+(53, 1670, '2022-04-08 16:39:48', 8, 2),
+(54, 2100, '2022-04-08 12:07:41', 9, 12),
+(55, 1860, '2022-04-08 12:09:24', 9, 5),
+(56, 1060, '2022-04-08 12:55:03', 10, 11),
+(57, 1360, '2022-04-08 16:34:26', 8, 4),
+(58, 240, '2022-04-08 16:36:14', 8, 3),
+(59, 1690, '2022-04-08 16:37:52', 8, 1),
+(60, 1110, '2022-04-08 16:42:22', 8, 8),
+(61, 2050, '2022-04-08 16:45:08', 11, 8),
+(62, 480, '2022-04-08 16:48:34', 11, 16),
+(63, 1900, '2022-04-08 16:50:55', 11, 4);
 
 -- --------------------------------------------------------
 
@@ -757,7 +929,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `id_avatar` int NOT NULL,
   PRIMARY KEY (`id_user`),
   KEY `id_avatar` (`id_avatar`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateurs`
@@ -766,7 +938,14 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 INSERT INTO `utilisateurs` (`id_user`, `user_name`, `mail`, `password`, `id_avatar`) VALUES
 (1, 'warren', 'warren@warren.com', '$2b$08$iAM.VRCLYnqDhTihgdQjguPsKmKEhCsH/xxNjBwWnlwrM58eKhBTO', 5),
 (2, 'amina', 'amina@amina.com', '$2b$08$5SKTgTrK92QdRTrnLTLhfuanuQ/S.RkrPpL4rEI2aE1UJHh2AN3k.', 1),
-(3, 'karim', 'karim@karim.com', '$2b$08$sQ5UULZymPnFGJxciBFLzeLfJyVrLgAykaoYp/AS81otB1UJPtGq6', 4);
+(3, 'karim', 'karim@karim.com', '$2b$08$sQ5UULZymPnFGJxciBFLzeLfJyVrLgAykaoYp/AS81otB1UJPtGq6', 4),
+(4, 'test', 'test@test.com', '$2b$08$diOuyLvSZMQy6PAR9V5Mu.RcnRb51HhzlGZW334o.CHME3SoT731e', 6),
+(5, 'unautretest', 'test@test.com', '$2b$08$6W1ydu0xb7tTcVor6t23ue04d5cht.RlvNdtkoYUDwidFZr7dcTF2', 2),
+(7, 'eric', 'eric@hhh.fr', '$2b$08$WtBqKRW6HmEzfkrHuwY9u.mViHzaMdeM9YTwqMpj83vlx7Mf8goU6', 6),
+(8, 'Yasso', 'lolo@lom', '$2b$08$CxUzSeeR4IkdFe7ycflSk./pzxK7Xh9dQBsbibwSSvpNUmlc0OJV2', 3),
+(9, 'almi', 'almi@almi', '$2b$08$p3wXcvMlN87vUStXJnMncuikz3NM16G6K21R6x12v.mkgCPrXJH6S', 1),
+(10, 'Mel', 'melanie@melanie', '$2b$08$bX2N9ZPvhKtOkHVb1txUteKh6MjbjtMyLJmqKW0YhYBfIRbUUtrLS', 5),
+(11, 'SuperRomain', 'romain@ntm.fr', '$2b$08$Emfk1NRfat62P.KLzVBxkOabkcUp0InwEvJFL3Df.TNPKSjSCEhou', 1);
 
 --
 -- Contraintes pour les tables déchargées
